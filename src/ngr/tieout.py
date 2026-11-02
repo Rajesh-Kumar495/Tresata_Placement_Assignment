@@ -33,7 +33,7 @@ from typing import Literal
 
 from pydantic import BaseModel
 
-from .docmodel import Row, Table
+from .docmodel import Cell, Row, Table
 
 Role = Literal["gaap_start", "adjustment", "tax_effect", "subtotal", "nongaap_result", "memo", "other"]
 SignHint = Literal["as_printed", "subtract"]
@@ -75,6 +75,7 @@ class Segment(BaseModel):
     verdict: Verdict
     reason_code: str | None = None
     diagnosis_row: str | None = None
+    diagnosis_message: str | None = None
 
 
 class ColumnResult(BaseModel):
@@ -84,12 +85,28 @@ class ColumnResult(BaseModel):
     reason_code: str | None = None
     segments: list[Segment] = []
     warnings: list[str] = []
+    # Auditor-facing provenance: how signs were decided where the printed table did not say.
+    provenance_warnings: list[str] = []
+
+
+class ColumnRole(BaseModel):
+    """For horizontal (columnar) reconciliations: 'As Reported | adj | adj | As Adjusted'."""
+
+    col_key: int
+    role: Role
 
 
 class TieOutResult(BaseModel):
     table_id: str
     verdict: Verdict
-    columns: list[ColumnResult]
+    columns: list[ColumnResult]  # vertical: one per period column; horizontal: one per line item
+    orientation: Literal["vertical", "horizontal"] = "vertical"
+    # De-duplicated across columns; shown on the finding and in the report lineage.
+    provenance_warnings: list[str] = []
+
+    @property
+    def relies_on_inferred_sign(self) -> bool:
+        return any(t.sign_source == "llm" for c in self.columns for s in c.segments for t in s.terms)
 
 
 _SEVERITY = {"FLAG": 3, "NEEDS_REVIEW": 2, "NOT_EVALUATED": 1, "PASS": 0}
@@ -108,7 +125,59 @@ def tie_out(table: Table, roles: list[RowRole], columns: list[int] | None = None
     cols = columns if columns is not None else _columns_for(ordered)
     results = [_tie_column(ordered, role_by_row, c) for c in cols]
     worst = max(results, key=lambda r: _SEVERITY[r.verdict]).verdict if results else "NOT_EVALUATED"
-    return TieOutResult(table_id=table.id, verdict=worst, columns=results)
+    prov = list(dict.fromkeys(w for r in results for w in r.provenance_warnings))
+    return TieOutResult(table_id=table.id, verdict=worst, columns=results, provenance_warnings=prov)
+
+
+def tie_out_horizontal(table: Table, column_roles: list[ColumnRole], line_rows: list[str]) -> TieOutResult:
+    """Columnar reconciliation: each line row must satisfy start column + adjustment columns = result column.
+
+    Implemented by transposing into a virtual table (columns -> rows, line rows -> value
+    columns) so the exact same segmented-chain engine, tolerance and diagnoses apply.
+    """
+    lines = [table.row(rid) for rid in line_rows]
+    vrows: list[Row] = []
+    vroles: list[RowRole] = []
+    for i, cr in enumerate(column_roles):
+        header = next((c.header_path for r in lines if (c := r.value_at(cr.col_key)) is not None and c.header_path), [])
+        label = " / ".join(header) or f"column {cr.col_key}"
+        cells = []
+        for j, line in enumerate(lines):
+            src = line.value_at(cr.col_key)
+            if src is None:
+                continue
+            cells.append(
+                Cell(id=f"{src.id}", text=src.text, col_start=j, col_end=j, number=src.number, header_path=[line.label])
+            )
+        vid = f"{table.id}.col{cr.col_key}"
+        vrows.append(Row(id=vid, index=i, label=label, cells=cells))
+        vroles.append(RowRole(row_id=vid, role=cr.role))
+    virtual = Table(id=table.id, order=table.order, rows=vrows, scale=table.scale)
+    result = tie_out(virtual, vroles, columns=list(range(len(lines))))
+    result.orientation = "horizontal"
+    return result
+
+
+def _provenance(seg: Segment) -> list[str]:
+    """Explain every sign decision the printed table did not make explicit (human requirement, 2026-11-02)."""
+    out = [f"DIAGNOSIS: {seg.diagnosis_message}"] if seg.diagnosis_message else []
+    for t in seg.terms:
+        if t.sign_source == "llm":
+            out.append(
+                f"INFERRED_SIGN: tied out via LLM-inferred subtraction on unlabelled row '{t.label}' ({t.row_id}): "
+                f"printed {t.printed} treated as {t.effective}; no 'Less:'-type label in the source"
+            )
+        elif t.sign_source == "lexicon" and t.sign_source_conflict:
+            out.append(
+                f"SIGN_CONFLICT: row '{t.label}' ({t.row_id}) subtracted because its label carries a subtraction cue; "
+                f"the LLM row labeller did not mark it as a subtraction"
+            )
+        elif t.sign_source == "printed" and t.sign_source_conflict and t.printed < 0:
+            out.append(
+                f"SIGN_CONFLICT: row '{t.label}' ({t.row_id}) is printed negative and also marked as a subtraction; "
+                f"used as printed ({t.printed}); verify intent"
+            )
+    return out
 
 
 # ---------------------------------------------------------------- internals
@@ -189,6 +258,7 @@ def _tie_column(rows: list[Row], roles: dict[str, RowRole], col: int) -> ColumnR
                 return res
             seg = _check_segment(anchor_id, anchor_cell_val, terms, row, role, reported, unit_terms + [row], col)
             res.segments.append(seg)
+            res.provenance_warnings.extend(_provenance(seg))
             anchor_id, anchor_cell_val = row.id, reported
             unit_terms, terms = [row], []
             if role == "nongaap_result":
@@ -199,10 +269,20 @@ def _tie_column(rows: list[Row], roles: dict[str, RowRole], col: int) -> ColumnR
     if not finished:
         res.verdict, res.reason_code = "NOT_EVALUATED", "no_nongaap_result"
         return res
+    if any(_is_percent(r, col) for r in rows if roles[r.id].role not in ("memo", "other")):
+        # rates/margins are ratios: they do not add across a reconciliation (found on Adient's tax-rate table)
+        res.verdict, res.reason_code, res.segments = "NOT_EVALUATED", "ratio_not_additive", []
+        res.provenance_warnings = []
+        return res
     res.verdict = max((s.verdict for s in res.segments), key=lambda v: _SEVERITY[v])
     worst = next(s for s in res.segments if s.verdict == res.verdict)
     res.reason_code = worst.reason_code
     return res
+
+
+def _is_percent(row: Row, col: int) -> bool:
+    _, cell = _value(row, col)
+    return cell is not None and cell.number.is_percent
 
 
 def _unit(rows: list[Row], col: int) -> Decimal:
@@ -244,6 +324,13 @@ def _check_segment(
         band_tol=band,
         verdict="PASS",
     )
+    if not any(not t.blank_as_zero for t in terms):
+        # No adjustment values at all: nothing was reconciled. Only an exact identity passes; anything
+        # else is a derived figure (e.g. non-GAAP EPS = non-GAAP income / shares), not an additive bridge.
+        # Found on real data: Lumen EPS 0.50 vs 0.51 would otherwise PASS on rounding tolerance alone.
+        if diff != 0:
+            seg.verdict, seg.reason_code = "NEEDS_REVIEW", "no_adjustment_values"
+        return seg
     if abs(diff) <= strict:
         return seg
     if abs(diff) <= band:
@@ -263,6 +350,18 @@ def _check_segment(
             seg.verdict, seg.reason_code, seg.diagnosis_row = "NEEDS_REVIEW", "possible_subtotal_misclassified", t.row_id
             return seg
         running += t.effective
+    # Q11 (human decision 2026-11-02): an UNLABELLED row printed positive may be a subtraction.
+    # Single row only, exact 2x match, routed to NEEDS_REVIEW with the exact row - never PASS.
+    for t in terms:
+        if t.blank_as_zero or t.sign_source != "printed" or lexicon_subtract_cue(t.label):
+            continue
+        if t.printed > 0 and abs(reported - (computed - 2 * t.effective)) <= strict:
+            seg.verdict, seg.reason_code, seg.diagnosis_row = "NEEDS_REVIEW", "possible_unlabelled_subtraction", t.row_id
+            seg.diagnosis_message = (
+                f"Discrepancy of {abs(diff)} equals 2x row '{t.label}' ({t.row_id}, printed {t.printed}): "
+                f"verify whether this row is a subtraction"
+            )
+            return seg
 
     seg.verdict, seg.reason_code = "FLAG", "tieout_mismatch"
     return seg

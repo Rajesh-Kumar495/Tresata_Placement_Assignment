@@ -9,7 +9,12 @@ source:
   filed: "2023-11-07"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1493761/000095017023060292/hear-ex99_1.htm
 label_source: "Company commitments in CORRESP 0000943663-23-000121 (c4, c5, c7 yes; c9 partial); fixes observed in this release"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
+measures:   # Q12, written 2026-11-02 from the document, not from LLM output
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net loss}
+  - {name: Adjusted gross margin, kind: performance, comparable_gaap: Gross margin}
+  - {name: Adjusted EBITDA margin target, kind: performance, forward_looking: true, comparable_gaap: Net income margin}
+  - {name: Run-rate Adjusted EBITDA outlook, kind: performance, forward_looking: true, comparable_gaap: Net income (loss)}
 must_not_flag:
   - rule_id: R-EBITDA-FROM-NI
     evidence_contains: "GAAP to Adjusted EBITDA Reconciliation"

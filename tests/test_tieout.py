@@ -194,9 +194,9 @@ def test_memo_rows_never_summed():
 
 
 # ---- real-world reconciliations from locked Tier A cases (transcribed; re-verified at ingest)
-def test_real_turtle_beach_table5_subtotal_and_uncued_subtraction():
-    # A02 Turtle Beach 8-K 2023-08-07, Table 5 (in thousands); starts at operating income (SEC c7)
-    # Row labels abbreviated; amounts as transcribed. Starting row = reported operating loss.
+def test_synthetic_subtotal_and_uncued_subtraction():
+    # Synthetic chain (numbers echo Turtle Beach). NOTE: the real Table 5 turned out to be COLUMNAR;
+    # the real-bytes test is tests/test_real_corpus.py. This stays as a vertical-chain engine test.
     rows = [
         ("Operating loss, as reported", ["(15,793)"]),
         ("Depreciation and amortization", ["971"]),
@@ -217,11 +217,25 @@ def test_real_turtle_beach_table5_subtotal_and_uncued_subtraction():
         "Other non-operating expense, net": "adjustment",
         "Adjusted EBITDA": "nongaap_result",
     }
-    # without the LLM's sign hint: genuinely ambiguous -> must not PASS
-    assert run(rows, roles).verdict == "FLAG"
+    # without the LLM's sign hint: genuinely ambiguous -> must not PASS; Q11 routes it to NEEDS_REVIEW
+    r0 = run(rows, roles)
+    assert r0.verdict == "NEEDS_REVIEW" and r0.columns[0].reason_code == "possible_unlabelled_subtraction"
     # with sign_hint=subtract on the expense row (LLM semantic cue) -> ties, lineage records 'llm'
     r = run(rows, roles, subtract={"Other non-operating expense, net"})
     assert r.verdict == "PASS"
+    # ...but never silently: an auditor must see that the subtraction was inferred, not printed
+    assert r.relies_on_inferred_sign
+    assert len(r.provenance_warnings) == 1
+    w = r.provenance_warnings[0]
+    assert w.startswith("INFERRED_SIGN") and "Other non-operating expense, net" in w and "-198" in w
+
+
+def test_labelled_subtraction_carries_no_inferred_sign_warning():
+    rows = BASE[:5] + [("Less: gain on sale of assets", ["600", "—"]), ("Adjusted EBITDA", ["20,000", "50,000"])]
+    roles = dict(ROLES, **{"Less: gain on sale of assets": "adjustment"})
+    _, t = parse_table(rows)
+    r = tie_out(t, roles_by_label(t, roles, subtract={"Less: gain on sale of assets"}))
+    assert r.verdict == "PASS" and not r.relies_on_inferred_sign and r.provenance_warnings == []
 
 
 def test_real_adient_less_equity_income():

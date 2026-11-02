@@ -8,7 +8,7 @@ source:
   filed: "2024-02-07"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1670541/000167054124000028/a02072024adientform8-kex991.htm
 label_source: "SEC letter 2024-04-02 (UPLOAD 0000000000-24-003502), comments 1-4; response CORRESP 0001670541-24-000062"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
 measures:
   - {name: Adjusted EBIT, kind: performance, comparable_gaap: EBIT / Net income}
   - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income attributable to Adient}

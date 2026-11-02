@@ -9,7 +9,19 @@ source:
   filed: "2025-05-06"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1377789/000137778925000015/fy25q3pressrelease.htm
 label_source: "Company commitment in CORRESP 0001377789-25-000009 (c2 yes, c3 yes); fix observed in this release"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
+measures:   # Q12, written 2026-11-02 from the document (lexicon hits, Table 3 rows, text), not from LLM output
+  - {name: Non-GAAP gross margin, kind: performance, comparable_gaap: Gross margin}
+  - {name: Non-GAAP research and development expenses, kind: performance, comparable_gaap: Research and development expenses}
+  - {name: Non-GAAP selling and administrative expenses, kind: performance, comparable_gaap: Selling and administrative expenses}
+  - {name: Non-GAAP total operating expenses, kind: performance, comparable_gaap: Total operating expenses}
+  - {name: Non-GAAP operating income, kind: performance, comparable_gaap: Operating income}
+  - {name: Non-GAAP income tax provision, kind: performance, comparable_gaap: Provision for income taxes}
+  - {name: Non-GAAP net income, kind: performance, comparable_gaap: Net income}
+  - {name: Non-GAAP diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted EPS}
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income}
+  - {name: Adjusted EBITDA guidance, kind: performance, forward_looking: true, comparable_gaap: Net income}
+  - {name: Net debt, kind: liquidity, comparable_gaap: Total debt}
 must_not_flag:
   - rule_id: R-PROM-HEADLINE
     evidence_contains: "Diluted Earnings per Share of $0.27; Non-GAAP Diluted Earnings per Share of $0.88"

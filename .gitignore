@@ -10,6 +10,6 @@ __pycache__/
 .hypothesis/
 
 # downloaded corpus and run outputs (re-creatable; may be large)
-data/raw/
+# data/raw/ is committed: public SEC filings, needed for byte-identical replay
 runs/
 eval/cassettes/live/

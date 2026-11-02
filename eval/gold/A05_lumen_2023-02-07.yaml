@@ -8,7 +8,7 @@ source:
   filed: "2023-02-07"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/18926/000001892623000008/lumnq420228-kexhibit991.htm
 label_source: "SEC letter 2023-04-11 (UPLOAD 0000000000-23-003607), comments 9 and 10. Response (CORRESP 0000018926-23-000043) not yet read (HTTP 503), see open question Q8"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
 measures:
   - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net (loss) income}
   - {name: Adjusted EBITDA, excluding Special Items, kind: performance, comparable_gaap: Net (loss) income}

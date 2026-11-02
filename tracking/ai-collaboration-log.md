@@ -27,6 +27,9 @@ Sections 1–2 are filled in as we go. **Sections 3–4 must be written by the h
 | 2026-11-02 | AI's v0.1: downgrade inapplicable rules to "ADVISORY" | **Human:** too vague; split statutory requirement vs staff-comment risk. Verified against the Form 8-K Item 2.02 Instruction 2. | ADR-017 |
 | 2026-11-02 | AI's own v0.1 tolerance `0.5×unit×addends` | **AI found during implementation:** the worst-case bound grows with table length and would silently pass a 3-unit error | Three-band tolerance (ADR-014 addendum), pending human review |
 | 2026-11-02 | Fetch agent could not decode the Form 8-K PDF and declined to answer from memory | Correct behaviour, but it left Q1 unverified | Read the saved PDF pages directly; quoted Instruction 2 |
+| 2026-11-02 | Triage agent described Turtle Beach Table 5 as a row-wise chain; I built a fixture from that description | **Wrong:** the downloaded bytes show a columnar table. Caught by running on real files. | Fixture relabelled synthetic; real-bytes tests added; ADR-021 |
+| 2026-11-02 | AI's tolerance alone let Lumen non-GAAP EPS 0.51 "tie" to GAAP EPS 0.50 with no adjustments | False pass, found on real data | `no_adjustment_values` guard (ADR-023) |
+| 2026-11-02 | **Human requirement:** inferred signs must be visible in provenance even when the math ties | AI design surfaced sign source only in the term data, not as an auditor-facing message | ADR-022 |
 | _human to add_ | | | |
 
 ## 3. What came from the human  ← **human to write**

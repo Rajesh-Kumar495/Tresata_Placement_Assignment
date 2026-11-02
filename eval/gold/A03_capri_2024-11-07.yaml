@@ -8,7 +8,7 @@ source:
   filed: "2024-11-07"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1530721/000153072124000124/cpri8-k09282024exhibit991.htm
 label_source: "SEC letter 2025-02-05 (UPLOAD 0000000000-25-001215), comments 4a, 4b, 5; response CORRESP 0001530721-25-000020"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
 measures:
   - {name: Adjusted operating margin, kind: performance, comparable_gaap: Operating margin}
   - {name: Adjusted income from operations, kind: performance, comparable_gaap: Total (loss) income from operations}

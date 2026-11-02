@@ -1,0 +1,62 @@
+{
+  "A01-aviat-2025-02-04": {
+    "bytes": 328880,
+    "content_type": "text/html",
+    "sha256": "5d67eab3e37a60ff498b2415240ab014acaa9525975b4815ab1b191206d77708",
+    "url": "https://www.sec.gov/Archives/edgar/data/1377789/000137778925000006/fy25q2pressrelease.htm"
+  },
+  "A02-turtlebeach-2023-08-07": {
+    "bytes": 1045577,
+    "content_type": "text/html",
+    "sha256": "d1b68b460bbbd38833ddab31da03382eed6984a69e521443b95743d5979aaba5",
+    "url": "https://www.sec.gov/Archives/edgar/data/1493761/000095017023039092/hear-ex99_1.htm"
+  },
+  "A03-capri-2024-11-07": {
+    "bytes": 452604,
+    "content_type": "text/html",
+    "sha256": "7f745684aa9cb667acd228b86e11eff53638333bd18feb0213068930a8bbb7b8",
+    "url": "https://www.sec.gov/Archives/edgar/data/1530721/000153072124000124/cpri8-k09282024exhibit991.htm"
+  },
+  "A04-cititrends-2025-06-03": {
+    "bytes": 100054,
+    "content_type": "text/html",
+    "sha256": "15ee17c838a6a1012241acfd9592499bd633d6717734950446bf8f1d2e75e62f",
+    "url": "https://www.sec.gov/Archives/edgar/data/1318484/000110465925055704/tm2516897d1_ex99-1.htm"
+  },
+  "A05-lumen-2023-02-07": {
+    "bytes": 498882,
+    "content_type": "text/html",
+    "sha256": "16cd162e0e68948f8c998f1477ffb66034318a1f4f54c292f18a909f44b3c3c2",
+    "url": "https://www.sec.gov/Archives/edgar/data/18926/000001892623000008/lumnq420228-kexhibit991.htm"
+  },
+  "A06-adient-2024-02-07": {
+    "bytes": 447939,
+    "content_type": "text/html",
+    "sha256": "0a4d86bb15ee66d2d7e6e40bfcd3c39305c9d7befd5687b53d43444b7eb630a0",
+    "url": "https://www.sec.gov/Archives/edgar/data/1670541/000167054124000028/a02072024adientform8-kex991.htm"
+  },
+  "B01-aviat-2025-05-06": {
+    "bytes": 347867,
+    "content_type": "text/html",
+    "sha256": "e4aa5d88e94d8c9ea83836e63e39de8a1831a96029bab23821415c894f9ebead",
+    "url": "https://www.sec.gov/Archives/edgar/data/1377789/000137778925000015/fy25q3pressrelease.htm"
+  },
+  "B02-turtlebeach-2023-11-07": {
+    "bytes": 426834,
+    "content_type": "text/html",
+    "sha256": "f02d387345122830f5cd3a9c83fc9cdb667dd889cac763456524afe61c4b47e8",
+    "url": "https://www.sec.gov/Archives/edgar/data/1493761/000095017023060292/hear-ex99_1.htm"
+  },
+  "B03-capri-2025-05-28": {
+    "bytes": 551212,
+    "content_type": "text/html",
+    "sha256": "519529c9cf84c349e6e466a54010b0730ec988c5ae9496a8ee104282311f7b4a",
+    "url": "https://www.sec.gov/Archives/edgar/data/1530721/000153072125000046/cpri8-k03292025exhibit991.htm"
+  },
+  "B04-cititrends-2025-08-26": {
+    "bytes": 148568,
+    "content_type": "text/html",
+    "sha256": "8655441eaed7383fbe7e4c13352edf8bf52bf3ee3bc5fe00a02881b3c51845a0",
+    "url": "https://www.sec.gov/Archives/edgar/data/1318484/000110465925082774/tm2524286d1_ex99-1.htm"
+  }
+}

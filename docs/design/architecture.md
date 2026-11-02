@@ -236,6 +236,12 @@ The HTML is normalised into blocks and tables, each with stable IDs:
 
     The v0.1 single tolerance of `0.5·u·n` was too loose. With 6 adjustments it silently passed a 3-unit error.
   - Every period column is checked independently.
+  - **Orientation (ADR-021):** horizontal (columnar) reconciliations, e.g. "As Reported | adjustments | As Adjusted", are transposed into the same chain engine. Half the real Tier A reconciliations are columnar.
+  - **Guards (ADR-023):**
+    - a segment with no adjustment values passes only on exact equality;
+    - percent columns are `NOT_EVALUATED (ratio_not_additive)`;
+    - multi-group horizontal labellings are split at each gaap_start.
+  - **Provenance (ADR-022):** every LLM-inferred sign on an unlabelled row emits an `INFERRED_SIGN` warning on the result, even when it ties.
   - Also checks the following, each a separate finding with its own rule ID:
     - reconciliation direction: the table starts with the GAAP measure (102.10(b) bullet 1);
     - the tax effect is a separate line (102.11);

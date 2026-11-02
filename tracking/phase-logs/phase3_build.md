@@ -80,6 +80,35 @@ Method: each letter read from EDGAR `filename2.txt` by fetch agents. For locked 
   - subtotals not checked → caught by the wrong-subtotal test;
   - unrestricted flip diagnosis → caught by the Turtle Beach real case.
 
-### Not done / blocked
-- **Corpus download is blocked on the human setting `SEC_EDGAR_USER_AGENT` in `.env`.** Until then, anchors are `provisional` and the real-world tie-out fixtures are transcriptions, not parsed bytes.
-- No LLM code yet (build step 5+).
+### Not done / blocked (at end of session 1)
+- Corpus download blocked on `SEC_EDGAR_USER_AGENT` (resolved in session 2).
+- No LLM code yet.
+
+## 2026-11-02 — Session 2: real corpus, inventory, row-role labelling
+
+### Human decisions this session
+- LLM via the Goedel endpoint (`GOEDEL_API_KEY`, `GOEDEL_URL`) with `deepseek/deepseek-v4.1-flash` → ADR-024.
+- Three-band tolerance **approved**: "passing up to a 3-unit discrepancy automatically on a 6-line table is way too loose for financial tie-outs" → ADR-014 addendum accepted.
+- **New requirement:** an LLM-inferred sign on an unlabelled row must be surfaced in provenance even when the math ties → ADR-022.
+
+### Done
+- **Corpus:** 10/10 downloaded; **27/27 gold anchors verbatim** → labels `validated`. Corpus committed (ADR-025).
+- **Real-bytes tests:** `tests/test_real_corpus.py` (7). Replaced the mis-transcribed Turtle Beach fixture: the real Table 5 is columnar.
+- **New code:**
+  - `llm.py`: OpenAI-compatible client, cassettes, schema repair;
+  - `grounding.py`: exact-match gate with offset-preserving normalisation;
+  - `inventory.py`: lexicon ∪ LLM, union/diff;
+  - `reconcile.py`: orientation-aware labeller, ID gate, column-group split;
+  - `pipeline.py`: runner, HC1 proposal files, manifest;
+  - `tieout.py`: horizontal transposition, provenance warnings, guards.
+- **Results:** see [eval/results/step5_real_corpus.md](../../eval/results/step5_real_corpus.md).
+  - Inventory gold recall: 43/46 LLM-only, 46/46 surfaced to HC1.
+  - Grounding: 181/181.
+  - Tie-out: 191/193 PASS; the 2 FLAGs are the Turtle Beach uncued-sign false positive (Q11).
+  - Replay: byte-identical.
+- **Tests:** 81 passing.
+
+### Surprises worth putting in the brief
+1. **Half the real reconciliations are columnar.** A design built only from reading the rules (and from an AI agent's description of a table) would have assumed vertical bridges.
+2. **Tolerance can produce false passes, not just false flags:** non-GAAP EPS 0.51 vs GAAP EPS 0.50 "tied" within a cent, with nothing reconciled.
+3. **The LLM got table structure right far more often than signs.** Its one systematic error is semantic sign on uncued rows, exactly the case the human anticipated before any data was seen.

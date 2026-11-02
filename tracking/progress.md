@@ -5,7 +5,7 @@
 |---|---|---|
 | 1. Research & problem ranking | ✅ Done (2026-11-01) | Human picked #2 (primary), #1 (secondary) |
 | 2. Architecture & test plan — primary | ✅ **Approved 2026-11-02** with human amendments (ADR-014…019) | — |
-| 3. Implementation + eval — primary | 🟡 In progress: steps 0–3 done (triage, labels, document model, tie-out) | **Checkpoint now: human review of triage, labels, tie-out engine** |
+| 3. Implementation + eval — primary | 🟡 In progress: steps 0–5 done (real corpus verified; inventory + labeller running on real files) | **Checkpoint now: human review of step-5 results + Q11** |
 | 4. Brief (4 pages + appendix) | Not started | — |
 | 5. Secondary target (#1 withholding) | Parked | Only if Stage 3–4 for #2 are submittable |
 
@@ -16,8 +16,8 @@
 | 1 | Gold labels + validator; synthetic case specs | ✅ (anchors provisional until step 4) |
 | 2 | Document model + numeric parser + tests | ✅ |
 | 3 | Tie-out engine + unit/property tests | ✅ (68 tests passing; mutation-checked) |
-| 4 | Corpus download → label anchor validation; model bake-off | ⛔ **Needs `SEC_EDGAR_USER_AGENT` in .env** (and an OpenRouter key for the bake-off) |
-| 5 | Measure inventory (lexicon + LLM + grounding) + HC1 | — |
+| 4 | Corpus download → label anchor validation; model choice | ✅ 10/10 docs, 27/27 anchors; model chosen by human (ADR-024) |
+| 5 | Measure inventory (lexicon + LLM + grounding) + HC1, plus row-role labeller on real files | ✅ 43/46 LLM-only, 46/46 surfaced; 191/193 tie-out PASS; **checkpoint: Q11 decision** |
 | 6 | Deterministic rules + applicability/category resolver + rule-pack excerpts | — |
 | 7 | LLM judges (k=1, escalation) | — |
 | 8 | Static HTML report, manifest, replay | — |

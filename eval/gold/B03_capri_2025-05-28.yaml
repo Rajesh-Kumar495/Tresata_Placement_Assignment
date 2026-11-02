@@ -9,7 +9,16 @@ source:
   filed: "2025-05-28"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1530721/000153072125000046/cpri8-k03292025exhibit991.htm
 label_source: "Company commitments in CORRESP 0001530721-25-000020 (c4a, c4b, c5 yes); fixes observed in this release"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
+measures:   # Q12, written 2026-11-02 from the document, not from LLM output
+  - {name: Adjusted operating income, kind: performance, comparable_gaap: Income from operations}
+  - {name: Adjusted operating margin, kind: performance, comparable_gaap: Operating margin}
+  - {name: Adjusted net income (loss) attributable to Capri, kind: performance, comparable_gaap: Net income (loss) attributable to Capri}
+  - {name: Adjusted diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted EPS}
+  - {name: Constant currency revenue change, kind: performance, comparable_gaap: Revenue change as reported}
+  - {name: Free cash flow, kind: liquidity, comparable_gaap: Net cash provided by operating activities}
+  - {name: Net debt, kind: liquidity, comparable_gaap: Total borrowings}
+  - {name: Adjusted guidance (fiscal 2026), kind: performance, forward_looking: true, comparable_gaap: GAAP equivalents}
 must_not_flag:
   - rule_id: R-PROM-ORDER
     evidence_contains: "Operating margin of (11.2)%; adjusted operating margin of (3.2)%"

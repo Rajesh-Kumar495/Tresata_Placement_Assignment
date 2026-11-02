@@ -8,7 +8,7 @@ source:
   filed: "2023-08-07"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1493761/000095017023039092/hear-ex99_1.htm
 label_source: "SEC letter 2023-08-23 (UPLOAD 0000000000-23-009245), comments 4, 5, 7, 9; response CORRESP 0000943663-23-000121"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
 measures:
   - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income (loss)}
   - {name: Adjusted Earnings (adjusted net loss), kind: performance, comparable_gaap: Net loss}

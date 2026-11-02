@@ -8,7 +8,7 @@ source:
   filed: "2025-02-04"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1377789/000137778925000006/fy25q2pressrelease.htm
 label_source: "SEC letter 2025-03-14 (UPLOAD 0000000000-25-002825), comments 2 and 3; response CORRESP 0001377789-25-000009"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
 measures:
   - {name: Non-GAAP gross margin, kind: performance, comparable_gaap: Gross margin}
   - {name: Non-GAAP R&D expenses, kind: performance, comparable_gaap: Research and development expenses}

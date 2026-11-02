@@ -9,7 +9,12 @@ source:
   filed: "2025-08-26"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1318484/000110465925082774/tm2524286d1_ex99-1.htm
 label_source: "Company commitments in CORRESP 0001104659-25-065388 (c2a yes, c2c yes); fixes observed in this release"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
+measures:   # Q12, written 2026-11-02 from the document, not from LLM output
+  - {name: Adjusted SG&A, kind: performance, comparable_gaap: SG&A}
+  - {name: Adjusted net income (loss), kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Full year EBITDA outlook, kind: performance, forward_looking: true, comparable_gaap: Net income (loss)}
 must_not_flag:
   - {rule_id: R-PROM-HEADLINE, note: "Adjusted EBITDA removed from headline block; net income has its own highlight bullet before adjusted EBITDA"}
   - {rule_id: R-RECON-TIEOUT}

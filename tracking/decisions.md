@@ -149,6 +149,57 @@ Format: Context → Decision → Consequences (pros / cons). Status moves to `Ac
   - EDGAR fetching refuses to run if `SEC_EDGAR_USER_AGENT` is unset. There is no default contact string.
   - The model is chosen by a bake-off on 2 sample tables during setup.
 
+### ADR-021 — Reconciliations have an orientation: vertical or horizontal (columnar)
+- **Status:** Accepted (2026-11-02; AI-identified from real data, reported to the human at the step-5 checkpoint)
+- **Context:** On the downloaded bytes, 3 of 6 Tier A reconciliations (Turtle Beach Table 5, Capri Sch. 6, Adient p.7) are columnar: "As Reported | adjustment columns | As Adjusted", reconciling each line across. The triage agent's row-wise description of Turtle Beach was a misreading. v1.0 assumed vertical tables only.
+- **Decision:** The labeller returns `orientation`. Horizontal reconciliations are **transposed** into a virtual table (columns → rows, line rows → value columns), so the identical segmented-chain engine, tolerance bands and diagnoses apply. No second arithmetic implementation exists.
+- **Consequence:** A table can hold both: a horizontal reconciliation plus a vertical continuation in the adjusted column (Turtle Beach EBITDA step, Adient memo build-up). The labeller lists them separately.
+
+### ADR-022 — Inferred signs are always disclosed in provenance
+- **Status:** Accepted (human-originated requirement, 2026-11-02)
+- **Decision:**
+  - Any term whose sign came from the LLM's `sign_hint` with no label cue emits `INFERRED_SIGN: tied out via LLM-inferred subtraction on unlabelled row '<label>' (<row id>): printed X treated as -X`.
+  - A lexicon/LLM disagreement emits `SIGN_CONFLICT`.
+  - Warnings are kept on each column and de-duplicated on the result; `relies_on_inferred_sign` is a boolean on the result.
+  - The finding's verdict can still be PASS, but never silently: the report lineage must show the warning to the reviewer.
+
+### ADR-023 — Deterministic guards added after the first real run
+- **Status:** Accepted (2026-11-02; AI-identified from real data)
+- **Decision:** Three guards, each from an observed failure:
+  1. **`no_adjustment_values`:** a segment with no adjustment values passes only on exact equality, else NEEDS_REVIEW. Observed: Lumen's GAAP EPS 0.50 → non-GAAP EPS 0.51 passed on 1-cent tolerance with nothing reconciled.
+  2. **`ratio_not_additive`:** percent values make the column NOT_EVALUATED. Observed: Adient's effective tax rates.
+  3. **Column-group split:** a horizontal labelling with several gaap_start columns is split at each gaap_start, and this is logged on the result. Observed: Adient 2023 and 2022 groups returned as one.
+- **Why deterministic:** each is a structural fact about the numbers, not a judgment, and each has a unit test (`tests/test_guards.py`).
+
+### ADR-024 — LLM provider: Goedel OpenAI-compatible endpoint, DeepSeek v4.1 flash
+- **Status:** Accepted (human decision, 2026-11-02). Supersedes the OpenRouter assumption in ADR-019.
+- **Decision:**
+  - Settings: `GOEDEL_API_KEY`, `GOEDEL_URL`, `LLM_MODEL_ID=deepseek/deepseek-v4.1-flash` from `.env`.
+  - JSON mode is `response_format=json_object`, plus local Pydantic validation and one repair retry.
+  - Content-addressed cassettes (`eval/cassettes/`) make every run replayable offline.
+- **Note:** The separate "bake-off" step was superseded by the human's model choice. The real-corpus run serves as its evidence: 0 schema failures and 0 repairs in 57 calls.
+
+### ADR-025 — The real corpus is committed with the repo
+- **Status:** Accepted (2026-11-02; AI decision, flagged to the human)
+- **Decision:** `data/raw/*.htm` (10 public SEC filings, about 4.4 MB) are no longer git-ignored. sha256 values are pinned in `eval/corpus_manifest.json`.
+- **Why:** Graders can replay the full pipeline byte-identically with no EDGAR access and no API key.
+
+### ADR-026 — Unlabelled single-row sign flips route to NEEDS_REVIEW (closes Q11)
+- **Status:** Accepted (human decision, 2026-11-02). Relaxes the cue-only restriction of ADR-014 for *diagnosis only*.
+- **Decision:** If a failed segment's discrepancy equals exactly 2× the printed value of ONE adjustment row with no "Less:"-type label, the verdict is `NEEDS_REVIEW (possible_unlabelled_subtraction)`, never PASS. The diagnostic names the row, e.g. "Discrepancy of 396 equals 2x row 'Other non-operating expense, net' (t05.r016, printed 198): verify whether this row is a subtraction". The message is carried as a `DIAGNOSIS:` provenance warning.
+- **Human's reasoning:**
+  - Printing a subtraction as a positive number without a "Less:" prefix is common in the wild (Turtle Beach proves it).
+  - A hard FLAG creates alert fatigue; auto-passing hides an ambiguity.
+  - The risk that a genuine arithmetic error happens to equal 2× one specific row is contained, because NEEDS_REVIEW still forces human inspection.
+  - The human endorsed not tuning the prompt to Turtle Beach and not feeding the diff back to the LLM.
+- **Effect on real data:** the Turtle Beach Adjusted EBITDA step moves from FLAG (false positive) to NEEDS_REVIEW with the exact row named.
+
+### ADR-027 — Headline region = every non-bullet block before the first body paragraph
+- **Status:** Accepted (2026-11-02; AI-identified while building R-PROM-HEADLINE; flagged to the human)
+- **Context:** Aviat's sub-headline lines ("Net Income of $3.5 million; Adjusted EBITDA of $14.9 million") are plain-styled, so the style-based classifier labelled them paragraphs. The SEC treated those lines as the headline (A01 comment 2).
+- **Decision:** All non-bullet blocks above the first body paragraph (≥ 200 characters, typically the dateline) are `headline`. Bullets below the dateline are body (R-PROM-ORDER).
+- **Scoring:** R-PROM-HEADLINE and R-PROM-ORDER implement the *same* C&DI clause, 102.10(a) bullet 2, split only by location, so the scorer treats them as one family.
+
 ### ADR-020 — Gold-label anchors are validated against the downloaded bytes
 - **Status:** Accepted (2026-11-02; AI-proposed, follows from ADR-004)
 - **Context:** Tier A/B anchors were captured by reading EDGAR pages through a fetch tool. Some long-document tails (e.g. Lumen's) came back only as tool summaries.

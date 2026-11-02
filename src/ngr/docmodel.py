@@ -28,6 +28,11 @@ _TEXT_BLOCK_TAGS = BLOCK_TAGS - {"td", "th"}
 BULLET_GLYPHS = "•·▪◦●■‣∙"
 _BULLET_RE = re.compile(rf"^[{BULLET_GLYPHS}]\s*")
 _SCALE_RE = re.compile(r"\bin\s+(thousands|millions|billions)\b", re.I)
+_PERIOD_RE = re.compile(
+    r"\b(three|six|nine|twelve)\s+months\s+ended\b|\b(quarter|year|fiscal year)\s+ended\b|"
+    r"^(january|february|march|april|may|june|july|august|september|october|november|december)\b.*\d{4}",
+    re.I,
+)
 _FONT_SIZE_RE = re.compile(r"font-size\s*:\s*([\d.]+)\s*(pt|px)", re.I)
 _BOLD_RE = re.compile(r"font-weight\s*:\s*(bold|bolder|[6-9]00)", re.I)
 _ITALIC_RE = re.compile(r"font-style\s*:\s*italic", re.I)
@@ -256,7 +261,7 @@ class _Builder:
         tid = f"t{len(self.tables) + 1:02d}"
         rows: list[Row] = []
         header_tokens: list[list[tuple[str, int, int]]] = []
-        seen_data = False
+        in_header = True  # header state machine: tables may repeat a header block (e.g. "Six Months Ended")
         for i, cells in enumerate(grid_rows):
             tokens = _merge_fragments(cells)
             if not tokens:
@@ -268,13 +273,15 @@ class _Builder:
                 label, value_tokens = tokens[0][0], tokens[1:]
             parsed = [(t, parse_number(t[0])) for t in value_tokens]
             numeric = [p for _, p in parsed if p.value is not None and not looks_like_year(p)]
-            # header rows: everything above the first row carrying a real (non-year) number
-            is_header = not numeric and not seen_data
-            if numeric:
-                seen_data = True
             rid = f"{tid}.r{i + 1:03d}"
-            if is_header:
-                header_tokens.append(value_tokens if not label else tokens)
+            if numeric:
+                in_header = False
+            elif not in_header and (_PERIOD_RE.search(label) or any(p.value is None for _, p in parsed)):
+                # a new header block after data: reset the header context for the rows below it
+                in_header = True
+                header_tokens = []
+            if in_header and not numeric:
+                header_tokens.append(tokens)
                 rows.append(Row(id=rid, index=i, label=label, cells=[], is_header=True))
                 continue
             out_cells = []
@@ -449,12 +456,10 @@ def _classify_headlines(blocks: list[Block]) -> None:
     Heuristic, documented: body paragraph = >= 200 chars and not mostly bold.
     Emphasised = mostly bold, or larger than the median font, or ALL CAPS.
     """
-    sizes = sorted(b.max_font_pt for b in blocks if b.max_font_pt)
-    median = sizes[len(sizes) // 2] if sizes else None
+    # ADR-027: plain-styled sub-headline lines (Aviat) are still headline: everything non-bullet above
+    # the first body paragraph counts. Emphasis no longer gates it.
     for b in blocks:
         if len(b.text) >= 200 and b.bold_fraction < 0.5:
             break
-        big = median is not None and b.max_font_pt is not None and b.max_font_pt > median
-        caps = len(b.text) > 12 and b.text.upper() == b.text and any(ch.isalpha() for ch in b.text)
-        if b.kind in ("paragraph", "heading") and (b.bold_fraction >= 0.5 or big or caps):
+        if b.kind in ("paragraph", "heading"):
             b.kind = "headline"

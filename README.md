@@ -33,7 +33,23 @@ Copy the configuration template, then fill in `.env`:
 cp .env.example .env
 ```
 
-`.env` is git-ignored. `SEC_EDGAR_USER_AGENT` is required for any EDGAR download, under the SEC fair-access policy. The OpenRouter variables are needed from the LLM steps onward.
+`.env` is git-ignored. `SEC_EDGAR_USER_AGENT` is required for any EDGAR download, under the SEC fair-access policy. `GOEDEL_API_KEY`, `GOEDEL_URL` and `LLM_MODEL_ID` are needed only for *live* LLM calls.
+
+## Reproduce the pipeline without network or API key
+
+The real corpus (`data/raw/`) and the recorded LLM responses (`eval/cassettes/`) are committed, so a replay runs fully offline:
+
+```bash
+.venv/Scripts/python -I -m ngr.pipeline --mode replay
+```
+
+Validate the gold-label anchors against the corpus:
+
+```bash
+.venv/Scripts/python -I -m ngr.corpus validate
+```
+
+Results: [eval/results/step5_real_corpus.md](eval/results/step5_real_corpus.md). Model: `deepseek/deepseek-v4.1-flash` via an OpenAI-compatible endpoint.
 
 ## Run the tests
 

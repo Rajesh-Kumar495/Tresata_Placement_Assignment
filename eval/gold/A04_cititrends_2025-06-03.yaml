@@ -8,7 +8,7 @@ source:
   filed: "2025-06-03"
   exhibit_url: https://www.sec.gov/Archives/edgar/data/1318484/000110465925055704/tm2516897d1_ex99-1.htm
 label_source: "SEC letter 2025-06-05 (UPLOAD 0000000000-25-005938), comments 1, 2a, 2b, 2c; response CORRESP 0001104659-25-065388"
-anchor_status: provisional
+anchor_status: validated   # 2026-11-02: all anchors found verbatim in downloaded bytes (ngr.corpus validate)
 measures:
   - {name: Adjusted operating income (loss), kind: performance, comparable_gaap: Operating income (loss)}
   - {name: Adjusted SG&A, kind: performance, comparable_gaap: SG&A}
