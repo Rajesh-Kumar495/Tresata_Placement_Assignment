@@ -1,3 +1,4 @@
 # Pinned inputs must stay byte-identical (sha256 in eval/corpus_manifest.json)
 data/raw/** -text
 eval/cassettes/** -text
+data/rules_src/** -text
