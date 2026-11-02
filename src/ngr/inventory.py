@@ -149,7 +149,8 @@ _EPS_RE = re.compile(r"(?:net\s+)?(?:earnings|income|loss)(?:\s*\((?:loss|earnin
 def _tokens(s: str) -> set[str]:
     s = _EPS_RE.sub(" eps ", s.lower()).replace("research and development", "r&d").replace("selling, general and administrative", "sg&a")
     stop = {"non", "gaap", "the", "of", "and", "a", "per", "share", "diluted", "total", "s", "excluding"}
-    return {w for w in re.findall(r"[a-z&]+", s) if w not in stop}
+    words = (w for w in re.findall(r"[a-z&]+", s) if w not in stop)
+    return {w[:-1] if len(w) > 4 and w.endswith("s") and not w.endswith("ss") else w for w in words}  # expenses -> expense
 
 
 def names_match(a: str, b: str) -> bool:

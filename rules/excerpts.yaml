@@ -1,0 +1,190 @@
+meta:
+  extracted: '2026-11-03'
+  sources:
+    cdi:
+      file: data/rules_src/cdi_nongaap.html
+      sha256: 7c7df89257968eb82fb082e6c30b0352827831c90cc05485c460dee83fb28ae4
+      page_last_updated: '2022-12-13'
+    regsk:
+      file: data/rules_src/regsk_229_10.html
+      sha256: e6797ca1d624379681dc52d4b0c1e44f80f69670fd45496988c1da11cad45eba
+  missing: []
+excerpts:
+  cdi:100.01: 'Question 100.01 Question: Can certain adjustments, although not explicitly prohibited, result in a non-GAAP
+    measure that is misleading? Answer: Yes. Certain adjustments may violate Rule 100(b) of Regulation G because they cause
+    the presentation of the non-GAAP measure to be misleading. Whether or not an adjustment results in a misleading non-GAAP
+    measure depends on a company’s individual facts and circumstances. Presenting a non-GAAP performance measure that excludes
+    normal, recurring, cash operating expenses necessary to operate a registrant’s business is one example of a measure that
+    could be misleading. When evaluating what is a normal, operating expense, the staff considers the nature and effect of
+    the non-GAAP adjustment and how it relates to the company’s operations, revenue generating activities, business strategy,
+    industry and regulatory environment. The staff would view an operating expense that occurs repeatedly or occasionally,
+    including at irregular intervals, as recurring. [December 13, 2022]'
+  cdi:100.02: 'Question 100.02 Question: Can a non-GAAP measure be misleading if it is presented inconsistently between periods?
+    Answer: Yes. For example, a non-GAAP measure that adjusts a particular charge or gain in the current period and for which
+    other, similar charges or gains were not also adjusted in prior periods could violate Rule 100(b) of Regulation G unless
+    the change between periods is disclosed and the reasons for it explained. In addition, depending on the significance of
+    the change, it may be necessary to recast prior measures to conform to the current presentation and place the disclosure
+    in the appropriate context. [May 17, 2016]'
+  cdi:100.03: 'Question 100.03 Question: Can a non-GAAP measure be misleading if the measure excludes charges, but does not
+    exclude any gains? Answer: Yes. For example, a non-GAAP measure that is adjusted only for non-recurring charges when there
+    were non-recurring gains that occurred during the same period could violate Rule 100(b) of Regulation G. [May 17, 2016]'
+  cdi:100.04: 'Question 100.04 Question: Can a non-GAAP measure violate Rule 100(b) of Regulation G if the recognition and
+    measurement principles used to calculate the measure are inconsistent with GAAP? Answer: Yes. By definition, a non-GAAP
+    measure excludes or includes amounts from the most directly comparable GAAP measure. However, non-GAAP adjustments that
+    have the effect of changing the recognition and measurement principles required to be applied in accordance with GAAP
+    would be considered individually tailored and may cause the presentation of a non-GAAP measure to be misleading. Examples
+    the staff may consider to be misleading include, but are not limited to: changing the pattern of recognition, such as
+    including an adjustment in a non-GAAP performance measure to accelerate revenue recognized ratably over time in accordance
+    with GAAP as though revenue was earned when customers were billed; presenting a non-GAAP measure of revenue that deducts
+    transaction costs as if the company acted as an agent in the transaction, when gross presentation as a principal is required
+    by GAAP, or the inverse, presenting a measure of revenue on a gross basis when net presentation is required by GAAP; and
+    changing the basis of accounting for revenue or expenses in a non-GAAP performance measure from an accrual basis in accordance
+    with GAAP to a cash basis. [December 13, 2022]'
+  cdi:100.05: 'Question 100.05 Question: Can a non-GAAP measure be misleading if it, and/or any adjustment made to the GAAP
+    measure, is not appropriately labeled and clearly described? Answer: Yes. Non-GAAP measures are not always consistent
+    across, or comparable with, non-GAAP measures disclosed by other companies. Without an appropriate label and clear description,
+    a non-GAAP measure and/or any adjustment made to arrive at that measure could be misleading to investors. The following
+    examples would violate Rule 100(b) of Regulation G: Failure to identify and describe a measure as non-GAAP. Presenting
+    a non-GAAP measure with a label that does not reflect the nature of the non-GAAP measure, such as: a contribution margin
+    that is calculated as GAAP revenue less certain expenses, labeled “net revenue”; non-GAAP measure labeled the same as
+    a GAAP line item or subtotal even though it is calculated differently than the similarly labeled GAAP measure, such as
+    “Gross Profit” or “Sales”; and a non-GAAP measure labeled “pro forma” that is not calculated in a manner consistent with
+    the pro forma requirements in Article 11 of Regulation S-X. [December 13, 2022]'
+  cdi:100.06: 'Question 100.06 Question: Can a non-GAAP measure be misleading, and violate Rule 100(b) of Regulation G, even
+    if it is accompanied by disclosure about the nature and effect of each adjustment made to the most directly comparable
+    GAAP measure? Answer: Yes. It is the staff’s view that a non-GAAP measure could mislead investors to such a degree that
+    even extensive, detailed disclosure about the nature and effect of each adjustment would not prevent the non-GAAP measure
+    from being materially misleading. [December 13, 2022]'
+  cdi:102.03: 'Question 102.03 Question: Item 10(e) of Regulation S-K prohibits adjusting a non-GAAP financial performance
+    measure to eliminate or smooth items identified as non-recurring, infrequent or unusual when the nature of the charge
+    or gain is such that it is reasonably likely to recur within two years or there was a similar charge or gain within the
+    prior two years. Is this prohibition based on the description of the charge or gain, or is it based on the nature of the
+    charge or gain? Answer: The prohibition is based on the description of the charge or gain that is being adjusted. It would
+    not be appropriate to state that a charge or gain is non-recurring, infrequent or unusual unless it meets the specified
+    criteria. The fact that a registrant cannot describe a charge or gain as non-recurring, infrequent or unusual, however,
+    does not mean that the registrant cannot adjust for that charge or gain. Registrants can make adjustments they believe
+    are appropriate, subject to Regulation G and the other requirements of Item 10(e) of Regulation S-K. See Question 100.01.
+    [May 17, 2016]'
+  cdi:102.05: 'Question 102.05 Question : While Item 10(e)(1)(ii) of Regulation S-K does not prohibit the use of per share
+    non-GAAP financial measures, the adopting release for Item 10(e), Exchange Act Release No. 47226, states that "per share
+    measures that are prohibited specifically under GAAP or Commission rules continue to be prohibited in materials filed
+    with or furnished to the Commission." In light of Commission guidance, specifically Accounting Series Release No. 142,
+    Reporting Cash Flow and Other Related Data , and Accounting Standards Codification 230, are non-GAAP earnings per share
+    numbers prohibited in documents filed or furnished with the Commission? Answer : No. Item 10(e) recognizes that certain
+    non-GAAP per share performance measures may be meaningful from an operating standpoint. Non-GAAP per share performance
+    measures should be reconciled to GAAP earnings per share. On the other hand, non-GAAP liquidity measures that measure
+    cash generated must not be presented on a per share basis in documents filed or furnished with the Commission, consistent
+    with Accounting Series Release No. 142. Whether per share data is prohibited depends on whether the non-GAAP measure can
+    be used as a liquidity measure, even if management presents it solely as a performance measure. When analyzing these questions,
+    the staff will focus on the substance of the non-GAAP measure and not management’s characterization of the measure. [May
+    17, 2016]'
+  cdi:102.07: 'Question 102.07 Question: Some companies present a measure of "free cash flow," which is typically calculated
+    as cash flows from operating activities as presented in the statement of cash flows under GAAP, less capital expenditures.
+    Does Item 10(e)(1)(ii) of Regulation S-K prohibit this measure in documents filed with the Commission? Answer: No. The
+    deduction of capital expenditures from the GAAP financial measure of cash flows from operating activities would not violate
+    the prohibitions in Item 10(e)(1)(ii). However, companies should be aware that this measure does not have a uniform definition
+    and its title does not describe how it is calculated. Accordingly, a clear description of how this measure is calculated,
+    as well as the necessary reconciliation, should accompany the measure where it is used. Companies should also avoid inappropriate
+    or potentially misleading inferences about its usefulness. For example, "free cash flow" should not be used in a manner
+    that inappropriately implies that the measure represents the residual cash flow available for discretionary expenditures,
+    since many companies have mandatory debt service requirements or other non-discretionary expenditures that are not deducted
+    from the measure. Also, free cash flow is a liquidity measure that must not be presented on a per share basis. See Question
+    102.05. [May 17, 2016]'
+  cdi:102.10(a): 'Question 102.10(a): Item 10(e)(1)(i)(A) of Regulation S-K requires that when a registrant presents a non-GAAP
+    measure it must present the most directly comparable GAAP measure with equal or greater prominence. This requirement applies
+    to non-GAAP measures presented in documents filed with the Commission and also earnings releases furnished under Item
+    2.02 of Form 8-K. Are there examples of disclosures that would cause a non-GAAP measure to be more prominent? Answer:
+    Yes. This requirement applies to the presentation of, and any related discussion and analysis of, a non-GAAP measure.
+    Whether a non-GAAP measure is more prominent than the comparable GAAP measure generally depends on the facts and circumstances
+    in which the disclosure is made. The staff would consider the following to be examples of non-GAAP measures that are more
+    prominent than the comparable GAAP measures: Presenting an income statement of non-GAAP measures. See Question 102.10(c).
+    Presenting a non-GAAP measure before the most directly comparable GAAP measure or omitting the comparable GAAP measure
+    altogether, including in an earnings release headline or caption that includes a non-GAAP measure. Presenting a ratio
+    where a non-GAAP financial measure is the numerator and/or denominator without also presenting the ratio calculated using
+    the most directly comparable GAAP measure(s) with equal or greater prominence. Presenting a non-GAAP measure using a style
+    of presentation (e.g., bold, larger font, etc.) that emphasizes the non-GAAP measure over the comparable GAAP measure.
+    Describing a non-GAAP measure as, for example, “record performance” or “exceptional” without at least an equally prominent
+    descriptive characterization of the comparable GAAP measure. Presenting charts, tables or graphs of a non-GAAP financial
+    measures without presenting charts, tables or graphs of the comparable GAAP measures with equal or greater prominence,
+    or omitting the comparable GAAP measures altogether. Providing discussion and analysis of a non-GAAP measure without a
+    similar discussion and analysis of the comparable GAAP measure in a location with equal or greater prominence. [December
+    13, 2022]'
+  cdi:102.10(b): 'Question 102.10(b) Question: Are there examples of disclosures that would cause the non-GAAP reconciliation
+    required by Item 10(e)(1)(i)(B) of Regulation S-K to give undue prominence to a non-GAAP measure? Answer: Yes. The staff
+    would consider the following examples of disclosure of non-GAAP measures as more prominent than the comparable GAAP measures:
+    Starting the reconciliation with a non-GAAP measure. Presenting a non-GAAP income statement when reconciling non-GAAP
+    measures to the most directly comparable GAAP measures. See Question 102.10(c). When presenting a forward-looking non-GAAP
+    measure, a registrant may exclude the quantitative reconciliation if it is relying on the exception provided by Item 10(e)(1)(i)(B)
+    of Regulation S-K. A measure would be considered more prominent than the comparable GAAP measure if it is presented without
+    disclosing reliance upon the exception, identifying the information that is unavailable, and its probable significance
+    in a location of equal or greater prominence. [December 13, 2022]'
+  cdi:102.10(c): 'Question 102.10(c) Question: The staff considers the presentation of a non-GAAP income statement, alone
+    or as part of the required non-GAAP reconciliation, as giving undue prominence to non-GAAP measures. What is considered
+    to be a non-GAAP income statement? Answer: The staff considers a non-GAAP income statement to be one that is comprised
+    of non-GAAP measures and includes all or most of the line items and subtotals found in a GAAP income statement. [December
+    13, 2022]'
+  cdi:102.11: 'Question 102.11 Question: How should income tax effects related to adjustments to arrive at a non-GAAP measure
+    be calculated and presented? Answer: A registrant should provide income tax effects on its non-GAAP measures depending
+    on the nature of the measures. If a measure is a liquidity measure that includes income taxes, it might be acceptable
+    to adjust GAAP taxes to show taxes paid in cash. If a measure is a performance measure, the registrant should include
+    current and deferred income tax expense commensurate with the non-GAAP measure of profitability. In addition, adjustments
+    to arrive at a non-GAAP measure should not be presented “net of tax.” Rather, income taxes should be shown as a separate
+    adjustment and clearly explained. [May 17, 2016]'
+  cdi:103.01: 'Question 103.01 Question: Exchange Act Release No. 47226 describes EBIT as "earnings before interest and taxes"
+    and EBITDA as "earnings before interest, taxes, depreciation and amortization." What GAAP measure is intended by the term
+    "earnings"? May measures other than those described in the release be characterized as "EBIT" or "EBITDA"? Does the exception
+    for EBIT and EBITDA from the prohibition in Item 10(e)(1)(ii)(A) of Regulation S-K apply to these other measures? Answer:
+    "Earnings" means net income as presented in the statement of operations under GAAP. Measures that are calculated differently
+    than those described as EBIT and EBITDA in Exchange Act Release No. 47226 should not be characterized as "EBIT" or "EBITDA"
+    and their titles should be distinguished from "EBIT" or "EBITDA," such as "Adjusted EBITDA." These measures are not exempt
+    from the prohibition in Item 10(e)(1)(ii)(A) of Regulation S-K, with the exception of measures addressed in Question 102.09.
+    [Jan. 11, 2010]'
+  cdi:103.02: 'Question 103.02 Question: If EBIT or EBITDA is presented as a performance measure, to which GAAP financial
+    measure should it be reconciled? Answer: If a company presents EBIT or EBITDA as a performance measure, such measures
+    should be reconciled to net income as presented in the statement of operations under GAAP. Operating income would not
+    be considered the most directly comparable GAAP financial measure because EBIT and EBITDA make adjustments for items that
+    are not included in operating income. In addition, these measures must not be presented on a per share basis. See Question
+    102.05. [May 17, 2016]'
+  cdi:104.01: 'Question 104.01 Question: Is segment information that is presented in conformity with Accounting Standards
+    Codification 280, pursuant to which a company may determine segment profitability on a basis that differs from the amounts
+    in the consolidated financial statements determined in accordance with GAAP, considered to be a non-GAAP financial measure
+    under Regulation G and Item 10(e) of Regulation S-K? Answer: No. Non-GAAP financial measures do not include financial
+    measures that are required to be disclosed by GAAP. Exchange Act Release No. 47226 lists "measures of profit or loss and
+    total assets for each segment required to be disclosed in accordance with GAAP" as examples of such measures. The measure
+    of segment profit or loss and segment total assets under Accounting Standards Codification 280 is the measure reported
+    to the chief operating decision maker for purposes of making decisions about allocating resources to the segment and assessing
+    its performance. The list of examples in Exchange Act Release No. 47226 is not exclusive. As an additional example, because
+    Accounting Standards Codification 280 requires or expressly permits the footnotes to the company''s consolidated financial
+    statements to include specific additional financial information for each segment, that information also would be excluded
+    from the definition of non-GAAP financial measures. [Jan. 11, 2010]'
+  cdi:104.06: 'Question 104.06 Question: Company X has operations in various foreign countries where the local currency is
+    used to prepare the financial statements which are translated into the reporting currency under the applicable accounting
+    standards. In preparing its MD&A, Company X will explain the reasons for changes in various financial statement captions.
+    A portion of these changes will be attributable to changes in exchange rates between periods used for translation. Company
+    X wants to isolate the effect of exchange rate differences and will present financial information in a constant currency
+    — e.g., assume a constant exchange rate between periods for translation. Would such a presentation be considered a non-GAAP
+    measure under Regulation G and Item 10(e) of Regulation S-K? Answer: Yes. Company X may comply with the reconciliation
+    requirements of Regulation G and Item 10(e) by presenting the historical amounts and the amounts in constant currency
+    and describing the process for calculating the constant currency amounts and the basis of presentation. [Jan. 11, 2010]'
+  regsk:10(e)(1)(i): '(1) Whenever one or more non-GAAP financial measures are included in a filing with the Commission: (i)
+    The registrant must include the following in the filing: (A) A presentation, with equal or greater prominence, of the
+    most directly comparable financial measure or measures calculated and presented in accordance with Generally Accepted
+    Accounting Principles (GAAP); (B) A reconciliation (by schedule or other clearly understandable method), which shall be
+    quantitative for historical non-GAAP measures presented, and quantitative, to the extent available without unreasonable
+    efforts, for forward-looking information, of the differences between the non-GAAP financial measure disclosed or released
+    with the most directly comparable financial measure or measures calculated and presented in accordance with GAAP identified
+    in paragraph (e)(1)(i)(A) of this section; (C) A statement disclosing the reasons why the registrant''s management believes
+    that presentation of the non-GAAP financial measure provides useful information to investors regarding the registrant''s
+    financial condition and results of operations; and (D) To the extent material, a statement disclosing the additional purposes,
+    if any, for which the registrant''s management uses the non-GAAP financial measure that are not disclosed pursuant to
+    paragraph (e)(1)(i)(C) of this section; and'
+  regsk:10(e)(1)(ii): '(ii) A registrant must not: (A) Exclude charges or liabilities that required, or will require, cash
+    settlement, or would have required cash settlement absent an ability to settle in another manner, from non-GAAP liquidity
+    measures, other than the measures earnings before interest and taxes (EBIT) and earnings before interest, taxes, depreciation,
+    and amortization (EBITDA); (B) Adjust a non-GAAP performance measure to eliminate or smooth items identified as non-recurring,
+    infrequent or unusual, when the nature of the charge or gain is such that it is reasonably likely to recur within two
+    years or there was a similar charge or gain within the prior two years; (C) Present non-GAAP financial measures on the
+    face of the registrant''s financial statements prepared in accordance with GAAP or in the accompanying notes; (D) Present
+    non-GAAP financial measures on the face of any pro forma financial information required to be disclosed by Article 11
+    of Regulation S-X ( 17 CFR 210.11-01 through 210.11-03); or (E) Use titles or descriptions of non-GAAP financial measures
+    that are the same as, or confusingly similar to, titles or descriptions used for GAAP financial measures; and'

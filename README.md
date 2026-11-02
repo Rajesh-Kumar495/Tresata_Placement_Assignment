@@ -7,7 +7,7 @@ This tool reviews non-GAAP measures in SEC earnings releases (Form 8-K Item 2.02
 
 It splits the work between deterministic code (parsing, arithmetic, rules) and bounded LLM steps (identifying measures, judgment calls). Every finding is traceable to a source span and a cited rule. A human reviewer confirms the inputs and owns the conclusions.
 
-**Status:** Stage 3 in progress. The deterministic core is built (document model, tie-out engine, gold labels). The LLM steps, rules and report are not built yet. See [tracking/progress.md](tracking/progress.md).
+**Status:** Stage 3 in progress. The full pipeline is built: parser, tie-out, measure inventory, row-role labeller, 9 deterministic rules, 4 judge/hybrid rules, HTML/JSON review memo and the evaluation harness. See [tracking/progress.md](tracking/progress.md).
 
 - Design: [docs/design/architecture.md](docs/design/architecture.md)
 - Evaluation plan: [docs/design/test_plan.md](docs/design/test_plan.md)
@@ -42,6 +42,14 @@ The real corpus (`data/raw/`) and the recorded LLM responses (`eval/cassettes/`)
 ```bash
 .venv/Scripts/python -I -m ngr.pipeline --mode replay
 ```
+
+Run the full evaluation (10 real releases + 20 synthetic cases), producing an HTML review memo per document plus scores:
+
+```bash
+.venv/Scripts/python -I -m ngr.evaluate --mode replay
+```
+
+Results go to `eval/results/full_eval.md`, with sample memos in `eval/results/sample_reports/`.
 
 Validate the gold-label anchors against the corpus:
 

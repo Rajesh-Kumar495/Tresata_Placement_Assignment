@@ -200,6 +200,26 @@ Format: Context → Decision → Consequences (pros / cons). Status moves to `Ac
 - **Decision:** All non-bullet blocks above the first body paragraph (≥ 200 characters, typically the dateline) are `headline`. Bullets below the dateline are body (R-PROM-ORDER).
 - **Scoring:** R-PROM-HEADLINE and R-PROM-ORDER implement the *same* C&DI clause, 102.10(a) bullet 2, split only by location, so the scorer treats them as one family.
 
+### ADR-028 — Rule implementation choices (build steps 6–7)
+- **Status:** Accepted (2026-11-03; AI decisions made while implementing, flagged to the human at the step-7 checkpoint)
+- **GAAP comparables:** Each non-GAAP measure maps to a GAAP *family* (net income, EPS, operating income/margin, gross, opex, cash from operations, revenue…) with a regex that ignores mentions prefixed by "adjusted / non-GAAP / core / modified". This is deterministic and explainable; it is weaker than an LLM on exotic measures, which then simply have no family and are skipped, never guessed.
+- **Prominence:**
+  - R-PROM-HEADLINE covers the headline region (ADR-027).
+  - R-PROM-ORDER covers bullet lists and summary tables. Section rows ("Net loss per share:") count as GAAP context.
+  - Paragraph-level discussion is **not** checked (R-PROM-DISCUSSION is Ext); it was too noisy to do deterministically.
+- **R-RECON-PRESENT:**
+  - A measure counts as reconciled if its name *strictly* matches a reconciliation result. Qualifiers must agree: "Modified Adjusted EBITDA" ≠ "Adjusted EBITDA"; "margin" ≠ the underlying amount.
+  - Per-share figures pass when the numerator is reconciled and GAAP EPS is shown (common practice; found on Aviat).
+  - Constant-currency figures pass under C&DI 104.06 when shown beside the reported change.
+  - Unexplained lexicon candidates without a reconciliation become NEEDS_REVIEW, not FLAG, because they are unconfirmed as measures.
+- **R-RECON-START-GAAP:** a reconciliation starting from a non-GAAP figure that is itself reconciled from GAAP elsewhere in the release is `NEEDS_REVIEW (chained)`, not FLAG (seen on Lumen FCF → unlevered cash flow, Adient memo).
+- **Horizontal line expansion:** every row with numbers in the start, result and ≥1 adjustment column is tied out, not only the rows the LLM listed. This is a deterministic coverage increase; rows whose adjustment cells are blank are excluded (Turtle Beach "Net loss" row).
+- **Judges:**
+  - Each judge gets deterministic pre-filters: language only on blocks with a non-GAAP mention AND superlative wording; normal-opex only on non-standard adjustments (interest, tax, D&A, stock comp, impairment and non-cash excluded); usefulness only on candidate paragraphs.
+  - This bounds cost and keeps the LLM away from questions with obvious answers.
+- **R-FWD-EXCEPTION:** no LLM call. Forward-looking measures come from the inventory plus a guidance-sentence detector. The exception disclosure must name the measure or speak generically about forward-looking non-GAAP measures; a disclosure about a different measure does not count.
+- **Cross-period recurrence (ADR-016):** not built in this pass. The single-document 100.01 judge is what is evaluated.
+
 ### ADR-020 — Gold-label anchors are validated against the downloaded bytes
 - **Status:** Accepted (2026-11-02; AI-proposed, follows from ADR-004)
 - **Context:** Tier A/B anchors were captured by reading EDGAR pages through a fetch tool. Some long-document tails (e.g. Lumen's) came back only as tool summaries.

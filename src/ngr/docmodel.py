@@ -352,26 +352,30 @@ def _has_block_descendant(el: Tag) -> bool:
 
 
 def _style_of(el: Tag) -> tuple[bool, bool, float | None]:
-    bold = italic = False
+    """CSS-like inheritance: the NEAREST element that decides a property wins (font-weight:normal overrides a bold ancestor)."""
+    bold: bool | None = None
+    italic: bool | None = None
     size: float | None = None
     for anc in [el, *el.parents]:
         if not isinstance(anc, Tag):
             continue
-        if anc.name in ("b", "strong"):
-            bold = True
-        if anc.name in ("i", "em"):
-            italic = True
         style = anc.get("style", "") or ""
-        if not bold and _BOLD_RE.search(style):
-            bold = True
-        if not italic and _ITALIC_RE.search(style):
-            italic = True
+        if bold is None:
+            if anc.name in ("b", "strong") or _BOLD_RE.search(style):
+                bold = True
+            elif re.search(r"font-weight\s*:\s*(normal|lighter|[1-4]00)\b", style, re.I):
+                bold = False
+        if italic is None:
+            if anc.name in ("i", "em") or _ITALIC_RE.search(style):
+                italic = True
+            elif re.search(r"font-style\s*:\s*normal", style, re.I):
+                italic = False
         if size is None:
             m = _FONT_SIZE_RE.search(style)
             if m:
                 v = float(m.group(1))
                 size = v * 0.75 if m.group(2).lower() == "px" else v
-    return bold, italic, size
+    return bool(bold), bool(italic), size
 
 
 def _runs_from_string(s: NavigableString) -> list[Run]:

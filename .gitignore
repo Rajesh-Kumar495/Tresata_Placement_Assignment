@@ -13,3 +13,5 @@ __pycache__/
 # data/raw/ is committed: public SEC filings, needed for byte-identical replay
 runs/
 eval/cassettes/live/
+
+# generated synthetic documents are reproducible from data/raw + src/ngr/synthetic.py

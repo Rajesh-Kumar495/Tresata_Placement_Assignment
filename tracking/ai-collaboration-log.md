@@ -30,6 +30,10 @@ Sections 1–2 are filled in as we go. **Sections 3–4 must be written by the h
 | 2026-11-02 | Triage agent described Turtle Beach Table 5 as a row-wise chain; I built a fixture from that description | **Wrong:** the downloaded bytes show a columnar table. Caught by running on real files. | Fixture relabelled synthetic; real-bytes tests added; ADR-021 |
 | 2026-11-02 | AI's tolerance alone let Lumen non-GAAP EPS 0.51 "tie" to GAAP EPS 0.50 with no adjustments | False pass, found on real data | `no_adjustment_values` guard (ADR-023) |
 | 2026-11-02 | **Human requirement:** inferred signs must be visible in provenance even when the math ties | AI design surfaced sign source only in the term data, not as an auditor-facing message | ADR-022 |
+| 2026-11-02 | **Human decision (Q11):** route single-row 2× discrepancies on unlabelled rows to NEEDS_REVIEW with the exact row named; never auto-PASS; don't tune the prompt to Turtle Beach | AI had left it as FLAG (alert fatigue) under the cue-only rule | ADR-026 |
+| 2026-11-03 | AI's first rule implementation: aliases trusted as given by the LLM | The LLM lumped distinct measures as aliases, hiding an SEC-raised unreconciled measure (Aviat) | Alias consistency check (eval/results/README.md #1) |
+| 2026-11-03 | AI's first scorer: matched only the first occurrence of a gold anchor | Under-counted real detections on documents with repeated captions | All occurrences; mismatched locations reported as "offsite", not hits |
+| 2026-11-03 | AI's forward-looking check: one disclosure about Adjusted EBITDA treated as covering Adjusted EPS | False PASS, caught by planted case M11 | Specific-measure coverage + core-word matching |
 | _human to add_ | | | |
 
 ## 3. What came from the human  ← **human to write**

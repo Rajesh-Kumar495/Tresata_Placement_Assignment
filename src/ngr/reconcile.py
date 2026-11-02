@@ -143,7 +143,10 @@ def label_and_tie(table: Table, llm: LLMClient) -> TableLabelling:
             if len(groups) > 1:
                 errors.append(f"normalised: split into {len(groups)} column groups (one gaap_start each)")
             for gi, group in enumerate(groups):
-                res = tie_out_horizontal(table, [ColumnRole(col_key=c.col_key, role=c.role) for c in group], lines) if lines else None
+                glines = expand_line_rows(table, group, lines)
+                if len(glines) > len(lines):
+                    errors.append(f"normalised: {len(glines) - len(lines)} eligible line row(s) added deterministically")
+                res = tie_out_horizontal(table, [ColumnRole(col_key=c.col_key, role=c.role) for c in group], glines) if glines else None
                 name = rc.measure if len(groups) == 1 else f"{rc.measure} [group {gi + 1}]"
                 results.append(ReconResult(table_id=table.id, measure=name, orientation="horizontal", start_is_gaap=rc.start_is_gaap,
                                            start_label=rc.start_label, tieout=res, gate_errors=list(errors), note=rc.note))
@@ -151,6 +154,26 @@ def label_and_tie(table: Table, llm: LLMClient) -> TableLabelling:
         results.append(ReconResult(table_id=table.id, measure=rc.measure, orientation=rc.orientation, start_is_gaap=rc.start_is_gaap,
                                    start_label=rc.start_label, tieout=result, gate_errors=errors, note=rc.note))
     return TableLabelling(table_id=table.id, is_reconciliation=out.is_reconciliation, reconciliations=results)
+
+
+def expand_line_rows(table: Table, group: list[_ColAssign], llm_lines: list[str]) -> list[str]:
+    """Deterministic coverage: every data row with numbers in the start AND result columns and in at
+    least one adjustment column is a line of this columnar reconciliation. Rows whose adjustment cells are
+    all blank (e.g. Turtle Beach's 'Net loss' row, whose result cell is a different measure) are excluded.
+    """
+    start = next((c.col_key for c in group if c.role == "gaap_start"), None)
+    result = next((c.col_key for c in group if c.role == "nongaap_result"), None)
+    adj = [c.col_key for c in group if c.role in ("adjustment", "tax_effect")]
+    if start is None or result is None or not adj:
+        return llm_lines
+
+    def num(r, k):
+        c = r.value_at(k)
+        return c is not None and c.number is not None and c.number.value is not None
+
+    extra = [r.id for r in table.data_rows if r.id not in llm_lines and num(r, start) and num(r, result) and any(num(r, k) for k in adj)]
+    ordered = {r.id: r.index for r in table.data_rows}
+    return sorted(set(llm_lines) | set(extra), key=lambda rid: ordered.get(rid, 0))
 
 
 def split_column_groups(cols: list[_ColAssign]) -> list[list[_ColAssign]]:
