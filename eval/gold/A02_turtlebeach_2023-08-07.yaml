@@ -1,0 +1,40 @@
+doc_id: A02-turtlebeach-2023-08-07
+tier: A
+synthetic: false
+source:
+  company: Turtle Beach Corporation
+  cik: 1493761
+  accession: 0000950170-23-039092
+  filed: "2023-08-07"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1493761/000095017023039092/hear-ex99_1.htm
+label_source: "SEC letter 2023-08-23 (UPLOAD 0000000000-23-009245), comments 4, 5, 7, 9; response CORRESP 0000943663-23-000121"
+anchor_status: provisional
+measures:
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Adjusted Earnings (adjusted net loss), kind: performance, comparable_gaap: Net loss}
+  - {name: Adjusted diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted EPS}
+  - {name: Adjusted EBITDA guidance / run-rate, kind: performance, forward_looking: true, comparable_gaap: Net income (loss)}
+expected_findings:
+  - rule_id: R-PROM-HEADLINE
+    verdict: FLAG
+    evidence_contains: "Revenue and Adjusted EBITDA Increased 16% and 54% Year-over-Year, Respectively"
+    sec_comment: "c4: header gives % change in Adjusted EBITDA without the GAAP % change"
+  - rule_id: R-TAX-SEPARATE
+    verdict: FLAG
+    evidence_contains: "Adjustments, net of tax:"
+    sec_comment: "c5: Table 4 adjustments presented net of tax (102.11)"
+  - rule_id: R-EBITDA-FROM-NI
+    verdict: FLAG
+    evidence_contains: "GAAP to Adjusted EBITDA Reconciliation"
+    sec_comment: "c7: Table 5 does not reconcile Adjusted EBITDA to net income (starts at operating income)"
+  - rule_id: R-NORMAL-OPEX
+    verdict: NEEDS_REVIEW
+    also_accept: [FLAG]
+    evidence_contains: "Other includes certain non-recurring business costs."
+    sec_comment: "c9: asks how CEO separation, inventory, acquisition, non-recurring and 'Other' adjustments satisfy 100.01"
+    note: "SEC asked a question; company defended (partial). A judgment call, so NEEDS_REVIEW or FLAG both count as detection."
+must_not_flag:
+  - {rule_id: R-RECON-TIEOUT, note: "Table 5 ties when the 'Other non-operating expense, net' row is subtracted (needs sign_hint); see test_real_turtle_beach_table5"}
+sec_raised_ext: [R-NONGAAP-IS]
+unscored_rules:
+  R-FWD-EXCEPTION: "Adjusted EBITDA guidance in headline; SEC did not comment on reconciliation of guidance"

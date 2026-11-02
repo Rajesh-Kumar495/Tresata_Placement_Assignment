@@ -1,0 +1,15 @@
+# secrets / local config (ADR-019)
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+.hypothesis/
+
+# downloaded corpus and run outputs (re-creatable; may be large)
+data/raw/
+runs/
+eval/cassettes/live/

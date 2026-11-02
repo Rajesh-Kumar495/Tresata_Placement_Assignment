@@ -1,0 +1,22 @@
+doc_id: B03-capri-2025-05-28
+tier: B
+synthetic: false
+paired_with: A03-capri-2024-11-07
+source:
+  company: Capri Holdings Limited
+  cik: 1530721
+  accession: 0001530721-25-000046
+  filed: "2025-05-28"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1530721/000153072125000046/cpri8-k03292025exhibit991.htm
+label_source: "Company commitments in CORRESP 0001530721-25-000020 (c4a, c4b, c5 yes); fixes observed in this release"
+anchor_status: provisional
+must_not_flag:
+  - rule_id: R-PROM-ORDER
+    evidence_contains: "Operating margin of (11.2)%; adjusted operating margin of (3.2)%"
+    note: "GAAP now first in highlight bullets"
+  - rule_id: R-RECON-PRESENT
+    evidence_contains: "Operating margin of (11.2)%; adjusted operating margin of (3.2)%"
+    note: "Sch. 7 now has an Operating Margin reconciliation row"
+  - {rule_id: R-RECON-TIEOUT}
+unscored_rules:
+  R-RECON-PRESENT: "FCF is defined as non-GAAP but reconciled only by in-text arithmetic ($281m - $128m = $153m); whether that suffices is a judgment call. Scored only via the operating-margin negative above."

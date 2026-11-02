@@ -1,0 +1,36 @@
+# Rule pack v0.1 (skeleton). See architecture §6 and ADR-003/ADR-017.
+# status: draft  -> verbatim excerpt still to be pasted from the source (build step 6)
+#         active -> excerpt verified against source_last_updated
+# category is per document type and is NEVER inferred by the LLM (ADR-017).
+version: "0.1.0"
+sources:
+  cdi: {url: "https://www.sec.gov/rules-regulations/staff-guidance/corporation-finance-interpretations/non-gaap-financial-measures", last_updated: "2022-12-13"}
+  regs_k_10e: {url: "https://www.law.cornell.edu/cfr/text/17/229.10"}
+  reg_g: {url: "https://www.law.cornell.edu/cfr/text/17/244.100"}
+  form_8k: {url: "https://www.sec.gov/files/form8-k.pdf", note: "Item 2.02 Instruction 2 (p.15); General Instruction B.2 (p.3)"}
+
+rules:
+  - {id: R-RECON-PRESENT,    mvp: true,  check: d_over_l, citation: [Reg G 100(a)(2), S-K 10(e)(1)(i)(B)],            category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-RECON-TIEOUT,     mvp: true,  check: deterministic, citation: [Reg G 100(a)(2)],                            category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-RECON-START-GAAP, mvp: true,  check: d_over_l, citation: [C&DI 102.10(b)],                                  category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-PROM-HEADLINE,    mvp: true,  check: d_over_l, citation: [C&DI 102.10(a), S-K 10(e)(1)(i)(A)],              category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-PROM-ORDER,       mvp: true,  check: d_over_l, citation: [C&DI 102.10(a), S-K 10(e)(1)(i)(A)],              category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-PROM-STYLE,       mvp: true,  check: deterministic, citation: [C&DI 102.10(a)],                             category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-PROM-LANGUAGE,    mvp: true,  check: llm_judge, citation: [C&DI 102.10(a)],                                 category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-FWD-EXCEPTION,    mvp: true,  check: hybrid,   citation: [C&DI 102.10(b), S-K 10(e)(1)(i)(B)],              category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-USEFULNESS,       mvp: true,  check: llm_presence, citation: [S-K 10(e)(1)(i)(C)],                         category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-TAX-SEPARATE,     mvp: true,  check: d_over_l, citation: [C&DI 102.11],                                     category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-EBITDA-LABEL,     mvp: true,  check: d_over_l, citation: [C&DI 103.01, S-K 10(e)(1)(ii)(E)],                category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-EBITDA-FROM-NI,   mvp: true,  check: d_over_l, citation: [C&DI 103.02],                                     category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-PERSHARE-LIQ,     mvp: true,  check: d_over_l, citation: [C&DI 102.05, C&DI 102.07],                        category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-NORMAL-OPEX,      mvp: true,  check: llm_judge, citation: [C&DI 100.01, Reg G 100(b)],                      category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-PROM-RATIO,       mvp: false, check: hybrid,   citation: [C&DI 102.10(a)],                                  category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-NONGAAP-IS,       mvp: false, check: hybrid,   citation: [C&DI 102.10(c)],                                  category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-PROM-DISCUSSION,  mvp: false, check: llm_judge, citation: [C&DI 102.10(a)],                                 category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}
+  - {id: R-INCONSISTENT-ADJ, mvp: false, check: deterministic, citation: [C&DI 100.02],                                category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-GAIN-ASYMMETRY,   mvp: false, check: hybrid,   citation: [C&DI 100.03],                                     category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-TAILORED,         mvp: false, check: llm_judge, citation: [C&DI 100.04],                                    category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-MISLABEL,         mvp: false, check: hybrid,   citation: [C&DI 100.05, S-K 10(e)(1)(ii)(E)],                category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-NONRECUR-LABEL,   mvp: false, check: hybrid,   citation: [C&DI 102.03, S-K 10(e)(1)(ii)(B)],                category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-FCF-TITLE,        mvp: false, check: llm_judge, citation: [C&DI 102.07],                                    category: {8-K_2.02_EX99: STAFF_COMMENT_RISK}, status: draft}
+  - {id: R-PROM-CHART,       mvp: false, check: not_evaluated, citation: [C&DI 102.10(a)],                             category: {8-K_2.02_EX99: REQUIREMENT}, status: draft}

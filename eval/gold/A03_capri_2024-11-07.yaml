@@ -1,0 +1,45 @@
+doc_id: A03-capri-2024-11-07
+tier: A
+synthetic: false
+source:
+  company: Capri Holdings Limited
+  cik: 1530721
+  accession: 0001530721-24-000124
+  filed: "2024-11-07"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1530721/000153072124000124/cpri8-k09282024exhibit991.htm
+label_source: "SEC letter 2025-02-05 (UPLOAD 0000000000-25-001215), comments 4a, 4b, 5; response CORRESP 0001530721-25-000020"
+anchor_status: provisional
+measures:
+  - {name: Adjusted operating margin, kind: performance, comparable_gaap: Operating margin}
+  - {name: Adjusted income from operations, kind: performance, comparable_gaap: Total (loss) income from operations}
+  - {name: Adjusted net income, kind: performance, comparable_gaap: Net income attributable to Capri}
+  - {name: Adjusted diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted net income per share}
+  - {name: Free cash flow, kind: liquidity, comparable_gaap: Net cash provided by operating activities}
+  - {name: Constant currency revenue change, kind: performance, comparable_gaap: Revenue change as reported}
+  - {name: Net debt, kind: liquidity, comparable_gaap: Total debt}
+expected_findings:
+  - rule_id: R-PROM-ORDER
+    verdict: FLAG
+    evidence_contains: "Adjusted operating margin of 3.0%"
+    sec_comment: "c4a: highlight bullets present adjusted operating margin and adjusted EPS without prominent GAAP amounts"
+  - rule_id: R-PROM-ORDER
+    verdict: FLAG
+    evidence_contains: "Adjusted earnings per share of $0.65"
+    sec_comment: "c4a (second measure)"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "Adjusted income from operations was $32 million and adjusted operating margin was 3.0%"
+    sec_comment: "c4b: no reconciliation of adjusted operating margin"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "free cash flow was an inflow of $23 million"
+    sec_comment: "c5: free cash flow not identified as non-GAAP and lacks Item 10(e) disclosures"
+must_not_flag:
+  - rule_id: R-RECON-PRESENT
+    evidence_contains: "Revenue decreased 16.4% on a reported basis and 16.4% in constant currency"
+    note: "Trap: historical + constant-currency side by side satisfies reconciliation per C&DI 104.06"
+  - {rule_id: R-RECON-TIEOUT, note: "Sch. 6 columnar reconciliation ties ((38)+43+1+4+12+10=32)"}
+sec_raised_ext: [R-MISLABEL]
+unscored_rules:
+  R-PERSHARE-LIQ: "Not applicable unless FCF per share appears; none observed"
+notes: "Net debt shown without reconciliation was not raised by the SEC; not labelled."

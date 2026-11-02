@@ -1,0 +1,37 @@
+doc_id: A01-aviat-2025-02-04
+tier: A
+synthetic: false
+source:
+  company: Aviat Networks, Inc.
+  cik: 1377789
+  accession: 0001377789-25-000006
+  filed: "2025-02-04"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1377789/000137778925000006/fy25q2pressrelease.htm
+label_source: "SEC letter 2025-03-14 (UPLOAD 0000000000-25-002825), comments 2 and 3; response CORRESP 0001377789-25-000009"
+anchor_status: provisional
+measures:
+  - {name: Non-GAAP gross margin, kind: performance, comparable_gaap: Gross margin}
+  - {name: Non-GAAP R&D expenses, kind: performance, comparable_gaap: Research and development expenses}
+  - {name: Non-GAAP selling and administrative expenses, kind: performance, comparable_gaap: Selling and administrative expenses}
+  - {name: Non-GAAP total operating expenses, kind: performance, comparable_gaap: Total operating expenses}
+  - {name: Non-GAAP operating income, kind: performance, comparable_gaap: Operating income}
+  - {name: Non-GAAP income tax provision, kind: performance, comparable_gaap: Provision for income taxes}
+  - {name: Non-GAAP net income, kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Non-GAAP diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted EPS}
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Adjusted EBITDA guidance, kind: performance, forward_looking: true, comparable_gaap: Net income (loss)}
+expected_findings:
+  - rule_id: R-PROM-HEADLINE
+    verdict: FLAG
+    evidence_contains: "Non-GAAP Diluted Earnings per Share of $0.82"
+    sec_comment: "c2: adjusted EBITDA and non-GAAP diluted EPS in the headline without the GAAP measures at equal prominence"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "Non-GAAP total operating expenses, excluding the impact of restructuring charges"
+    sec_comment: "c3: non-GAAP total operating expenses discussed with no reconciliation to GAAP total operating expenses"
+must_not_flag:
+  - {rule_id: R-RECON-TIEOUT, note: "No arithmetic issue raised; any FLAG is adjudicated by hand before counting as a false positive"}
+unscored_rules:
+  R-PROM-LANGUAGE: "Highlight says 'Achieved record quarterly adjusted EBITDA' (102.10(a) bullet 5 pattern) but the SEC did not raise it; adjudicate manually"
+  R-FWD-EXCEPTION: "Adjusted EBITDA guidance not reconciled; whether footnote 1 discloses reliance on the exception is unverified"
+notes: "Mixed sign conventions: positive add-backs in gross margin/op income blocks, parenthesised subtractions in R&D/S&A/tax blocks."

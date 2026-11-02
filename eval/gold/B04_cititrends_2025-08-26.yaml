@@ -1,0 +1,17 @@
+doc_id: B04-cititrends-2025-08-26
+tier: B
+synthetic: false
+paired_with: A04-cititrends-2025-06-03
+source:
+  company: Citi Trends, Inc.
+  cik: 1318484
+  accession: 0001104659-25-082774
+  filed: "2025-08-26"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1318484/000110465925082774/tm2524286d1_ex99-1.htm
+label_source: "Company commitments in CORRESP 0001104659-25-065388 (c2a yes, c2c yes); fixes observed in this release"
+anchor_status: provisional
+must_not_flag:
+  - {rule_id: R-PROM-HEADLINE, note: "Adjusted EBITDA removed from headline block; net income has its own highlight bullet before adjusted EBITDA"}
+  - {rule_id: R-RECON-TIEOUT}
+unscored_rules:
+  R-NORMAL-OPEX: "Former 'other non-recurring' line now broken out (Severance, CEO transition, Cyber incident, Shareholder matters, Lease termination fee); whether each passes 100.01 is a judgment call"

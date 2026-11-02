@@ -1,0 +1,46 @@
+doc_id: A06-adient-2024-02-07
+tier: A
+synthetic: false
+source:
+  company: Adient plc
+  cik: 1670541
+  accession: 0001670541-24-000028
+  filed: "2024-02-07"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1670541/000167054124000028/a02072024adientform8-kex991.htm
+label_source: "SEC letter 2024-04-02 (UPLOAD 0000000000-24-003502), comments 1-4; response CORRESP 0001670541-24-000062"
+anchor_status: provisional
+measures:
+  - {name: Adjusted EBIT, kind: performance, comparable_gaap: EBIT / Net income}
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income attributable to Adient}
+  - {name: Adjusted net income attributable to Adient, kind: performance, comparable_gaap: Net income attributable to Adient}
+  - {name: Adjusted diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted EPS as reported}
+  - {name: Adjusted effective tax rate, kind: performance, comparable_gaap: Effective tax rate as reported}
+  - {name: Adjusted equity income, kind: performance, comparable_gaap: Equity income}
+  - {name: Adjusted interest expense, kind: performance, comparable_gaap: Net financing charges}
+  - {name: Adjusted EBITDA excluding adjusted equity income, kind: performance, comparable_gaap: Net income attributable to Adient}
+  - {name: Net leverage ratio, kind: liquidity, comparable_gaap: Total debt / net income ratio}
+  - {name: Free cash flow, kind: liquidity, comparable_gaap: Operating cash flow}
+expected_findings:
+  - rule_id: R-RECON-START-GAAP
+    verdict: FLAG
+    evidence_contains: "Memo accounts:"
+    sec_comment: "c2: adjusted EBITDA reconciled to adjusted results rather than to GAAP amounts"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "Less: Adjusted Equity Income"
+    sec_comment: "c3: adjusted equity income etc. lack the most directly comparable GAAP measure"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "The following table presents calculations of net debt and net leverage ratio:"
+    sec_comment: "c3: net leverage ratio without GAAP comparable"
+  - rule_id: R-NORMAL-OPEX
+    verdict: NEEDS_REVIEW
+    also_accept: [FLAG]
+    evidence_contains: "Reflects non-qualified restructuring charges for costs that are directly attributable"
+    sec_comment: "c4: whether restructuring-type costs are normal, recurring, cash operating expenses"
+  # Headline and highlights are JPG-only (real instance of test D11): prominence rules must abstain.
+  - {rule_id: R-PROM-HEADLINE, verdict: NOT_EVALUATED, note: "headline is an image"}
+  - {rule_id: R-PROM-STYLE, verdict: NOT_EVALUATED, note: "headline/highlights are images"}
+must_not_flag:
+  - {rule_id: R-RECON-TIEOUT, note: "'Less: Adjusted Equity Income 25' printed positive and subtracted: 216-25=191"}
+sec_raised_ext: [R-NONGAAP-IS]

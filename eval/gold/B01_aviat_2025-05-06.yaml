@@ -1,0 +1,23 @@
+doc_id: B01-aviat-2025-05-06
+tier: B
+synthetic: false
+paired_with: A01-aviat-2025-02-04
+source:
+  company: Aviat Networks, Inc.
+  cik: 1377789
+  accession: 0001377789-25-000015
+  filed: "2025-05-06"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1377789/000137778925000015/fy25q3pressrelease.htm
+label_source: "Company commitment in CORRESP 0001377789-25-000009 (c2 yes, c3 yes); fix observed in this release"
+anchor_status: provisional
+must_not_flag:
+  - rule_id: R-PROM-HEADLINE
+    evidence_contains: "Diluted Earnings per Share of $0.27; Non-GAAP Diluted Earnings per Share of $0.88"
+    note: "GAAP now precedes non-GAAP in the headline lines"
+  - rule_id: R-RECON-PRESENT
+    evidence_contains: "GAAP operating expense"
+    note: "Table 3 now reconciles GAAP operating expense 30,002 to non-GAAP operating expense 27,241"
+  - {rule_id: R-RECON-TIEOUT}
+unscored_rules:
+  R-PROM-LANGUAGE: "Adjudicate manually if flagged"
+notes: "Also the planned mutation base for Tier C (post-fix, SEC-reviewed issuer)."

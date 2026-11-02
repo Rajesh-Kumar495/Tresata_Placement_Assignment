@@ -1,0 +1,21 @@
+doc_id: B02-turtlebeach-2023-11-07
+tier: B
+synthetic: false
+paired_with: A02-turtlebeach-2023-08-07
+source:
+  company: Turtle Beach Corporation
+  cik: 1493761
+  accession: 0000950170-23-060292
+  filed: "2023-11-07"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1493761/000095017023060292/hear-ex99_1.htm
+label_source: "Company commitments in CORRESP 0000943663-23-000121 (c4, c5, c7 yes; c9 partial); fixes observed in this release"
+anchor_status: provisional
+must_not_flag:
+  - rule_id: R-EBITDA-FROM-NI
+    evidence_contains: "GAAP to Adjusted EBITDA Reconciliation"
+    note: "Now starts at 'Net loss $ (3,606)' and ends at 'Adjusted EBITDA $ 1,037'"
+  - {rule_id: R-TAX-SEPARATE, note: "Net-of-tax Adjusted Earnings table removed"}
+  - {rule_id: R-PROM-HEADLINE, note: "Headline no longer gives Adjusted EBITDA % change"}
+  - {rule_id: R-RECON-TIEOUT}
+unscored_rules:
+  R-NORMAL-OPEX: "Company kept the adjustments with footnoted descriptions (partial fix); judgment call"

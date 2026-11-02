@@ -1,0 +1,34 @@
+doc_id: A05-lumen-2023-02-07
+tier: A
+synthetic: false
+source:
+  company: Lumen Technologies, Inc.
+  cik: 18926
+  accession: 0000018926-23-000008
+  filed: "2023-02-07"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/18926/000001892623000008/lumnq420228-kexhibit991.htm
+label_source: "SEC letter 2023-04-11 (UPLOAD 0000000000-23-003607), comments 9 and 10. Response (CORRESP 0000018926-23-000043) not yet read (HTTP 503), see open question Q8"
+anchor_status: provisional
+measures:
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net (loss) income}
+  - {name: Adjusted EBITDA, excluding Special Items, kind: performance, comparable_gaap: Net (loss) income}
+  - {name: Adjusted EBITDA Margin, kind: performance, comparable_gaap: Net income margin}
+  - {name: Modified Adjusted EBITDA, kind: performance, comparable_gaap: Net (loss) income}
+  - {name: Modified Revenue, kind: performance, comparable_gaap: Total revenue}
+  - {name: Free Cash Flow, kind: liquidity, comparable_gaap: Net cash provided by operating activities}
+  - {name: Unlevered Cash Flow, kind: liquidity, comparable_gaap: Net cash provided by operating activities}
+  - {name: Net income excluding Special Items, kind: performance, comparable_gaap: Net (loss) income}
+  - {name: Diluted EPS excluding Special Items, kind: performance, per_share: true, comparable_gaap: Diluted EPS}
+expected_findings:
+  - rule_id: R-PROM-ORDER
+    verdict: FLAG
+    evidence_contains: "Adjusted EBITDA Margin"
+    sec_comment: "c10: non-GAAP measures listed before the GAAP comparable on 'Financial Results, page 3'"
+    note: "Anchor string recurs in the document; scoring requires overlap with the page-3 Financial Results table"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "removal of the financial impacts related to the Latin American business divestiture"
+    sec_comment: "c9: 'Modified' metrics; reconciliation only on the company website, not in the release"
+must_not_flag: []
+sec_raised_ext: [R-TAILORED, R-PROM-RATIO]
+notes: "Release tail (reconciliation captions) came back as a tool summary during triage; anchors must be validated against downloaded bytes before scoring (ADR-020)."

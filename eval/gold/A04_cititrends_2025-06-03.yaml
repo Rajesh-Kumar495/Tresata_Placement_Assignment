@@ -1,0 +1,35 @@
+doc_id: A04-cititrends-2025-06-03
+tier: A
+synthetic: false
+source:
+  company: Citi Trends, Inc.
+  cik: 1318484
+  accession: 0001104659-25-055704
+  filed: "2025-06-03"
+  exhibit_url: https://www.sec.gov/Archives/edgar/data/1318484/000110465925055704/tm2516897d1_ex99-1.htm
+label_source: "SEC letter 2025-06-05 (UPLOAD 0000000000-25-005938), comments 1, 2a, 2b, 2c; response CORRESP 0001104659-25-065388"
+anchor_status: provisional
+measures:
+  - {name: Adjusted operating income (loss), kind: performance, comparable_gaap: Operating income (loss)}
+  - {name: Adjusted SG&A, kind: performance, comparable_gaap: SG&A}
+  - {name: Adjusted net income (loss), kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Adjusted diluted EPS, kind: performance, per_share: true, comparable_gaap: Diluted EPS}
+  - {name: Adjusted EBITDA, kind: performance, comparable_gaap: Net income (loss)}
+  - {name: Adjusted EBITDA flowthrough, kind: performance, comparable_gaap: Net income flowthrough}
+expected_findings:
+  - rule_id: R-PROM-HEADLINE
+    verdict: FLAG
+    evidence_contains: "Adjusted EBITDA* of $5.4 million, $6.2 million higher than prior year"
+    sec_comment: "c2a: adjusted EBITDA in the headline block without net income at equal prominence"
+  - rule_id: R-RECON-PRESENT
+    verdict: FLAG
+    evidence_contains: "Adjusted EBITDA Flowthrough of 40%, above Company expectations"
+    sec_comment: "c2b: provide all Item 10(e) disclosures for the flowthrough measure"
+  - rule_id: R-NORMAL-OPEX
+    verdict: NEEDS_REVIEW
+    also_accept: [FLAG]
+    evidence_contains: "Other non-recurring expenses"
+    sec_comment: "c1/c2c: break out 'other non-recurring expenses', consider 100.01"
+must_not_flag:
+  - {rule_id: R-RECON-TIEOUT, note: "Adjusted EBITDA reconciliation ties with negative-printed subtractions (871-458+76+0+4370+64-402+885=5406)"}
+sec_raised_ext: [R-PROM-DISCUSSION, R-NONRECUR-LABEL]
