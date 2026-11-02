@@ -65,7 +65,11 @@ class LLMClient:
                 import os
 
                 load_env()
-                return os.environ.get("LLM_MODEL_ID", "replay")
+                # A fresh clone has no .env: fall back to the model the committed cassettes were recorded with,
+                # so replay keys match and the evaluation reproduces without any configuration.
+                recorded = self.cassette_dir / "MODEL"
+                default = recorded.read_text(encoding="utf-8").strip() if recorded.exists() else "replay"
+                return os.environ.get("LLM_MODEL_ID") or default
             self._settings = llm_settings()
         return self._settings[2]
 
