@@ -15,11 +15,11 @@ The first full run exposed bugs. They were fixed *after* seeing the results, so 
 | …of which with the exact expected verdict | — | 13 | 16 |
 | Synthetic C/D cases passing | core ≥ 90% det. / 70% LLM | 18/20 (core 16/17) | **20/20 (core 17/17)** |
 | Must-not-flag (precision on known-clean items) | 0 violations on traps | 17/18 | **18/18** |
-| Final evidence quotes verbatim | 0 failures | 966/972 | **1209/1209** |
+| Final evidence quotes verbatim | 0 failures | 966/972 | **1183/1183** |
 | Inventory recall / precision (10 real docs) | ≥ 90% recall | 73/73 · 79/85 | 73/73 · 79/85 |
 | Tie-out checks on real docs | 100% correct on unambiguous | 351 PASS, 2 NEEDS_REVIEW, 11 NOT_EVALUATED | unchanged |
 
-**What changed between the runs.** Every change is a general bug fix with a test, not a per-document tweak:
+**What changed between the runs.** Every change is a general bug fix with a test, not a per-document tweak. Items 1–10 were found in the first full run; items 11–13 were found while adjudicating unlabelled findings:
 
 | # | Bug | Fix |
 |---|---|---|
@@ -33,14 +33,27 @@ The first full run exposed bugs. They were fixed *after* seeing the results, so 
 | 8 | 100.01 judge was asked about cash-flow bridge items (prepaids, dividends) | Liquidity reconciliations excluded (100.01 concerns performance measures) |
 | 9 | Table captions split across blocks were missed | Evidence includes the 3 preceding blocks |
 | 10 | An anchorless "must not flag R-PROM-HEADLINE" was also matched against R-PROM-ORDER via the family rule | The family rule applies only to anchored checks |
+| 11 | "Cash flow from operating activities" was not recognised as the GAAP comparable of free cash flow | Pattern fixed |
+| 12 | A measure matched through an alias took its GAAP family from the parent name (R&D compared with total opex) | Family comes from the matched text |
+| 13 | "Adjusted earnings before interest, tax, depreciation and amortization" was not recognised as Adjusted EBITDA | Name normalisation |
 
 **Remaining Tier A misses (2), honestly characterised:**
 - **A05 Lumen "Modified" metrics.** The system *does* FLAG "Modified Adjusted EBITDA" and "Modified Revenue" as unreconciled, but its evidence is the metric mentions, not the footnote the gold label anchors on. Scored as offsite, not a hit.
 - **A06 Adient "adjusted equity income".** The columnar table shows GAAP 23 → Adj 2 → Adjusted 25, so the system treats it as reconciled. The SEC's point was prominence on a different page. This is a genuine disagreement with the regulator's reading.
 - **A06 recon-start (weak):** Adient's memo build-up is flagged NEEDS_REVIEW (chained from a reconciled figure) rather than FLAG. A human still sees it.
 
+## Baseline, HC1-confirmed run and adjudication (final)
+- **Single-LLM-call baseline** (same model, documents, rule list and scorer; `baseline_eval.json`):
+  - Tier A 9/19; must-not-flag 8/18; synthetic 8/19 (D13 does not apply);
+  - quotes grounded 330/333;
+  - it reported tie-out errors in reconciliations that add up (C00, M13, M14, D08).
+- **HC1 = gold measure list** (`full_eval_hc1gold.md`): same recall (17/19); inventory precision 73/73; unlabelled findings fall from 83 to 69.
+- **Adjudication** (`adjudication.md`, by the AI assistant, not a qualified reviewer):
+  - 100 FLAG/NEEDS_REVIEW findings on real releases: 17 match SEC gold; of the 83 unlabelled, 36 TP, 37 debatable, 10 FP.
+  - Precision: **53% strict**, **90% lenient**.
+
 ## What the numbers do NOT show
-- **Alert volume is the main weakness.** 86 FLAG/NEEDS_REVIEW findings on the 10 real releases are not covered by any gold label (see full_eval.md). Many are defensible (e.g. Aviat's "record" Adjusted EBITDA, net debt without reconciliation), but R-PROM-ORDER (27) and R-NORMAL-OPEX (24) are noisy. They have not been manually adjudicated yet, so **precision on real documents is unmeasured**.
+- **Alert volume is the main weakness.** 86 FLAG/NEEDS_REVIEW findings on the 10 real releases are not covered by any gold label (see full_eval.md). Many are defensible (e.g. Aviat's "record" Adjusted EBITDA, net debt without reconciliation), but R-PROM-ORDER (27) and R-NORMAL-OPEX (24) are noisy. They were adjudicated by the AI assistant (see above), not by a qualified reviewer.
 - **The evaluation runs without HC1.** The inventory is used as proposed; a human confirming it would remove some noise.
 - **Synthetic cases use one base document** (B01 Aviat). They test the rules, not generalisation across issuers.
 - **Small sample:** 6 Tier A releases, 19 SEC-raised issues. Counts, not confidence intervals.

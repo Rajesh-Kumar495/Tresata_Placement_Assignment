@@ -5,9 +5,9 @@
 |---|---|---|
 | 1. Research & problem ranking | ✅ Done (2026-11-01) | Human picked #2 (primary), #1 (secondary) |
 | 2. Architecture & test plan (primary) | ✅ Approved 2026-11-02 (ADR-014…019) | — |
-| 3. Implementation + eval (primary) | 🟡 Core done: steps 0–9 built and evaluated; adjudication + baseline open | **Checkpoint now: human review of full evaluation** |
-| 4. Brief (4 pages + appendix) | Not started | — |
-| 5. Secondary target (#1 withholding) | Parked | Only if Stages 3–4 are submittable |
+| 3. Implementation + eval (primary) | ✅ Done 2026-11-03: system, HC1-gold run, single-call baseline, adjudication | — |
+| 4. Brief (4 pages + appendix) | ✅ Drafted 2026-11-03 → docs/brief/brief.pdf | **Human: rewrite appendix 'What came from me' / 'stand behind' in own words; push; export logs (SUBMISSION_CHECKLIST.md)** |
+| 5. Secondary target (#1 withholding) | Not built (by decision: time spent on evaluation quality) | — |
 
 ## Build order (architecture §16)
 | Step | Item | Status |
@@ -40,3 +40,4 @@
 - **2026-11-02** — Human review → ADR-014…019; design approved. Triage, labels, parser, tie-out built.
 - **2026-11-02** — Corpus downloaded and validated; inventory + labeller on real files; columnar tie-out, guards, provenance (ADR-021…025).
 - **2026-11-02/03** — Q11 (ADR-026) and Q12 decided by the human; git committed. Rules, judges, report, synthetic cases and harness built. First full run: Tier A 14/19, synthetic 18/20. Ten general bugs fixed → 17/19, 20/20, 18/18 clean, 1209/1209 grounded (both runs reported in eval/results/README.md).
+- **2026-11-03** — Human: "finish all the work". Added HC1-confirmed mode, reviewer CLI (review/hc1/hc2), single-call baseline (Tier A 9/19, must-not-flag 8/18, synthetic 8/19 vs system 17/19, 18/18, 20/20), AI adjudication of 83 unlabelled findings (precision 53% strict / 90% lenient; 3 more bugs fixed), brief (4 pp + appendix, PDF), README and submission checklist.
