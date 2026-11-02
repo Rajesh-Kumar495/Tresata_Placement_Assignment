@@ -1,8 +1,9 @@
 {
- "run_id": "20261102T184705Z",
- "mode": "replay",
+ "run_id": "20261102T185831Z",
+ "mode": "record",
+ "hc1": "none (LLM proposal used as-is)",
  "model": "deepseek/deepseek-v4.1-flash",
- "elapsed_s": 15.5,
+ "elapsed_s": 15.9,
  "docs": {
   "A01-aviat-2025-02-04": {
    "expected": [
@@ -17,7 +18,7 @@
      "sec": "c2: adjusted EBITDA and non-GAAP diluted EPS in the headline without the GAAP measures at equal prominence",
      "elsewhere": [
       "FLAG:Adjusted EBITDA",
-      "FLAG:Adjusted EBITDA guidance",
+      "FLAG:Full year Adjusted EBITDA",
       "FLAG:Net debt"
      ]
     },
@@ -31,7 +32,6 @@
      ],
      "sec": "c3: non-GAAP total operating expenses discussed with no reconciliation to GAAP total operating expenses",
      "elsewhere": [
-      "FLAG:Adjusted earnings before interest, tax, ",
       "FLAG:Net debt"
      ]
     }
@@ -46,12 +46,6 @@
     }
    ],
    "extras": [
-    {
-     "rule": "R-RECON-PRESENT",
-     "verdict": "FLAG",
-     "subject": "Adjusted earnings before interest, tax, depreciation and amortization",
-     "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted earnings before interest, tax, depreciation and amortization'"
-    },
     {
      "rule": "R-RECON-PRESENT",
      "verdict": "FLAG",
@@ -73,20 +67,20 @@
     {
      "rule": "R-PROM-ORDER",
      "verdict": "FLAG",
-     "subject": "Net debt",
+     "subject": "net debt position",
      "message": "Bullet presents 'net debt position' without the comparable GAAP measure (debt) in the same list"
     },
     {
      "rule": "R-PROM-ORDER",
      "verdict": "FLAG",
-     "subject": "Adjusted EBITDA guidance",
-     "message": "Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list"
+     "subject": "Net debt",
+     "message": "Bullet presents 'Net debt' without the comparable GAAP measure (debt) in the same list"
     },
     {
      "rule": "R-PROM-ORDER",
      "verdict": "FLAG",
-     "subject": "Non-GAAP operating expenses",
-     "message": "Table t03: non-GAAP row 'Non-GAAP research and development expenses' appears without a preceding GAAP opex row"
+     "subject": "Full year Adjusted EBITDA",
+     "message": "Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list"
     },
     {
      "rule": "R-NORMAL-OPEX",
@@ -119,13 +113,13 @@
     ]
    },
    "grounding": [
-    39,
+    36,
     0
    ],
    "tier": "A",
    "verdicts": {
     "R-RECON-TIEOUT:PASS": 7,
-    "R-RECON-PRESENT:FLAG": 3,
+    "R-RECON-PRESENT:FLAG": 2,
     "R-RECON-START-GAAP:PASS": 1,
     "R-PROM-HEADLINE:FLAG": 2,
     "R-PROM-ORDER:FLAG": 4,
@@ -265,7 +259,7 @@
     "unmatched_predictions": []
    },
    "grounding": [
-    47,
+    49,
     0
    ],
    "tier": "A",
@@ -284,7 +278,7 @@
     "R-PROM-LANGUAGE:PASS": 1,
     "R-NORMAL-OPEX:NEEDS_REVIEW": 4,
     "R-USEFULNESS:PASS": 1,
-    "R-FWD-EXCEPTION:PASS": 3
+    "R-FWD-EXCEPTION:PASS": 5
    },
    "tieout": {
     "reconciliations": 8,
@@ -308,7 +302,6 @@
      "sec": "c4a: highlight bullets present adjusted operating margin and adjusted EPS without prominent GAAP amounts",
      "elsewhere": [
       "FLAG:Adjusted earnings per share",
-      "FLAG:Free cash flow",
       "NOT_EVALUATED:headline"
      ]
     },
@@ -323,7 +316,6 @@
      "sec": "c4a (second measure)",
      "elsewhere": [
       "FLAG:Adjusted operating margin",
-      "FLAG:Free cash flow",
       "NOT_EVALUATED:headline"
      ]
     },
@@ -380,12 +372,6 @@
      "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'"
     },
     {
-     "rule": "R-PROM-ORDER",
-     "verdict": "FLAG",
-     "subject": "Free cash flow",
-     "message": "Bullet presents 'free cash flow' without the comparable GAAP measure (cash ops) in the same list"
-    },
-    {
      "rule": "R-NORMAL-OPEX",
      "verdict": "FLAG",
      "subject": "Restructuring and Other Charges",
@@ -426,7 +412,7 @@
     "unmatched_predictions": []
    },
    "grounding": [
-    36,
+    35,
     0
    ],
    "tier": "A",
@@ -435,7 +421,7 @@
     "R-RECON-PRESENT:FLAG": 3,
     "R-RECON-START-GAAP:PASS": 1,
     "R-PROM-HEADLINE:NOT_EVALUATED": 1,
-    "R-PROM-ORDER:FLAG": 3,
+    "R-PROM-ORDER:FLAG": 2,
     "R-PROM-STYLE:NOT_EVALUATED": 1,
     "R-TAX-SEPARATE:PASS": 1,
     "R-EBITDA-FROM-NI:PASS": 1,
@@ -467,7 +453,7 @@
      ],
      "sec": "c2a: adjusted EBITDA in the headline block without net income at equal prominence",
      "elsewhere": [
-      "FLAG:Adjusted EBITDA"
+      "FLAG:EBITDA*"
      ]
     },
     {
@@ -506,7 +492,7 @@
     {
      "rule": "R-PROM-ORDER",
      "verdict": "FLAG",
-     "subject": "Adjusted EBITDA",
+     "subject": "EBITDA*",
      "message": "Bullet presents 'EBITDA*' without the comparable GAAP measure (net income) in the same list"
     },
     {
@@ -1025,14 +1011,14 @@
     {
      "rule": "R-RECON-PRESENT",
      "verdict": "FLAG",
-     "subject": "Adjusted earnings before interest, tax, depreciation and amortization",
-     "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted earnings before interest, tax, depreciation and amortization'"
+     "subject": "Net debt",
+     "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'"
     },
     {
      "rule": "R-RECON-PRESENT",
-     "verdict": "FLAG",
-     "subject": "Net debt",
-     "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'"
+     "verdict": "NEEDS_REVIEW",
+     "subject": "adjusted earnings",
+     "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'adjusted earnings' (lexicon candidate not confirmed as a measure)"
     },
     {
      "rule": "R-PROM-ORDER",
@@ -1049,7 +1035,7 @@
     {
      "rule": "R-PROM-ORDER",
      "verdict": "FLAG",
-     "subject": "Adjusted EBITDA (guidance)",
+     "subject": "Full year Adjusted EBITDA",
      "message": "Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list"
     },
     {
@@ -1081,13 +1067,14 @@
     "unmatched_predictions": []
    },
    "grounding": [
-    39,
+    38,
     0
    ],
    "tier": "B",
    "verdicts": {
     "R-RECON-TIEOUT:PASS": 8,
-    "R-RECON-PRESENT:FLAG": 2,
+    "R-RECON-PRESENT:FLAG": 1,
+    "R-RECON-PRESENT:NEEDS_REVIEW": 1,
     "R-RECON-START-GAAP:PASS": 1,
     "R-PROM-HEADLINE:PASS": 1,
     "R-PROM-ORDER:FLAG": 3,
@@ -1186,7 +1173,7 @@
     ]
    },
    "grounding": [
-    21,
+    25,
     0
    ],
    "tier": "B",
@@ -1205,7 +1192,7 @@
     "R-NORMAL-OPEX:FLAG": 3,
     "R-NORMAL-OPEX:NEEDS_REVIEW": 1,
     "R-USEFULNESS:PASS": 1,
-    "R-FWD-EXCEPTION:PASS": 3
+    "R-FWD-EXCEPTION:PASS": 7
    },
    "tieout": {
     "reconciliations": 1,
@@ -1241,12 +1228,6 @@
     }
    ],
    "extras": [
-    {
-     "rule": "R-PROM-ORDER",
-     "verdict": "FLAG",
-     "subject": "Free cash flow",
-     "message": "Bullet presents 'free cash flow' without the comparable GAAP measure (cash ops) in the same list"
-    },
     {
      "rule": "R-NORMAL-OPEX",
      "verdict": "FLAG",
@@ -1294,7 +1275,7 @@
     "unmatched_predictions": []
    },
    "grounding": [
-    46,
+    45,
     0
    ],
    "tier": "B",
@@ -1303,7 +1284,7 @@
     "R-RECON-PRESENT:FLAG": 2,
     "R-RECON-START-GAAP:PASS": 1,
     "R-PROM-HEADLINE:NOT_EVALUATED": 1,
-    "R-PROM-ORDER:FLAG": 1,
+    "R-PROM-ORDER:PASS": 1,
     "R-PROM-STYLE:NOT_EVALUATED": 1,
     "R-TAX-SEPARATE:PASS": 1,
     "R-EBITDA-FROM-NI:PASS": 1,
@@ -1345,7 +1326,7 @@
     {
      "rule": "R-PROM-ORDER",
      "verdict": "FLAG",
-     "subject": "EBITDA (forward-looking guidance)",
+     "subject": "Full year EBITDA*",
      "message": "Bullet presents 'Full year EBITDA*' without the comparable GAAP measure (net income) in the same list"
     }
    ],
@@ -1359,7 +1340,7 @@
     "unmatched_predictions": []
    },
    "grounding": [
-    16,
+    17,
     0
    ],
    "tier": "B",
@@ -1378,7 +1359,7 @@
     "R-NORMAL-OPEX:FLAG": 1,
     "R-NORMAL-OPEX:NEEDS_REVIEW": 3,
     "R-USEFULNESS:PASS": 1,
-    "R-FWD-EXCEPTION:PASS": 1
+    "R-FWD-EXCEPTION:PASS": 2
    },
    "tieout": {
     "reconciliations": 6,
@@ -1404,7 +1385,7 @@
     ]
    ],
    "grounding": [
-    38,
+    36,
     0
    ]
   },
@@ -1422,7 +1403,7 @@
     ]
    ],
    "grounding": [
-    47,
+    46,
     0
    ]
   },
@@ -1440,7 +1421,7 @@
     ]
    ],
    "grounding": [
-    41,
+    40,
     0
    ]
   },
@@ -1459,7 +1440,7 @@
     ]
    ],
    "grounding": [
-    40,
+    39,
     0
    ]
   },
@@ -1477,7 +1458,7 @@
     ]
    ],
    "grounding": [
-    40,
+    39,
     0
    ]
   },
@@ -1495,7 +1476,7 @@
     ]
    ],
    "grounding": [
-    40,
+    38,
     0
    ]
   },
@@ -1513,7 +1494,7 @@
     ]
    ],
    "grounding": [
-    43,
+    41,
     0
    ]
   },
@@ -1531,7 +1512,7 @@
     ]
    ],
    "grounding": [
-    39,
+    37,
     0
    ]
   },
@@ -1544,12 +1525,13 @@
      "R-FWD-EXCEPTION=FLAG",
      "pass",
      [
+      "FLAG:no_exception_disclosure",
       "FLAG:no_exception_disclosure"
      ]
     ]
    ],
    "grounding": [
-    40,
+    39,
     0
    ]
   },
@@ -1565,7 +1547,7 @@
     ]
    ],
    "grounding": [
-    40,
+    38,
     0
    ]
   },
@@ -1581,7 +1563,7 @@
     ]
    ],
    "grounding": [
-    39,
+    38,
     0
    ]
   },
@@ -1622,7 +1604,7 @@
     ]
    ],
    "grounding": [
-    39,
+    38,
     0
    ]
   },
@@ -1645,7 +1627,7 @@
     ]
    ],
    "grounding": [
-    47,
+    46,
     0
    ]
   },
@@ -1670,7 +1652,7 @@
     ]
    ],
    "grounding": [
-    41,
+    40,
     0
    ]
   },
@@ -1684,7 +1666,6 @@
      "pass",
      [
       "FLAG:no_reconciliation",
-      "FLAG:no_reconciliation",
       "FLAG:no_reconciliation"
      ]
     ],
@@ -1695,7 +1676,7 @@
     ]
    ],
    "grounding": [
-    40,
+    38,
     0
    ]
   },
@@ -1732,7 +1713,7 @@
     ]
    ],
    "grounding": [
-    39,
+    38,
     0
    ]
   },
@@ -1748,7 +1729,7 @@
     ]
    ],
    "grounding": [
-    39,
+    37,
     0
    ]
   },
@@ -1764,7 +1745,7 @@
     ]
    ],
    "grounding": [
-    39,
+    37,
     0
    ]
   },
@@ -1782,7 +1763,7 @@
     ]
    ],
    "grounding": [
-    52,
+    51,
     0
    ]
   }
@@ -1806,8 +1787,8 @@
    "FLAG": 1
   },
   "R-FWD-EXCEPTION": {
-   "PASS": 34,
-   "FLAG": 7
+   "PASS": 41,
+   "FLAG": 8
   },
   "R-NORMAL-OPEX": {
    "FLAG": 77,
@@ -1828,8 +1809,8 @@
    "PASS": 7
   },
   "R-PROM-ORDER": {
-   "FLAG": 91,
-   "PASS": 3
+   "FLAG": 89,
+   "PASS": 4
   },
   "R-PROM-STYLE": {
    "PASS": 25,
@@ -1837,8 +1818,9 @@
    "FLAG": 1
   },
   "R-RECON-PRESENT": {
-   "FLAG": 63,
-   "PASS": 3
+   "FLAG": 42,
+   "PASS": 3,
+   "NEEDS_REVIEW": 13
   },
   "R-RECON-START-GAAP": {
    "PASS": 28,

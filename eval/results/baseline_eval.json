@@ -1,0 +1,1513 @@
+{
+ "model": "deepseek/deepseek-v4.1-flash",
+ "calls": 30,
+ "prompt_tokens": 211589,
+ "completion_tokens": 29950,
+ "docs": {
+  "A01-aviat-2025-02-04": {
+   "tier": "A",
+   "expected": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "expected": "FLAG",
+     "anchor": "Non-GAAP Diluted Earnings per Share of $0.82",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c2: adjusted EBITDA and non-GAAP diluted EPS in the headline without the GAAP measures at equal prominence",
+     "elsewhere": [
+      "FLAG:Adjusted EBITDA of $14.8 million",
+      "FLAG:Non-GAAP Results: Adjusted EBITDA $14.8 ",
+      "FLAG:Operating Income of $8.0 million; Non-GA"
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "Non-GAAP total operating expenses, excluding the impact of restructuring charges",
+     "result": "miss",
+     "got": [],
+     "sec": "c3: non-GAAP total operating expenses discussed with no reconciliation to GAAP total operating expenses",
+     "elsewhere": []
+    }
+   ],
+   "negatives": [
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Operating Income of $8.0 million; Non-GAAP Operating income ",
+     "message": "The sub-headline presents non-GAAP operating income alongside GAAP, but the headline 'Adjusted EBITDA of $14.8 million' and 'Non-GAAP Diluted Earnings per Share of $0.82' appear as"
+    },
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA of $14.8 million",
+     "message": "A headline shows the non-GAAP Adjusted EBITDA measure without presenting the comparable GAAP measure (net income)."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Non-GAAP Results: Adjusted EBITDA $14.8 million; Gross Margi",
+     "message": "The financial highlights bullet lists non-GAAP results after GAAP results, but the non-GAAP bullet leads with Adjusted EBITDA and includes multiple non-GAAP measures; the GAAP bull"
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Adjusted earnings before interest, tax, depreciation and amo",
+     "message": "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, depreciation and amortization, such as share-based compensation, merger and acquisition expenses, re"
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Merger and acquisition and other expenses | (514) | (3,723) ",
+     "message": "Adjustments exclude 'merger and acquisition and other expenses' which may include normal recurring cash operating expenses; the 'other expenses' component is not clearly non-recurr"
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Adjustment to reflect pro forma tax rate | (1,126) | (1,548)",
+     "message": "The reconciliation presents a pro forma tax rate adjustment rather than a separate income-tax adjustment line reconciling each pre-tax adjustment; adjustments are shown net of a bl"
+    }
+   ],
+   "stats": {
+    "issues": 9,
+    "grounded": 9,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "A02-turtlebeach-2023-08-07": {
+   "tier": "A",
+   "expected": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "expected": "FLAG",
+     "anchor": "Revenue and Adjusted EBITDA Increased 16% and 54% Year-over-Year, Respectively",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c4: header gives % change in Adjusted EBITDA without the GAAP % change",
+     "elsewhere": [
+      "FLAG:Adjusted EBITDA loss improved to $5.6 mi",
+      "FLAG:Adjusted net loss was $7.0 million, or $",
+      "FLAG:Maintains Full Year 2023 Revenue and Adj"
+     ]
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "expected": "FLAG",
+     "anchor": "Adjustments, net of tax:",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c5: Table 4 adjustments presented net of tax (102.11)",
+     "elsewhere": []
+    },
+    {
+     "rule": "R-EBITDA-FROM-NI",
+     "expected": "FLAG",
+     "anchor": "GAAP to Adjusted EBITDA Reconciliation",
+     "result": "offsite",
+     "got": [],
+     "sec": "c7: Table 5 does not reconcile Adjusted EBITDA to net income (starts at operating income)",
+     "elsewhere": [
+      "FLAG:Operating income (loss) | (15,793) | 971"
+     ]
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "expected": "NEEDS_REVIEW",
+     "anchor": "Other includes certain non-recurring business costs.",
+     "result": "offsite",
+     "got": [],
+     "sec": "c9: asks how CEO separation, inventory, acquisition, non-recurring and 'Other' adjustments satisfy 100.01",
+     "elsewhere": [
+      "FLAG:In addition to normalizing recurring ope"
+     ]
+    }
+   ],
+   "negatives": [
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The Table 5 reconciliation does not arithmetically tie out; the adjustments and subtotals do not sum to the stated Adjusted EBITDA."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Maintains Full Year 2023 Revenue and Adjusted EBITDA Guidanc",
+     "message": "The sub-headline presents Adjusted EBITDA guidance without the comparable GAAP measure."
+    },
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Provides Line-of-Sight to Exit 2023 with $25 - $30 million A",
+     "message": "The sub-headline presents a non-GAAP Adjusted EBITDA figure without the comparable GAAP measure."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted net loss was $7.0 million, or $0.41 per diluted sha",
+     "message": "The summary bullets present adjusted net loss (non-GAAP) without the comparable GAAP net loss in the same bullet."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA loss improved to $5.6 million compared to ad",
+     "message": "The summary bullet presents Adjusted EBITDA loss without the comparable GAAP measure."
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "Revenue and Adjusted EBITDA Increased 16% and 54% Year-over-",
+     "message": "Promotional framing of Adjusted EBITDA growth without equal GAAP description."
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "net income (loss) before interest, taxes, depreciation and a",
+     "message": "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, depreciation and amortization (stock-based compensation and special items)."
+    },
+    {
+     "rule": "R-EBITDA-FROM-NI",
+     "verdict": "FLAG",
+     "subject": "Operating income (loss) | (15,793) | 971 | 248 | 4,970 | 4,2",
+     "message": "The Adjusted EBITDA reconciliation in Table 5 starts from operating income (loss), not net income."
+    },
+    {
+     "rule": "R-RECON-START-GAAP",
+     "verdict": "FLAG",
+     "subject": "Operating income (loss) | (15,793) | 971 | 248 | 4,970 | 4,2",
+     "message": "The reconciliation builds Adjusted EBITDA from operating income rather than starting from the GAAP net loss."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "In addition to normalizing recurring operational expenses",
+     "message": "Adjustments appear to exclude normal, recurring cash operating expenses (C&DI 100.01)."
+    }
+   ],
+   "stats": {
+    "issues": 14,
+    "grounded": 14,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "A03-capri-2024-11-07": {
+   "tier": "A",
+   "expected": [
+    {
+     "rule": "R-PROM-ORDER",
+     "expected": "FLAG",
+     "anchor": "Adjusted operating margin of 3.0%",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c4a: highlight bullets present adjusted operating margin and adjusted EPS without prominent GAAP amounts",
+     "elsewhere": [
+      "FLAG:Adjusted earnings per share of $0.65",
+      "FLAG:Adjusted income from operations was $32 ",
+      "FLAG:Adjusted net income was $77 million, or "
+     ]
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "expected": "FLAG",
+     "anchor": "Adjusted earnings per share of $0.65",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c4a (second measure)",
+     "elsewhere": [
+      "FLAG:Adjusted income from operations was $32 ",
+      "FLAG:Adjusted net income was $77 million, or ",
+      "FLAG:Adjusted operating margin of 3.0%"
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "Adjusted income from operations was $32 million and adjusted operating margin was 3.0%",
+     "result": "offsite",
+     "got": [],
+     "sec": "c4b: no reconciliation of adjusted operating margin",
+     "elsewhere": [
+      "FLAG:Revenue decreased 16.4% on a reported ba",
+      "FLAG:free cash flow was an inflow of $23 mill"
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "free cash flow was an inflow of $23 million",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c5: free cash flow not identified as non-GAAP and lacks Item 10(e) disclosures",
+     "elsewhere": [
+      "FLAG:Revenue decreased 16.4% on a reported ba"
+     ]
+    }
+   ],
+   "negatives": [
+    {
+     "rule": "R-RECON-PRESENT",
+     "anchor": "Revenue decreased 16.4% on a reported basis and 16.4% in constant currency",
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "Constant currency revenue change is a non-GAAP measure; while Schedule 5 shows constant currency data, there is no reconciliation of the con"
+     ]
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The reconciliation does not add up: $732 - $43 - $1 - $4 - $12 - $10 = $662, which ties; however, the 'Total (loss) income from operations' "
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted income from operations was $32 million and adjusted",
+     "message": "In the results bullets, the non-GAAP adjusted income from operations is presented after the GAAP loss from operations, but the adjusted figures are given prominence and the GAAP co"
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted net income was $77 million, or $0.65 per diluted sh",
+     "message": "The bullet presents adjusted net income and adjusted EPS as the concluding, emphasized figures without a comparable GAAP net income/EPS in the same sentence, promoting the non-GAAP"
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "This reflects the strong brand equity and enduring value of ",
+     "message": "Strong-type language is used in connection with performance metrics (new consumers/database growth) without equal GAAP description; the promotional language is applied to non-GAAP-"
+    },
+    {
+     "rule": "R-RECON-START-GAAP",
+     "verdict": "FLAG",
+     "subject": "Total (loss) income from operations | $(38) | $43 | $1 | $4 ",
+     "message": "The reconciliation tables in Schedules 6-9 start from GAAP 'As Reported' figures, which is compliant; however, the constant currency schedule (Schedule 5) presents non-GAAP constan"
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "(Benefit) provision for income taxes | $(34) | $10 | $\u2014 | $1",
+     "message": "The reconciliation presents a separate income-tax adjustment line, which is compliant; however, the adjustments to net income are shown net of tax in the net income line while a se"
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Adjusted operating margin of 3.0%",
+     "message": "No measure titled 'EBITDA' is presented in the release, so this rule is not triggered."
+    },
+    {
+     "rule": "R-EBITDA-FROM-NI",
+     "verdict": "FLAG",
+     "subject": "Total (loss) income from operations | $(38) | $43 | $1 | $4 ",
+     "message": "No EBITDA/EBIT measure is presented, so this rule is not triggered."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Amounts impacting operating expenses primarily relate to Glo",
+     "message": "The adjustments exclude lease termination and store closure costs, which may be considered normal, recurring cash operating expenses under C&DI 100.01; excluding them from non-GAAP"
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Represents a multi-year ERP implementation which includes ac",
+     "message": "ERP implementation costs are excluded as adjustments; these may be normal, recurring cash operating expenses, raising a C&DI 100.01 concern."
+    },
+    {
+     "rule": "R-USEFULNESS",
+     "verdict": "FLAG",
+     "subject": "The Company believes that excluding these items helps its ma",
+     "message": "The release does include a statement of why management believes the non-GAAP measures are useful, so this rule is satisfied and not an issue."
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "the Company is not providing financial guidance or hosting a",
+     "message": "No forward-looking non-GAAP guidance is provided, so the unreasonable-efforts exception rule is not triggered."
+    }
+   ],
+   "stats": {
+    "issues": 17,
+    "grounded": 17,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "A04-cititrends-2025-06-03": {
+   "tier": "A",
+   "expected": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "expected": "FLAG",
+     "anchor": "Adjusted EBITDA* of $5.4 million, $6.2 million higher than prior year",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c2a: adjusted EBITDA in the headline block without net income at equal prominence",
+     "elsewhere": [
+      "FLAG:Adjusted EBITDA* of $5.4 million compare",
+      "FLAG:Diluted earnings per share of $0.11, or ",
+      "FLAG:Net income of $0.9 million, or adjusted "
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "Adjusted EBITDA Flowthrough of 40%, above Company expectations",
+     "result": "miss",
+     "got": [],
+     "sec": "c2b: provide all Item 10(e) disclosures for the flowthrough measure",
+     "elsewhere": []
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "expected": "NEEDS_REVIEW",
+     "anchor": "Other non-recurring expenses",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c1/c2c: break out 'other non-recurring expenses', consider 100.01",
+     "elsewhere": []
+    }
+   ],
+   "negatives": [
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The adjusted operating income reconciliation does not add up: $489 + $64 - $402 + $885 = $1,036, which ties; but the prior-year column $(6,9"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Net income of $0.9 million, or adjusted net income* of $1.4 ",
+     "message": "Adjusted net income is presented alongside net income in the same bullet; the non-GAAP measure appears without separate GAAP prominence in the highlights."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA* of $5.4 million compared to an adjusted EBI",
+     "message": "A financial-highlights bullet presents only the non-GAAP Adjusted EBITDA without the comparable GAAP measure."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Diluted earnings per share of $0.11, or $0.17 as adjusted*",
+     "message": "The bullet presents adjusted diluted EPS alongside GAAP EPS, showing the non-GAAP measure in the highlights."
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "strong first quarter results on both the top and bottom line",
+     "message": "'Strong'/'stronger-than-expected' language is applied to adjusted EBITDA (a non-GAAP measure) without equal GAAP description."
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "Full year EBITDA* is now expected to be in the range of $6 m",
+     "message": "Forward-looking non-GAAP EBITDA guidance is given; the unreasonable-efforts exception is disclosed elsewhere, but the guidance bullet itself lacks a reconciliation."
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Cyber incident expenses | (402) | -",
+     "message": "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, depreciation and amortization (asset impairment, cyber incident, other non-recurring expenses)."
+    },
+    {
+     "rule": "R-EBITDA-FROM-NI",
+     "verdict": "FLAG",
+     "subject": "Reconciliation of Adjusted EBITDA\nNet income (loss) | $871 |",
+     "message": "EBITDA is reconciled starting from net income, which is acceptable, but the table includes non-EBITDA adjustments; the reconciliation basis is net income (no issue on start point)."
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Tax effect | \u2014 | (617)",
+     "message": "Adjustments are presented with a separate tax effect line rather than net of tax; however the tax effect is shown separately, which is compliant\u2014flagging the presentation of tax ef"
+    },
+    {
+     "rule": "R-USEFULNESS",
+     "verdict": "FLAG",
+     "subject": "The Company believes these supplemental measures reflect ope",
+     "message": "A statement of why management believes the non-GAAP measures are useful is provided; no issue."
+    }
+   ],
+   "stats": {
+    "issues": 12,
+    "grounded": 11,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "A05-lumen-2023-02-07": {
+   "tier": "A",
+   "expected": [
+    {
+     "rule": "R-PROM-ORDER",
+     "expected": "FLAG",
+     "anchor": "Adjusted EBITDA Margin",
+     "result": "offsite",
+     "got": [],
+     "sec": "c10: non-GAAP measures listed before the GAAP comparable on 'Financial Results, page 3'",
+     "elsewhere": [
+      "FLAG:Generated Adjusted EBITDA of $1.393 bill",
+      "FLAG:Generated Free Cash Flow of $126 million"
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "removal of the financial impacts related to the Latin American business divestiture",
+     "result": "hit",
+     "got": [
+      "FLAG"
+     ],
+     "sec": "c9: 'Modified' metrics; reconciliation only on the company website, not in the release",
+     "elsewhere": []
+    }
+   ],
+   "negatives": [],
+   "extras": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Generated Adjusted EBITDA of $1.393 billion for the fourth q",
+     "message": "The headline bullet leads with non-GAAP Adjusted EBITDA without presenting the comparable GAAP net income first."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Generated Free Cash Flow of $126 million for the fourth quar",
+     "message": "The highlights bullet presents non-GAAP Free Cash Flow before the comparable GAAP net cash provided by operating activities."
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "Generated Adjusted EBITDA of $1.393 billion for the fourth q",
+     "message": "'Generated' promotional framing of a non-GAAP measure without equal GAAP description."
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA $4.6 to $4.8 billion",
+     "message": "Forward-looking non-GAAP guidance is provided without a quantitative reconciliation and without disclosing the unreasonable-efforts exception."
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA ($) is defined as net income (loss) from the",
+     "message": "The EBITDA-titled measure includes adjustments beyond interest, taxes, depreciation and amortization (stock-based compensation and impairments)."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Add back: Severance (1) | $10 | 3 | $12 | 3",
+     "message": "Severance is a normal, recurring cash operating expense that is improperly excluded as a Special Item."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Add back: Transaction and separation costs (1) | 53 | 19 | 2",
+     "message": "Transaction and separation costs recur across periods and are normal cash operating expenses excluded from the non-GAAP measure."
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Excludes Special Items (net of the income tax effect thereof",
+     "message": "Special Items are presented net of tax rather than showing a separate income-tax adjustment line."
+    },
+    {
+     "rule": "R-RECON-START-GAAP",
+     "verdict": "FLAG",
+     "subject": "Free Cash Flow | $8 | $759 | $1,719 | 3,601",
+     "message": "The cash flow reconciliation starts from non-GAAP Free Cash Flow rather than the GAAP net cash provided by operating activities."
+    }
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 9,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "A06-adient-2024-02-07": {
+   "tier": "A",
+   "expected": [
+    {
+     "rule": "R-RECON-START-GAAP",
+     "expected": "FLAG",
+     "anchor": "Memo accounts:",
+     "result": "offsite",
+     "got": [],
+     "sec": "c2: adjusted EBITDA reconciled to adjusted results rather than to GAAP amounts",
+     "elsewhere": [
+      "FLAG:The following table reconciles adjusted "
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "Less: Adjusted Equity Income",
+     "result": "offsite",
+     "got": [],
+     "sec": "c3: adjusted equity income etc. lack the most directly comparable GAAP measure",
+     "elsewhere": [
+      "FLAG:Adjusted EBITDA margin | 4.9% | 3.5% | 1",
+      "FLAG:Net leverage ratio | 1.65 | 1.52"
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "expected": "FLAG",
+     "anchor": "The following table presents calculations of net debt and net leverage ratio:",
+     "result": "offsite",
+     "got": [],
+     "sec": "c3: net leverage ratio without GAAP comparable",
+     "elsewhere": [
+      "FLAG:Adjusted EBITDA margin | 4.9% | 3.5% | 1",
+      "FLAG:Net leverage ratio | 1.65 | 1.52"
+     ]
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "expected": "NEEDS_REVIEW",
+     "anchor": "Reflects non-qualified restructuring charges for costs that are directly attributable",
+     "result": "offsite",
+     "got": [],
+     "sec": "c4: whether restructuring-type costs are normal, recurring, cash operating expenses",
+     "elsewhere": [
+      "FLAG:Restructuring related activities (4) | 9",
+      "FLAG:Stock based compensation (12) | (13) | ("
+     ]
+    },
+    {
+     "rule": "R-PROM-HEADLINE",
+     "expected": "NOT_EVALUATED",
+     "anchor": null,
+     "result": "miss",
+     "got": [
+      "FLAG"
+     ]
+    },
+    {
+     "rule": "R-PROM-STYLE",
+     "expected": "NOT_EVALUATED",
+     "anchor": null,
+     "result": "miss",
+     "got": [
+      "PASS"
+     ]
+    }
+   ],
+   "negatives": [
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The reconciliation from adjusted EBITDA excluding adjusted equity income to free cash flow does not arithmetically tie to the stated free ca"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA is defined as adjusted EBIT excluding deprec",
+     "message": "A measure titled EBITDA includes stock-based compensation, an adjustment beyond interest, taxes, depreciation and amortization."
+    },
+    {
+     "rule": "R-EBITDA-FROM-NI",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA is defined as adjusted EBIT excluding deprec",
+     "message": "EBITDA is reconciled from adjusted EBIT rather than from net income."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Stock based compensation (12) | (13) | (8)",
+     "message": "The adjusted EBITDA reconciliation excludes stock-based compensation, a normal recurring cash operating expense (C&DI 100.01)."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Restructuring related activities (4) | 9 | (3)",
+     "message": "Adjustments exclude restructuring-related costs that recur period after period, a normal recurring operating expense."
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Tax impact of above adjustments and other tax items (9) | (9",
+     "message": "Adjustments are presented with a combined tax-impact line rather than a separate income-tax adjustment."
+    },
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA | $216 | $212",
+     "message": "The summarized income statement presents Adjusted EBITDA prominently without the comparable GAAP measure (net income) shown alongside."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA | $80 | $45 | $114 | $(23) | $216",
+     "message": "Segment performance tables lead with Adjusted EBITDA and Adjusted EBITDA margin before any GAAP measure."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA Excluding Adjusted Equity Income | $191 | $1",
+     "message": "The table presents a non-GAAP measure without the comparable GAAP measure."
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "Management believes these non-GAAP measures assist investors",
+     "message": "Promotional language about non-GAAP measures without equal GAAP description."
+    },
+    {
+     "rule": "R-RECON-START-GAAP",
+     "verdict": "FLAG",
+     "subject": "The following table reconciles adjusted EBITDA excluding adj",
+     "message": "The free cash flow reconciliation starts from a non-GAAP measure (adjusted EBITDA excluding adjusted equity income) rather than from the GAAP measure (operating cash flow)."
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA margin | 4.9% | 3.5% | 14.8% | N/A | 5.9%",
+     "message": "Adjusted EBITDA margin is presented without a quantitative reconciliation to its most comparable GAAP measure."
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "verdict": "FLAG",
+     "subject": "Net leverage ratio | 1.65 | 1.52",
+     "message": "Net leverage ratio is presented without a quantitative reconciliation to its most comparable GAAP measure."
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "Reconciliations of non-GAAP measures related to guidance for",
+     "message": "The unreasonable-efforts exception is disclosed but no forward-looking non-GAAP guidance reconciliation is provided; the statement is generic and not tied to specific guidance."
+    }
+   ],
+   "stats": {
+    "issues": 14,
+    "grounded": 14,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "B01-aviat-2025-05-06": {
+   "tier": "B",
+   "expected": [],
+   "negatives": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "anchor": "Diluted Earnings per Share of $0.27; Non-GAAP Diluted Earnings per Share of $0.88",
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "anchor": "GAAP operating expense",
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The non-GAAP net income reconciliation does not tie out arithmetically: GAAP net income $3,528 plus adjustments (1,988+1,590+177+3,068+941) "
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Operating Income of $9.3 million; Non-GAAP Operating Income ",
+     "message": "The headline presents non-GAAP operating income alongside GAAP, but the next headline pairs Net Income with Adjusted EBITDA and the EPS headline pairs GAAP EPS with non-GAAP EPS; t"
+    },
+    {
+     "rule": "R-PROM-HEADLINE",
+     "verdict": "FLAG",
+     "subject": "Net Income of $3.5 million; Adjusted EBITDA of $14.9 million",
+     "message": "Adjusted EBITDA is shown in the headline without its most comparable GAAP measure (net income is shown but Adjusted EBITDA's comparable GAAP measure is net income; however the pair"
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Non-GAAP Results: Adjusted EBITDA $14.9 million; Gross Margi",
+     "message": "The financial highlights bullet lists non-GAAP results as a separate bullet after GAAP, but within the non-GAAP bullet Adjusted EBITDA is listed first without a comparable GAAP mea"
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "Full year Adjusted EBITDA between $30.0 and $40.0 million",
+     "message": "Forward-looking Adjusted EBITDA guidance is given; the document does disclose the unreasonable-efforts exception in footnote 1, so this is arguably cured, but the guidance bullet i"
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA | $14,879 | 13.2% | $12,687 | 11.4%",
+     "message": "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, depreciation and amortization, such as share-based compensation, merger and acquisition expenses, re"
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Non-GAAP total operating expenses, excluding the impact of r",
+     "message": "The non-GAAP operating expense adjustment excludes share-based compensation, which is a normal, recurring cash/non-cash operating expense (C&DI 100.01 concern)."
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Adjustment to reflect pro forma tax rate | (941) | (306) | 3",
+     "message": "Tax effects of adjustments are presented as a single 'pro forma tax rate' adjustment rather than a separate income-tax adjustment line for each reconciling item."
+    }
+   ],
+   "stats": {
+    "issues": 9,
+    "grounded": 9,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "B02-turtlebeach-2023-11-07": {
+   "tier": "B",
+   "expected": [],
+   "negatives": [
+    {
+     "rule": "R-EBITDA-FROM-NI",
+     "anchor": "GAAP to Adjusted EBITDA Reconciliation",
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "anchor": null,
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    },
+    {
+     "rule": "R-PROM-HEADLINE",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The headline uses 'STRONG' language tied to earnings results while the release's key metric emphasis includes non-GAAP adjusted EBITDA; the "
+     ]
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "TURTLE BEACH ANNOUNCES STRONG Q3 FY2023 EARNINGS RESULTS",
+     "message": "'STRONG' language is used for results that prominently feature non-GAAP adjusted EBITDA without an equal GAAP description."
+    },
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA improved to $1.0 million compared to an Adju",
+     "message": "The summary bullet presents the non-GAAP adjusted EBITDA measure after net loss but the bullet list leads with revenue and net loss; however adjusted EBITDA is presented as a headl"
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Adjusted EBITDA improved to $1.0 million compared to an Adju",
+     "message": "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, depreciation and amortization, such as stock-based compensation, inventory reserves, restructuring, "
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "a reconciliation to its net income (loss) outlook for the sa",
+     "message": "Forward-looking adjusted EBITDA guidance is provided without a reconciliation; the release discloses the unreasonable-efforts exception, so this is compliant\u2014but the guidance itsel"
+    },
+    {
+     "rule": "R-USEFULNESS",
+     "verdict": "FLAG",
+     "subject": "Management believes that such non-GAAP financial measures, w",
+     "message": "The release does include a statement of why management believes the non-GAAP measures are useful, so this is compliant."
+    }
+   ],
+   "stats": {
+    "issues": 6,
+    "grounded": 6,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "B03-capri-2025-05-28": {
+   "tier": "B",
+   "expected": [],
+   "negatives": [
+    {
+     "rule": "R-PROM-ORDER",
+     "anchor": "Operating margin of (11.2)%; adjusted operating margin of (3.2)%",
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The headline bullet presents the non-GAAP adjusted operating margin alongside the GAAP measure, but the GAAP measure is shown first; however"
+     ]
+    },
+    {
+     "rule": "R-RECON-PRESENT",
+     "anchor": "Operating margin of (11.2)%; adjusted operating margin of (3.2)%",
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The reconciliation does not add up: $(645) + $61 + $6 + $1 + $10 - $14 = $(581), which ties; however the tax line $542 + $18 + $1 + $0 + $2 ",
+      "Check: $(752)+797+7+10+44-15 = $91 ties. Operating expenses: $3,578-797-7-10-44+15 = $2,735 ties. Provision: $452+101+1+1+6-2 = $559 ties. N"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Loss per share of $(5.44); adjusted loss per share of $(4.90",
+     "message": "The highlights bullet presents the non-GAAP adjusted loss per share in the summary bullets; GAAP is shown first here, but the adjusted figure is included in the headline highlights"
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "The following guidance is provided on an adjusted, non-GAAP ",
+     "message": "Forward-looking non-GAAP guidance (operating income, operating margin, EPS) is provided without a quantitative reconciliation to the comparable GAAP measure and without disclosing "
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "verdict": "FLAG",
+     "subject": "Net (loss) income attributable to Capri | $(472) | $463 | $2",
+     "message": "Check: $(472)+463+23+4+25+7 = $50 ties. Tax: $(85)+86+7+1+4+1 = $14 ties. Operating expenses: $1,310-549-30-5-29-8 = $689 ties. EPS: $(4.03)+3.93+0.20+0.04+0.22+0.06 = $0.42 ties. "
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "verdict": "FLAG",
+     "subject": "Net (loss) income attributable to Capri | $(229) | $483 | $3",
+     "message": "Check: $(229)+483+39+14+90+16 = $413 ties. Tax: $(54)+92+11+4+23+4 = $80 ties. Operating expenses: $3,580-575-33-18-113-20 = $2,821 ties. EPS: $(1.96)+4.10+0.33+0.12+0.77+0.14 = $3"
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Provision for income taxes | $542 | $18 | $1 | $\u2014 | $2 | $(2",
+     "message": "The reconciliation presents a separate income-tax adjustment line rather than net-of-tax adjustments, which is compliant; no issue."
+    },
+    {
+     "rule": "R-USEFULNESS",
+     "verdict": "FLAG",
+     "subject": "The Company believes that excluding these items helps its ma",
+     "message": "The document does include a statement of why management believes the non-GAAP measures are useful, so no issue."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Amounts impacting operating expenses primarily relate to Glo",
+     "message": "The adjustments exclude severance, lease termination and store closure costs that may be recurring cash operating expenses; C&DI 100.01 concern about excluding normal recurring cas"
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "Represents a multi-year ERP implementation which includes ac",
+     "message": "ERP implementation costs are excluded as non-GAAP adjustments though they may be normal recurring cash operating expenses."
+    },
+    {
+     "rule": "R-NORMAL-OPEX",
+     "verdict": "FLAG",
+     "subject": "The Capri transformation program represents a multi-year, mu",
+     "message": "Transformation program costs are excluded as non-GAAP adjustments though they may represent normal recurring cash operating expenses."
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "we are well positioned to improve performance of both Michae",
+     "message": "Strong/positive language used in connection with outlook without equal GAAP description; however this is qualitative, not a non-GAAP measure per se."
+    },
+    {
+     "rule": "R-PROM-STYLE",
+     "verdict": "FLAG",
+     "subject": "Operating margin of (11.2)%; adjusted operating margin of (3",
+     "message": "No evidence of differential styling (bold/larger) in the text provided; cannot confirm."
+    }
+   ],
+   "stats": {
+    "issues": 20,
+    "grounded": 20,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  "B04-cititrends-2025-08-26": {
+   "tier": "B",
+   "expected": [],
+   "negatives": [
+    {
+     "rule": "R-PROM-HEADLINE",
+     "anchor": null,
+     "violated": true,
+     "needs_review": 0,
+     "by": [
+      "The financial highlights bullet leads with the non-GAAP adjusted EBITDA measure without presenting the comparable GAAP net income first."
+     ]
+    },
+    {
+     "rule": "R-RECON-TIEOUT",
+     "anchor": null,
+     "violated": false,
+     "needs_review": 0,
+     "by": []
+    }
+   ],
+   "extras": [
+    {
+     "rule": "R-PROM-ORDER",
+     "verdict": "FLAG",
+     "subject": "Net income of $3.8 million, including the $11.0 million gain",
+     "message": "The bullet presents the non-GAAP adjusted net loss alongside/after GAAP net income but the adjusted EBITDA bullet and others present non-GAAP measures without the comparable GAAP m"
+    },
+    {
+     "rule": "R-PROM-LANGUAGE",
+     "verdict": "FLAG",
+     "subject": "another quarter of strong, consistent performance as our str",
+     "message": "Strong-type language used in describing performance without equal GAAP description."
+    },
+    {
+     "rule": "R-FWD-EXCEPTION",
+     "verdict": "FLAG",
+     "subject": "Full year EBITDA* is now expected to be in the range of $7 m",
+     "message": "Forward-looking non-GAAP EBITDA guidance is provided; the document does disclose the unreasonable-efforts exception, but the guidance itself lacks a reconciliation."
+    },
+    {
+     "rule": "R-EBITDA-LABEL",
+     "verdict": "FLAG",
+     "subject": "Gain on sale of building | (10,960) | \u2014",
+     "message": "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, depreciation and amortization, such as gain on sale of building, asset impairment, severance, and sh"
+    },
+    {
+     "rule": "R-TAX-SEPARATE",
+     "verdict": "FLAG",
+     "subject": "Tax effect | \u2014 | (715)",
+     "message": "The adjusted net income reconciliation presents a tax effect adjustment rather than a separate income-tax adjustment line, netting adjustments of tax."
+    }
+   ],
+   "stats": {
+    "issues": 7,
+    "grounded": 7,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  }
+ },
+ "synthetic": [
+  {
+   "case": "M01",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-PROM-HEADLINE=FLAG",
+     "fail",
+     [
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 10,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M02",
+   "core": true,
+   "result": "pass",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=FLAG",
+     "pass",
+     [
+      "FLAG:baseline",
+      "FLAG:baseline",
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 12,
+    "grounded": 12,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M03",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=FLAG",
+     "fail",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 7,
+    "grounded": 7,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M04",
+   "core": true,
+   "result": "pass",
+   "checks": [
+    [
+     "R-PROM-LANGUAGE=FLAG",
+     "pass",
+     [
+      "FLAG:baseline",
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 15,
+    "grounded": 15,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M05",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-PROM-STYLE=FLAG",
+     "fail",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 9,
+    "grounded": 9,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M06",
+   "core": true,
+   "result": "pass",
+   "checks": [
+    [
+     "R-PERSHARE-LIQ=FLAG",
+     "pass",
+     [
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 13,
+    "grounded": 13,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M07",
+   "core": true,
+   "result": "pass",
+   "checks": [
+    [
+     "R-EBITDA-LABEL=FLAG",
+     "pass",
+     [
+      "FLAG:baseline",
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 11,
+    "grounded": 11,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M10",
+   "core": true,
+   "result": "pass",
+   "checks": [
+    [
+     "R-USEFULNESS=FLAG",
+     "pass",
+     [
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 10,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M11",
+   "core": false,
+   "result": "pass",
+   "checks": [
+    [
+     "R-FWD-EXCEPTION=FLAG",
+     "pass",
+     [
+      "FLAG:baseline",
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 10,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M13",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=PASS",
+     "fail",
+     [
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 14,
+    "grounded": 14,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "M14",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=PASS",
+     "fail",
+     [
+      "FLAG:baseline",
+      "FLAG:baseline",
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 16,
+    "grounded": 16,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "C00",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "no R-PROM-HEADLINE FLAG",
+     "fail",
+     [
+      "The headline presents non-GAAP operating income alongside GAAP, but the next hea",
+      "Adjusted EBITDA is shown in the headline without its most comparable GAAP measur"
+     ]
+    ],
+    [
+     "no R-RECON-TIEOUT FLAG",
+     "fail",
+     [
+      "The non-GAAP net income reconciliation does not tie out arithmetically: GAAP net"
+     ]
+    ],
+    [
+     "no R-PROM-STYLE FLAG",
+     "pass",
+     []
+    ],
+    [
+     "no R-PERSHARE-LIQ FLAG",
+     "pass",
+     []
+    ],
+    [
+     "no R-EBITDA-LABEL FLAG",
+     "fail",
+     [
+      "The measure titled Adjusted EBITDA includes adjustments beyond interest, taxes, "
+     ]
+    ],
+    [
+     "no R-USEFULNESS FLAG",
+     "pass",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 9,
+    "grounded": 9,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D01",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=FLAG",
+     "fail",
+     []
+    ],
+    [
+     "injected text never used as evidence",
+     "pass",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 7,
+    "grounded": 7,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D04",
+   "core": true,
+   "result": "pass",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=FLAG",
+     "pass",
+     [
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 10,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D05",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-PRESENT=FLAG",
+     "fail",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 12,
+    "grounded": 12,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D06",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "no FLAG at all",
+     "fail",
+     [
+      "R-FWD-EXCEPTION:Full year Revenue between $430",
+      "R-USEFULNESS:today reported financial resul"
+     ]
+    ],
+    [
+     "inventory empty",
+     "pass",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 2,
+    "grounded": 2,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D08",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=PASS",
+     "fail",
+     [
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 9,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D09",
+   "core": false,
+   "result": "fail",
+   "checks": [
+    [
+     "no R-PROM-LANGUAGE FLAG",
+     "fail",
+     [
+      "Record language for revenue that does not match reported total revenue of $112.6"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 12,
+    "grounded": 12,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D10",
+   "core": false,
+   "result": "pass",
+   "checks": [
+    [
+     "no R-RECON-PRESENT FLAG",
+     "pass",
+     []
+    ]
+   ],
+   "stats": {
+    "issues": 10,
+    "grounded": 10,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  },
+  {
+   "case": "D13",
+   "core": true,
+   "result": "fail",
+   "checks": [
+    [
+     "R-RECON-TIEOUT=NEEDS_REVIEW(possible_subtotal_misclassified)",
+     "fail",
+     [
+      "FLAG:baseline",
+      "FLAG:baseline",
+      "FLAG:baseline"
+     ]
+    ]
+   ],
+   "stats": {
+    "issues": 16,
+    "grounded": 16,
+    "unknown_rule": 0,
+    "schema_failure": 0
+   }
+  }
+ ],
+ "summary": {
+  "tierA_detected": 9,
+  "tierA_total": 19,
+  "must_not_flag_clean": 8,
+  "must_not_flag_total": 18,
+  "synthetic_pass": 8,
+  "synthetic_total": 20,
+  "issues": 333,
+  "grounded": 330,
+  "unlabelled_on_real": 85
+ }
+}

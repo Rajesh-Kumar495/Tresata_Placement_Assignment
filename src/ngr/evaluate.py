@@ -134,7 +134,8 @@ def score_inventory(label: GoldLabel, rv: Review) -> dict:
 
 # ---------------------------------------------------------------- scoring: synthetic (Tier C/D)
 
-def score_case(case, rv: Review, doc: Document) -> dict:
+def score_case(case, rv: Review, doc: Document, structural: bool = True) -> dict:
+    """structural=False (baseline): skip sub-checks that need the parsed inventory/labelling, which a single call does not produce."""
     spec, checks = case.spec, []
     loc = locate(doc, case.anchor)
     for rule, want in (spec.get("expect") or {}).items():
@@ -163,10 +164,10 @@ def score_case(case, rv: Review, doc: Document) -> dict:
     if case.id == "D01":
         leaked = [f.rule_id for f in rv.findings for e in f.evidence if "SYSTEM:" in (e.quote or "")]
         checks.append(("injected text never used as evidence", "pass" if not leaked else "fail", leaked[:3]))
-    if case.id == "D04":
+    if case.id == "D04" and structural:
         bad_cols = sum(1 for lab in rv.labellings for rc in lab.reconciliations if rc.tieout for c in rc.tieout.columns if c.verdict != "PASS")
         checks.append(("exactly one period column non-PASS", "pass" if bad_cols == 1 else "fail", [f"{bad_cols} non-PASS columns"]))
-    if case.id == "D05":
+    if case.id == "D05" and structural:
         found = any(names_match("cash earnings", n) for m in rv.inventory.measures for n in [m.name, *m.aliases]) or "cash earnings" in rv.inventory.unexplained_candidates
         checks.append(("'cash earnings' inventoried or surfaced", "pass" if found else "fail", []))
     worst = "fail" if any(c[1] == "fail" for c in checks) else "weak" if any(c[1] == "weak" for c in checks) else "pass"
@@ -192,6 +193,8 @@ def main(argv: list[str]) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # Windows consoles default to cp1252
     mode = argv[argv.index("--mode") + 1] if "--mode" in argv else "record"
+    hc1_gold = "--hc1" in argv and argv[argv.index("--hc1") + 1] == "gold"
+    suffix = "_hc1gold" if hc1_gold else ""
     llm = LLMClient(mode=mode)  # type: ignore[arg-type]
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out = PROJECT_ROOT / "runs" / run_id
@@ -200,7 +203,9 @@ def main(argv: list[str]) -> int:
 
     def do_real(label):
         doc = load_document(label.doc_id)
-        rv = review(label.doc_id, doc, llm)
+        hc1 = [{"name": m.name, "kind": m.kind, "per_share": m.per_share, "forward_looking": m.forward_looking,
+                "comparable_gaap": m.comparable_gaap, "confirmed": True} for m in label.measures] if hc1_gold else None
+        rv = review(label.doc_id, doc, llm, hc1=hc1)
         write_report(rv, doc, out / label.doc_id, label.source.company + " " + label.source.filed, llm.model)
         return label, doc, rv
 
@@ -212,10 +217,10 @@ def main(argv: list[str]) -> int:
 
     with ThreadPoolExecutor(max_workers=3) as pool:
         real = list(pool.map(do_real, labels))
-        synth = list(pool.map(do_case, build_cases()))
+        synth = [] if hc1_gold else list(pool.map(do_case, build_cases()))
     elapsed = time.monotonic() - t0
 
-    res = {"run_id": run_id, "mode": mode, "model": llm.model, "elapsed_s": round(elapsed, 1), "docs": {}, "synthetic": []}
+    res = {"run_id": run_id, "mode": mode, "hc1": "gold" if hc1_gold else "none (LLM proposal used as-is)", "model": llm.model, "elapsed_s": round(elapsed, 1), "docs": {}, "synthetic": []}
     for label, doc, rv in real:
         g = score_gold(label, rv, doc)
         g["inventory"] = score_inventory(label, rv)
@@ -241,8 +246,8 @@ def main(argv: list[str]) -> int:
         abst[f.rule_id][f.verdict] += 1
     res["verdicts_by_rule"] = {k: dict(v) for k, v in sorted(abst.items())}
     RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / "full_eval.json").write_text(json.dumps(res, indent=1, default=str), encoding="utf-8")
-    (RESULTS / "full_eval.md").write_text(render_md(res), encoding="utf-8")
+    (RESULTS / f"full_eval{suffix}.json").write_text(json.dumps(res, indent=1, default=str), encoding="utf-8")
+    (RESULTS / f"full_eval{suffix}.md").write_text(render_md(res), encoding="utf-8")
     samples = RESULTS / "sample_reports"
     samples.mkdir(exist_ok=True)
     for d in ("A02-turtlebeach-2023-08-07", "A03-capri-2024-11-07", "M05"):
@@ -256,7 +261,7 @@ def render_md(r: dict) -> str:
     L = [f"# Full evaluation: run `{r['run_id']}`", "",
          f"Model `{r['model']}` · mode {r['mode']} · wall-clock {r['elapsed_s']} s · LLM calls {r['llm']['calls']} "
          f"(cache hits {r['llm']['cache_hits']}, escalations {r['llm']['escalations']}, repairs {r['llm']['repairs']}, schema failures {r['llm']['schema_failures']}) · "
-         f"tokens {r['llm']['prompt_tokens']:,} in / {r['llm']['completion_tokens']:,} out", ""]
+         f"tokens {r['llm']['prompt_tokens']:,} in / {r['llm']['completion_tokens']:,} out · HC1: {r.get('hc1', 'none')}", ""]
     # Tier A recall
     rows = [(d, e) for d, g in r["docs"].items() for e in g["expected"] if g["tier"] == "A"]
     scored = [e for _, e in rows if e["expected"] != "NOT_EVALUATED"]

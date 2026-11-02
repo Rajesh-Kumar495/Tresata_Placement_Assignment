@@ -1,0 +1,761 @@
+{
+ "summary": {
+  "findings_on_real_docs": 100,
+  "matched_to_SEC_gold": 17,
+  "unlabelled": 83,
+  "unlabelled_TP": 36,
+  "unlabelled_DEBATABLE": 37,
+  "unlabelled_FP": 10,
+  "precision_strict": 0.53,
+  "precision_lenient": 0.9
+ },
+ "findings": [
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Net debt",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'",
+   "label": "DEBATABLE",
+   "reason": "Net debt / net cash / prior-year adjusted margin without an explicit reconciliation schedule"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-PROM-HEADLINE",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Headline omits the most directly comparable GAAP measure (net income) for 'Adjusted EBITDA'",
+   "label": "TP",
+   "reason": "SEC c2 named adjusted EBITDA in the headline as well (gold anchor covered only the EPS line)"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Bullet presents 'adjusted EBITDA' before the comparable GAAP measure (net income) in the same list",
+   "label": "TP",
+   "reason": "Highlight bullet presents (record) Adjusted EBITDA with no net income in the list (102.10(a))"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "net debt position",
+   "message": "Bullet presents 'net debt position' without the comparable GAAP measure (debt) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Net debt",
+   "message": "Bullet presents 'Net debt' without the comparable GAAP measure (debt) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Full year Adjusted EBITDA",
+   "message": "Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Merger and acquisition and other expenses",
+   "message": "Adjustment 'Merger and acquisition and other expenses' may exclude a normal, recurring cash operating expense: M&A expenses recur and are cash operating expenses; excluding them ma",
+   "label": "FP",
+   "reason": "Non-operating item; 100.01 concerns operating expenses"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Restructuring charges",
+   "message": "Adjustment 'Restructuring charges' may exclude a normal, recurring cash operating expense: Restructuring charges can recur at irregular intervals; label alone doesn't establish non",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A01-aviat-2025-02-04",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Other expense (income), net",
+   "message": "Adjustment 'Other expense (income), net' may exclude a normal, recurring cash operating expense: Label alone doesn't reveal whether it is a recurring cash operating expense or non-",
+   "label": "FP",
+   "reason": "Non-operating item; 100.01 concerns operating expenses"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-RECON-TIEOUT",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Adjusted EBITDA",
+   "message": "t05 vertical reconciliation of 'Adjusted EBITDA': 0/1 period columns tie (Three Months Ended/June 30, 2023/Adj/EBITDA: NEEDS_REVIEW possible_unlabelled_subtraction)",
+   "label": "TP",
+   "reason": "Q11 diagnostic: the subtraction really is unlabelled; NEEDS_REVIEW naming the row is the designed outcome"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-RECON-TIEOUT",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Adjusted EBITDA",
+   "message": "t05 vertical reconciliation of 'Adjusted EBITDA': 0/1 period columns tie (Six Months Ended/June 30, 2023/Adj/EBITDA: NEEDS_REVIEW possible_unlabelled_subtraction)",
+   "label": "TP",
+   "reason": "Q11 diagnostic: the subtraction really is unlabelled; NEEDS_REVIEW naming the row is the designed outcome"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-PROM-HEADLINE",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA guidance",
+   "message": "Headline omits the most directly comparable GAAP measure (net income) for 'Adjusted EBITDA Guidance'",
+   "label": "TP",
+   "reason": "Same header block the SEC raised in c4; guidance/target lines repeat the pattern"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-PROM-HEADLINE",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA margin target",
+   "message": "Headline omits the most directly comparable GAAP measure (net margin) for 'Adjusted EBITDA Margin Target'",
+   "label": "TP",
+   "reason": "Same header block the SEC raised in c4; guidance/target lines repeat the pattern"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Non-recurring business costs",
+   "message": "Adjustment 'Non-recurring business costs' may exclude a normal, recurring cash operating expense: Label says non-recurring but no detail on nature; cannot judge if normal recurring",
+   "label": "TP",
+   "reason": "SEC c9 asked about exactly these adjustments (CEO separation, acquisition, non-recurring)"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Acquisition integration costs",
+   "message": "Adjustment 'Acquisition integration costs' may exclude a normal, recurring cash operating expense: Label alone; no description of nature or frequency to judge recurring cash operat",
+   "label": "TP",
+   "reason": "SEC c9 asked about exactly these adjustments (CEO separation, acquisition, non-recurring)"
+  },
+  {
+   "doc": "A02-turtlebeach-2023-08-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "CEO separation related costs",
+   "message": "Adjustment 'CEO separation related costs' may exclude a normal, recurring cash operating expense: Label alone; cannot determine whether recurring cash operating expense or genuinel",
+   "label": "TP",
+   "reason": "SEC c9 asked about exactly these adjustments (CEO separation, acquisition, non-recurring)"
+  },
+  {
+   "doc": "A03-capri-2024-11-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Net debt",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'",
+   "label": "FP",
+   "reason": "Components given inline (cash $182m, borrowings $1.71bn -> net debt $1.53bn): a clearly understandable reconciliation"
+  },
+  {
+   "doc": "A03-capri-2024-11-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Restructuring and Other Charges",
+   "message": "Adjustment 'Restructuring and Other Charges' may exclude a normal, recurring cash operating expense: Restructuring and store closure costs recur at irregular intervals and are oper",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A03-capri-2024-11-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "ERP Implementation",
+   "message": "Adjustment 'ERP Implementation' may exclude a normal, recurring cash operating expense: Multi-year ERP implementation is a recurring operating expense necessary to operate the busi",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A03-capri-2024-11-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Capri Transformation",
+   "message": "Adjustment 'Capri Transformation' may exclude a normal, recurring cash operating expense: Multi-year transformation program covering operations is a recurring operating expense nec",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A03-capri-2024-11-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Merger Related Costs",
+   "message": "Adjustment 'Merger Related Costs' may exclude a normal, recurring cash operating expense: Label alone does not reveal whether costs are recurring cash operating expenses; related t",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A03-capri-2024-11-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Restructuring and Other Expense",
+   "message": "Adjustment 'Restructuring and Other Expense' may exclude a normal, recurring cash operating expense: Restructuring and store closure costs recur at irregular intervals and are oper",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A04-cititrends-2025-06-03",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "EBITDA*",
+   "message": "Bullet presents 'EBITDA*' without the comparable GAAP measure (net income) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  },
+  {
+   "doc": "A04-cititrends-2025-06-03",
+   "rule": "R-PROM-LANGUAGE",
+   "verdict": "FLAG",
+   "subject": "Ken Seipel, Chief Executive Officer said, \u201cI am pleased to r",
+   "message": "Language prominence: Characterizes non-GAAP adjusted EBITDA as 'stronger-than-expected' without equally prominent similar description of comparable GAAP measure.",
+   "label": "TP",
+   "reason": "CEO quote characterises adjusted EBITDA as stronger than expected; SEC c2b raised non-GAAP discussion prominence"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA Margin",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted EBITDA Margin'",
+   "label": "TP",
+   "reason": "SEC c9/c10: modified metrics reconciled only on website; margin without GAAP margin"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Modified Adjusted EBITDA",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Modified Adjusted EBITDA'",
+   "label": "TP",
+   "reason": "SEC c9/c10: modified metrics reconciled only on website; margin without GAAP margin"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Modified Revenue",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Modified Revenue'",
+   "label": "TP",
+   "reason": "SEC c9/c10: modified metrics reconciled only on website; margin without GAAP margin"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Estimated Net Debt",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Estimated Net Debt'",
+   "label": "DEBATABLE",
+   "reason": "Net debt / net cash / prior-year adjusted margin without an explicit reconciliation schedule"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-START-GAAP",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Unlevered Cash Flow",
+   "message": "Reconciliation of 'Unlevered Cash Flow' in t08 starts from 'Free Cash Flow', a non-GAAP figure that is itself reconciled from GAAP elsewhere in the release (chained)",
+   "label": "DEBATABLE",
+   "reason": "Chained from a measure reconciled to GAAP elsewhere; routed to NEEDS_REVIEW by design"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-START-GAAP",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Free Cash Flow excluding cash Special Items",
+   "message": "Reconciliation of 'Free Cash Flow excluding cash Special Items' in t08 starts from 'Free Cash Flow', a non-GAAP figure that is itself reconciled from GAAP elsewhere in the release ",
+   "label": "DEBATABLE",
+   "reason": "Chained from a measure reconciled to GAAP elsewhere; routed to NEEDS_REVIEW by design"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-START-GAAP",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Unlevered Cash Flow excluding cash Special Items",
+   "message": "Reconciliation of 'Unlevered Cash Flow excluding cash Special Items' in t08 starts from 'Unlevered Cash Flow', a non-GAAP figure that is itself reconciled from GAAP elsewhere in th",
+   "label": "DEBATABLE",
+   "reason": "Chained from a measure reconciled to GAAP elsewhere; routed to NEEDS_REVIEW by design"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-RECON-START-GAAP",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Adjusted EBITDA excluding Special Items",
+   "message": "Reconciliation of 'Adjusted EBITDA excluding Special Items' in t09 starts from 'Adjusted EBITDA', a non-GAAP figure that is itself reconciled from GAAP elsewhere in the release (ch",
+   "label": "DEBATABLE",
+   "reason": "Chained from a measure reconciled to GAAP elsewhere; routed to NEEDS_REVIEW by design"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Estimated Net Debt",
+   "message": "Bullet presents 'Estimated Net Debt' without the comparable GAAP measure (debt) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Net debt bullet without total debt"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Table t07: non-GAAP row 'Total Special Items impacting Adjusted EBITDA' appears without a preceding GAAP net income row",
+   "label": "FP",
+   "reason": "Special-items detail table, not a presentation of a non-GAAP measure"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Exclude: Special Items",
+   "message": "Adjustment 'Exclude: Special Items' may exclude a normal, recurring cash operating expense: Label 'Special Items' is undefined; cannot determine if it is a normal recurring cash op",
+   "label": "TP",
+   "reason": "SEC (10-K comment 2) asked Lumen to consider 100.01 for special items"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Add back: Severance",
+   "message": "Adjustment 'Add back: Severance' may exclude a normal, recurring cash operating expense: Severance is a cash operating expense that occurs repeatedly or occasionally, including at ",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Add back: Consumer and other litigation",
+   "message": "Adjustment 'Add back: Consumer and other litigation' may exclude a normal, recurring cash operating expense: Litigation costs recur occasionally at irregular intervals and are cash",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Add back: Transaction and separation costs",
+   "message": "Adjustment 'Add back: Transaction and separation costs' may exclude a normal, recurring cash operating expense: Transaction and separation costs are cash expenses that occur repeat",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Add back: Real estate transactions",
+   "message": "Adjustment 'Add back: Real estate transactions' may exclude a normal, recurring cash operating expense: Label alone does not reveal whether these are recurring cash operating expen",
+   "label": "FP",
+   "reason": "Real-estate transaction gains/losses are not operating expenses"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-FWD-EXCEPTION",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA Outlook",
+   "message": "Forward-looking non-GAAP 'Adjusted EBITDA Outlook' has no reconciliation and no disclosed reliance on the unreasonable-efforts exception",
+   "label": "TP",
+   "reason": "Outlook table gives non-GAAP guidance; no unreasonable-efforts disclosure found in the release text"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-FWD-EXCEPTION",
+   "verdict": "FLAG",
+   "subject": "Free Cash Flow Outlook",
+   "message": "Forward-looking non-GAAP 'Free Cash Flow Outlook' has no reconciliation and no disclosed reliance on the unreasonable-efforts exception",
+   "label": "TP",
+   "reason": "Outlook table gives non-GAAP guidance; no unreasonable-efforts disclosure found in the release text"
+  },
+  {
+   "doc": "A05-lumen-2023-02-07",
+   "rule": "R-FWD-EXCEPTION",
+   "verdict": "FLAG",
+   "subject": "Net Cash Interest",
+   "message": "Forward-looking non-GAAP 'Net Cash Interest' has no reconciliation and no disclosed reliance on the unreasonable-efforts exception",
+   "label": "DEBATABLE",
+   "reason": "Unclear whether 'net cash interest' is a non-GAAP measure"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBIT margin",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted EBIT margin'",
+   "label": "TP",
+   "reason": "Adjusted EBIT/EBITDA margins without GAAP margins; SEC c3 raised the same class of measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA margin",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted EBITDA margin'",
+   "label": "TP",
+   "reason": "Adjusted EBIT/EBITDA margins without GAAP margins; SEC c3 raised the same class of measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Adjusted effective tax rate",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted effective tax rate'",
+   "label": "FP",
+   "reason": "Table shows as-reported and adjusted effective tax rates side by side"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-RECON-START-GAAP",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA Excluding Adjusted Equity Income",
+   "message": "Reconciliation of 'Adjusted EBITDA Excluding Adjusted Equity Income' in t09 starts from 'Adjusted EBITDA', a non-GAAP figure",
+   "label": "TP",
+   "reason": "Reconciliations start from adjusted EBITDA; SEC c2/c3"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-RECON-START-GAAP",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Free cash flow",
+   "message": "Reconciliation of 'Free cash flow' in t15 starts from 'Adjusted EBITDA excluding adjusted equity income', a non-GAAP figure that is itself reconciled from GAAP elsewhere in the rel",
+   "label": "TP",
+   "reason": "Reconciliations start from adjusted EBITDA; SEC c2/c3"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBIT",
+   "message": "Bullet presents 'Adjusted EBIT' before the comparable GAAP measure (net income) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBIT margin",
+   "message": "Bullet presents 'Adjusted EBIT margin' without the comparable GAAP measure (net margin) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Bullet presents 'Adjusted EBITDA' before the comparable GAAP measure (net income) in the same list",
+   "label": "TP",
+   "reason": "Highlight bullet presents (record) Adjusted EBITDA with no net income in the list (102.10(a))"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA margin",
+   "message": "Bullet presents 'Adjusted EBITDA margin' without the comparable GAAP measure (net margin) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA excluding adjusted equity income",
+   "message": "Bullet presents 'Adjusted EBITDA excluding adjusted equity income' before the comparable GAAP measure (net income) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted net income attributable to Adient",
+   "message": "Bullet presents 'Adjusted net income attributable to Adient' before the comparable GAAP measure (net income) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted earnings per share",
+   "message": "Bullet presents 'Adjusted earnings per share' without the comparable GAAP measure (eps) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Free cash flow",
+   "message": "Bullet presents 'Free cash flow' before the comparable GAAP measure (cash ops) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Cash-flow/debt measure in a list without its GAAP comparable; commonly accepted presentation"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Net debt",
+   "message": "Bullet presents 'Net debt' without the comparable GAAP measure (debt) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Cash-flow/debt measure in a list without its GAAP comparable; commonly accepted presentation"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Net leverage ratio",
+   "message": "Bullet presents 'Net leverage ratio' without the comparable GAAP measure (debt) in the same list",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Table t07: non-GAAP row 'Adjusted EBITDA' appears without a preceding GAAP net income row",
+   "label": "TP",
+   "reason": "Highlight bullet presents (record) Adjusted EBITDA with no net income in the list (102.10(a))"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA margin",
+   "message": "Table t08: non-GAAP row 'Adjusted EBITDA margin' appears without a preceding GAAP net margin row",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Table t13: non-GAAP row 'LTM Adjusted EBITDA' appears without a preceding GAAP net income row",
+   "label": "TP",
+   "reason": "Highlight bullet presents (record) Adjusted EBITDA with no net income in the list (102.10(a))"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA excluding adjusted equity income",
+   "message": "Table t15: non-GAAP row 'Adjusted EBITDA excluding adjusted equity income' appears without a preceding GAAP net income row",
+   "label": "TP",
+   "reason": "Adjusted measures listed without/before GAAP comparables; SEC c3 asked for equal prominence across these measures"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Adjustments",
+   "message": "Adjustment 'Adjustments' may exclude a normal, recurring cash operating expense: Tax-related adjustments are not operating expenses, but generic label and truncated text prevent cl",
+   "label": "FP",
+   "reason": "Tax adjustment, not an operating expense"
+  },
+  {
+   "doc": "A06-adient-2024-02-07",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "Other items",
+   "message": "Adjustment 'Other items' may exclude a normal, recurring cash operating expense: Generic 'Other items' label with no detail; cannot assess whether recurring cash operating expense.",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Net debt",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'",
+   "label": "DEBATABLE",
+   "reason": "Net debt / net cash / prior-year adjusted margin without an explicit reconciliation schedule"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "NEEDS_REVIEW",
+   "subject": "adjusted earnings",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'adjusted earnings' (lexicon candidate not confirmed as a measure)",
+   "label": "FP",
+   "reason": "Lexicon fragment of 'Adjusted earnings before interest, tax...' (= Adjusted EBITDA, which is reconciled)"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Adjusted EBITDA",
+   "message": "Bullet presents 'Adjusted EBITDA' before the comparable GAAP measure (net income) in the same list",
+   "label": "TP",
+   "reason": "Highlight bullet presents (record) Adjusted EBITDA with no net income in the list (102.10(a))"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Net debt",
+   "message": "Bullet presents 'Net debt' without the comparable GAAP measure (debt) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Full year Adjusted EBITDA",
+   "message": "Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Merger and acquisition and other expenses",
+   "message": "Adjustment 'Merger and acquisition and other expenses' may exclude a normal, recurring cash operating expense: M&A and other expenses recur and are cash operating costs; 'other' is",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Restructuring (charges) recovery",
+   "message": "Adjustment 'Restructuring (charges) recovery' may exclude a normal, recurring cash operating expense: Restructuring charges recur, including at irregular intervals, and are cash op",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B01-aviat-2025-05-06",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Restructuring charges (recovery)",
+   "message": "Adjustment 'Restructuring charges (recovery)' may exclude a normal, recurring cash operating expense: Restructuring charges recur, including at irregular intervals, and are cash op",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B02-turtlebeach-2023-11-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "run-rate EBITDA",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'run-rate EBITDA'",
+   "label": "FP",
+   "reason": "Forward-looking run-rate; the release discloses why no reconciliation is provided"
+  },
+  {
+   "doc": "B02-turtlebeach-2023-11-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Adjusted gross margin",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted gross margin'",
+   "label": "DEBATABLE",
+   "reason": "Net debt / net cash / prior-year adjusted margin without an explicit reconciliation schedule"
+  },
+  {
+   "doc": "B02-turtlebeach-2023-11-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Recurring operating expenses",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Recurring operating expenses'",
+   "label": "DEBATABLE",
+   "reason": "Net debt / net cash / prior-year adjusted margin without an explicit reconciliation schedule"
+  },
+  {
+   "doc": "B02-turtlebeach-2023-11-07",
+   "rule": "R-RECON-PRESENT",
+   "verdict": "FLAG",
+   "subject": "Net cash position",
+   "message": "No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net cash position'",
+   "label": "DEBATABLE",
+   "reason": "Net debt / net cash / prior-year adjusted margin without an explicit reconciliation schedule"
+  },
+  {
+   "doc": "B02-turtlebeach-2023-11-07",
+   "rule": "R-PROM-LANGUAGE",
+   "verdict": "FLAG",
+   "subject": "\u201cWith our sharp focus on improvements in execution, our thir",
+   "message": "Language prominence: Characterizes non-GAAP adjusted EBITDA as increasing significantly without equally prominent similar description of comparable GAAP measure.",
+   "label": "FP",
+   "reason": "'significantly' states a magnitude; not the 'record/exceptional' characterisation in 102.10(a)"
+  },
+  {
+   "doc": "B03-capri-2025-05-28",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Restructuring and Other Charges",
+   "message": "Adjustment 'Restructuring and Other Charges' may exclude a normal, recurring cash operating expense: Severance and store closure costs are cash operating expenses that recur, inclu",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B03-capri-2025-05-28",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "ERP Implementation",
+   "message": "Adjustment 'ERP Implementation' may exclude a normal, recurring cash operating expense: Multi-year ERP implementation costs are recurring cash operating expenses necessary to opera",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B03-capri-2025-05-28",
+   "rule": "R-NORMAL-OPEX",
+   "verdict": "FLAG",
+   "subject": "Capri Transformation",
+   "message": "Adjustment 'Capri Transformation' may exclude a normal, recurring cash operating expense: Multi-year transformation costs spanning operations are recurring cash operating expenses ",
+   "label": "DEBATABLE",
+   "reason": "Restructuring / M&A / ERP / transformation exclusions: 100.01's 'occasionally, at irregular intervals' supports a flag, but these are widely accepted adjustments"
+  },
+  {
+   "doc": "B03-capri-2025-05-28",
+   "rule": "R-FWD-EXCEPTION",
+   "verdict": "FLAG",
+   "subject": "Adjusted operating income (guidance)",
+   "message": "Forward-looking non-GAAP 'Adjusted operating income (guidance)' has no reconciliation and no disclosed reliance on the unreasonable-efforts exception",
+   "label": "TP",
+   "reason": "Adjusted guidance with no reconciliation and no unreasonable-efforts disclosure (102.10(b) bullet 3)"
+  },
+  {
+   "doc": "B03-capri-2025-05-28",
+   "rule": "R-FWD-EXCEPTION",
+   "verdict": "FLAG",
+   "subject": "Adjusted operating margin (guidance)",
+   "message": "Forward-looking non-GAAP 'Adjusted operating margin (guidance)' has no reconciliation and no disclosed reliance on the unreasonable-efforts exception",
+   "label": "TP",
+   "reason": "Adjusted guidance with no reconciliation and no unreasonable-efforts disclosure (102.10(b) bullet 3)"
+  },
+  {
+   "doc": "B03-capri-2025-05-28",
+   "rule": "R-FWD-EXCEPTION",
+   "verdict": "FLAG",
+   "subject": "Adjusted diluted earnings per share (guidance)",
+   "message": "Forward-looking non-GAAP 'Adjusted diluted earnings per share (guidance)' has no reconciliation and no disclosed reliance on the unreasonable-efforts exception",
+   "label": "TP",
+   "reason": "Adjusted guidance with no reconciliation and no unreasonable-efforts disclosure (102.10(b) bullet 3)"
+  },
+  {
+   "doc": "B04-cititrends-2025-08-26",
+   "rule": "R-PROM-ORDER",
+   "verdict": "FLAG",
+   "subject": "Full year EBITDA*",
+   "message": "Bullet presents 'Full year EBITDA*' without the comparable GAAP measure (net income) in the same list",
+   "label": "DEBATABLE",
+   "reason": "Forward guidance or net debt in a bullet without the GAAP comparable"
+  }
+ ]
+}

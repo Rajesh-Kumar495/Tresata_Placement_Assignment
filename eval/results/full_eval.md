@@ -1,6 +1,6 @@
-# Full evaluation: run `20261102T184705Z`
+# Full evaluation: run `20261102T185831Z`
 
-Model `deepseek/deepseek-v4.1-flash` · mode replay · wall-clock 15.5 s · LLM calls 200 (cache hits 200, escalations 18, repairs 0, schema failures 0) · tokens 411,839 in / 109,830 out
+Model `deepseek/deepseek-v4.1-flash` · mode record · wall-clock 15.9 s · LLM calls 200 (cache hits 200, escalations 18, repairs 0, schema failures 0) · tokens 411,839 in / 109,830 out · HC1: none (LLM proposal used as-is)
 
 ## Tier A: SEC-raised issues (recall)
 
@@ -38,15 +38,14 @@ Model `deepseek/deepseek-v4.1-flash` · mode replay · wall-clock 15.5 s · LLM 
 
 ## Unlabelled findings on real documents (need manual adjudication)
 
-86 FLAG/NEEDS_REVIEW findings not covered by any gold label: R-PROM-ORDER 27, R-NORMAL-OPEX 24, R-RECON-PRESENT 16, R-RECON-START-GAAP 6, R-FWD-EXCEPTION 6, R-PROM-HEADLINE 3, R-RECON-TIEOUT 2, R-PROM-LANGUAGE 2
+83 FLAG/NEEDS_REVIEW findings not covered by any gold label: R-PROM-ORDER 25, R-NORMAL-OPEX 24, R-RECON-PRESENT 15, R-RECON-START-GAAP 6, R-FWD-EXCEPTION 6, R-PROM-HEADLINE 3, R-RECON-TIEOUT 2, R-PROM-LANGUAGE 2
 
-- A01 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted earnings before interest, tax, depreciation and amorti
 - A01 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'
 - A01 FLAG R-PROM-HEADLINE: Headline omits the most directly comparable GAAP measure (net income) for 'Adjusted EBITDA'
 - A01 FLAG R-PROM-ORDER: Bullet presents 'adjusted EBITDA' before the comparable GAAP measure (net income) in the same list
 - A01 FLAG R-PROM-ORDER: Bullet presents 'net debt position' without the comparable GAAP measure (debt) in the same list
+- A01 FLAG R-PROM-ORDER: Bullet presents 'Net debt' without the comparable GAAP measure (debt) in the same list
 - A01 FLAG R-PROM-ORDER: Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list
-- A01 FLAG R-PROM-ORDER: Table t03: non-GAAP row 'Non-GAAP research and development expenses' appears without a preceding GAAP opex row
 - A01 FLAG R-NORMAL-OPEX: Adjustment 'Merger and acquisition and other expenses' may exclude a normal, recurring cash operating expense: M&A expenses recur and are cash operati
 - A01 FLAG R-NORMAL-OPEX: Adjustment 'Restructuring charges' may exclude a normal, recurring cash operating expense: Restructuring charges can recur at irregular intervals; lab
 - A01 NEEDS_REVIEW R-NORMAL-OPEX: Adjustment 'Other expense (income), net' may exclude a normal, recurring cash operating expense: Label alone doesn't reveal whether it is a recurring 
@@ -58,7 +57,6 @@ Model `deepseek/deepseek-v4.1-flash` · mode replay · wall-clock 15.5 s · LLM 
 - A02 NEEDS_REVIEW R-NORMAL-OPEX: Adjustment 'Acquisition integration costs' may exclude a normal, recurring cash operating expense: Label alone; no description of nature or frequency 
 - A02 NEEDS_REVIEW R-NORMAL-OPEX: Adjustment 'CEO separation related costs' may exclude a normal, recurring cash operating expense: Label alone; cannot determine whether recurring cash
 - A03 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'
-- A03 FLAG R-PROM-ORDER: Bullet presents 'free cash flow' without the comparable GAAP measure (cash ops) in the same list
 - A03 FLAG R-NORMAL-OPEX: Adjustment 'Restructuring and Other Charges' may exclude a normal, recurring cash operating expense: Restructuring and store closure costs recur at ir
 - A03 FLAG R-NORMAL-OPEX: Adjustment 'ERP Implementation' may exclude a normal, recurring cash operating expense: Multi-year ERP implementation is a recurring operating expense
 - A03 FLAG R-NORMAL-OPEX: Adjustment 'Capri Transformation' may exclude a normal, recurring cash operating expense: Multi-year transformation program covering operations is a r
@@ -105,8 +103,8 @@ Model `deepseek/deepseek-v4.1-flash` · mode replay · wall-clock 15.5 s · LLM 
 - A06 FLAG R-PROM-ORDER: Table t15: non-GAAP row 'Adjusted EBITDA excluding adjusted equity income' appears without a preceding GAAP net income row
 - A06 NEEDS_REVIEW R-NORMAL-OPEX: Adjustment 'Adjustments' may exclude a normal, recurring cash operating expense: Tax-related adjustments are not operating expenses, but generic label
 - A06 NEEDS_REVIEW R-NORMAL-OPEX: Adjustment 'Other items' may exclude a normal, recurring cash operating expense: Generic 'Other items' label with no detail; cannot assess whether rec
-- B01 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Adjusted earnings before interest, tax, depreciation and amorti
 - B01 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net debt'
+- B01 NEEDS_REVIEW R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'adjusted earnings' (lexicon candidate not confirmed as a measur
 - B01 FLAG R-PROM-ORDER: Bullet presents 'Adjusted EBITDA' before the comparable GAAP measure (net income) in the same list
 - B01 FLAG R-PROM-ORDER: Bullet presents 'Net debt' without the comparable GAAP measure (debt) in the same list
 - B01 FLAG R-PROM-ORDER: Bullet presents 'Full year Adjusted EBITDA' without the comparable GAAP measure (net income) in the same list
@@ -118,7 +116,6 @@ Model `deepseek/deepseek-v4.1-flash` · mode replay · wall-clock 15.5 s · LLM 
 - B02 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Recurring operating expenses'
 - B02 FLAG R-RECON-PRESENT: No quantitative reconciliation to the most directly comparable GAAP measure found for 'Net cash position'
 - B02 FLAG R-PROM-LANGUAGE: Language prominence: Characterizes non-GAAP adjusted EBITDA as increasing significantly without equally prominent similar description of comparable GA
-- B03 FLAG R-PROM-ORDER: Bullet presents 'free cash flow' without the comparable GAAP measure (cash ops) in the same list
 - B03 FLAG R-NORMAL-OPEX: Adjustment 'Restructuring and Other Charges' may exclude a normal, recurring cash operating expense: Severance and store closure costs are cash operat
 - B03 FLAG R-NORMAL-OPEX: Adjustment 'ERP Implementation' may exclude a normal, recurring cash operating expense: Multi-year ERP implementation costs are recurring cash operati
 - B03 FLAG R-NORMAL-OPEX: Adjustment 'Capri Transformation' may exclude a normal, recurring cash operating expense: Multi-year transformation costs spanning operations are recu
@@ -169,7 +166,7 @@ Recall LLM-only **73/73** · surfaced to HC1 **73/73** · precision **79/85** (p
 
 ## Grounding of final evidence
 
-1209/1209 evidence quotes found verbatim in the source (target: 0 failures)
+1183/1183 evidence quotes found verbatim in the source (target: 0 failures)
 
 ## Verdicts by rule (all 30 documents)
 
@@ -177,14 +174,14 @@ Recall LLM-only **73/73** · surfaced to HC1 **73/73** · precision **79/85** (p
 |---|---|---|---|---|
 | R-EBITDA-FROM-NI | 29 | 2 | 0 | 0 |
 | R-EBITDA-LABEL | 29 | 1 | 0 | 0 |
-| R-FWD-EXCEPTION | 34 | 7 | 0 | 0 |
+| R-FWD-EXCEPTION | 41 | 8 | 0 | 0 |
 | R-NORMAL-OPEX | 1 | 77 | 19 | 0 |
 | R-PERSHARE-LIQ | 29 | 1 | 0 | 0 |
 | R-PROM-HEADLINE | 22 | 7 | 0 | 4 |
 | R-PROM-LANGUAGE | 7 | 24 | 0 | 0 |
-| R-PROM-ORDER | 3 | 91 | 0 | 0 |
+| R-PROM-ORDER | 4 | 89 | 0 | 0 |
 | R-PROM-STYLE | 25 | 1 | 0 | 4 |
-| R-RECON-PRESENT | 3 | 63 | 0 | 0 |
+| R-RECON-PRESENT | 3 | 42 | 13 | 0 |
 | R-RECON-START-GAAP | 28 | 1 | 6 | 0 |
 | R-RECON-TIEOUT | 194 | 4 | 3 | 8 |
 | R-TAX-SEPARATE | 29 | 1 | 0 | 0 |

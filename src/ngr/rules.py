@@ -27,7 +27,7 @@ _FAM = {
     "net_income": _NI,
     "operating_income": r"operating\s+(?:income|loss|profit)(?:\s*\((?:loss|income)\))?|income\s+from\s+operations|(?:income|loss)\s+from\s+operations",
     "opex": r"operating\s+expenses?",
-    "cash_ops": r"cash\s+(?:provided\s+by|from|generated\s+(?:by|from)|used\s+in)\s+operat|operating\s+cash\s+flow",
+    "cash_ops": r"cash\s+(?:flows?\s+)?(?:provided\s+by|from|generated\s+(?:by|from)|used\s+in)\s+operat|operating\s+cash\s+flow",
     "revenue": r"\b(?:revenue|net\s+sales|sales)\b",
     "sga": r"selling,?\s+general\s+and\s+administrative|\bSG&A\b",
     "sa": r"selling\s+and\s+administrative",
@@ -105,7 +105,9 @@ def mentions_in(text: str, inv: Inventory) -> list[tuple[str, int, int, str]]:
             if len(n) < 4 or not _tokens(n):  # generic aliases ("Non-GAAP") would match everything
                 continue
             for hit in re.finditer(re.escape(n), text, re.I):
-                found.append((m.name, hit.start(), hit.end(), "inventory"))
+                # the matched text decides the GAAP family: an alias like "Non-GAAP R&D expenses" under
+                # "Non-GAAP operating expenses" must be compared with GAAP R&D, not GAAP opex
+                found.append((n if gaap_family(n) else m.name, hit.start(), hit.end(), "inventory"))
     for hit in _LEX_RE.finditer(text):
         found.append((hit.group(0), hit.start(), hit.end(), "lexicon"))
     found.sort(key=lambda x: (x[1], -(x[2] - x[1])))
