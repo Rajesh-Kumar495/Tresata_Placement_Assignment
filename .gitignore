@@ -16,3 +16,7 @@ eval/cassettes/live/
 
 # generated synthetic documents are reproducible from data/raw + src/ngr/synthetic.py
 data/synthetic/
+
+# local working files, not part of the submission (kept on disk)
+docs/brief/
+SUBMISSION_CHECKLIST.md

@@ -6,7 +6,7 @@
 | 1. Research & problem ranking | ✅ Done (2026-11-01) | Human picked #2 (primary), #1 (secondary) |
 | 2. Architecture & test plan (primary) | ✅ Approved 2026-11-02 (ADR-014…019) | — |
 | 3. Implementation + eval (primary) | ✅ Done 2026-11-03: system, HC1-gold run, single-call baseline, adjudication | — |
-| 4. Brief (4 pages + appendix) | ✅ Drafted 2026-11-03 → docs/brief/brief.pdf | **Human: rewrite appendix 'What came from me' / 'stand behind' in own words; push; export logs (SUBMISSION_CHECKLIST.md)** |
+| 4. Brief (4 pages + appendix) | ✅ Drafted 2026-11-03 → Tresata_Brief.pdf | **Human: push; export chat logs; submit** |
 | 5. Secondary target (#1 withholding) | Not built (by decision: time spent on evaluation quality) | — |
 
 ## Build order (architecture §16)
