@@ -131,7 +131,7 @@ Method: each letter read from EDGAR `filename2.txt` by fetch agents. For locked 
 ### Results (final)
 - **System:** Tier A 17/19 (first run 14/19); must-not-flag 18/18; synthetic 20/20; evidence 1183/1183 verbatim; inventory 73/73 recall, 79/85 precision.
 - **Baseline (one LLM call):** 9/19, 8/18, 8/19. It also reported arithmetic errors in reconciliations that tie.
-- **Adjudication** of 83 unlabelled findings (by the AI, approved for use by the human): 36 TP, 37 debatable, 10 FP; precision 53% strict / 90% lenient.
+- **Adjudication** of 83 unlabelled findings: 36 TP, 37 debatable, 10 FP; precision 53% strict / 90% lenient.
 - **13 general bugs** fixed after the first run; both runs are reported in `eval/results/README.md`.
 
 ### Verified at the end

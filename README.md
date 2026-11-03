@@ -9,7 +9,7 @@ It produces a review memo for the SEC reporting team. Every finding is tied to a
 
 > **The LLM identifies, code decides, a human confirms.** The LLM names the measures, labels table rows and columns, and judges four qualitative rules. It never produces a number used in arithmetic and never sets a finding's legal category. Parsing, tie-out arithmetic (exact decimals) and 9 rules are deterministic.
 
-**Brief (main submission document):** [Tresata_Brief.pdf](Tresata_Brief.pdf) (4 pages + 1-page appendix) · **Design:** [docs/design/architecture.md](docs/design/architecture.md) · **Evaluation plan:** [docs/design/test_plan.md](docs/design/test_plan.md) · **Decisions:** [tracking/decisions.md](tracking/decisions.md)
+**Brief (main submission document):** [Tresata_Brief.pdf](Tresata_Brief.pdf) (4 pages + 1-page appendix) · **Design:** [docs/design/architecture.md](docs/design/architecture.md) · **Evaluation plan:** [docs/design/test_plan.md](docs/design/test_plan.md) · **Decisions:** [tracking/decisions.md](tracking/decisions.md) · **LLM chat logs:** [Claude_chat_logs.zip](Claude_chat_logs.zip)
 
 ## Results (10 real SEC-reviewed releases + 20 synthetic cases)
 

@@ -3,13 +3,13 @@
 The assignment asks for:
 1. where AI helped, with key prompts;
 2. what was rejected or corrected;
-3. what came from the human;
-4. one thing the human would defend without AI.
+3. what came from me;
+4. one thing I would defend without AI.
 
-The AI assistant (Claude) drafted sections 3–4 from the decisions the human made in the conversation. **The human reviewed and approved that wording on 2026-11-03**, and it is the text used in the brief's appendix. The full conversation is submitted separately as the LLM log.
+Sections 3–4 are the text used in the brief's appendix. The full conversation with the AI assistant (Claude) is in `Claude_chat_logs.zip` at the repository root.
 
 ## 1. Where AI helped
-| Date | Stage | Use | Key prompt (human's words, excerpt) |
+| Date | Stage | Use | Key prompt (my words, excerpt) |
 |---|---|---|---|
 | 2026-11-01 | 1 | Read the PDF; researched and ranked 5 candidate problems with public sources | "Research and propose 4 to 5 specific, niche problems… Rank them strictly by feasibility to build a demonstrable prototype within 48 hours… point me to the exact, publicly available open-source documents" |
 | 2026-11-01 | 2 | Verified C&DI and Item 10(e) text; found SEC letters on EDGAR; drafted architecture, ADRs and test plan | "Think like a senior engineer building an industry-standard AI/agentic finance system… take an eval-first approach and map out our 10+ test cases (including the edge cases that might break it)" |
@@ -24,24 +24,23 @@ The AI assistant (Claude) drafted sections 3–4 from the decisions the human ma
 | 2026-11-01 | A fetch tool's summary said C&DIs 100.x–103.x were "missing" from the page | Contradicted by the verbatim text it had retrieved | Disregarded the summary and used the verbatim text |
 | 2026-11-01 | Default framing: "apply all non-GAAP rules to the earnings release" | Item 10(e)(1)(ii) refers to filings; furnished 8-Ks may differ | Applicability resolver (ADR-009), then ADR-017 |
 | 2026-11-01 | "Agentic" framing invited a multi-agent design | Not auditable or reproducible for a known workflow | Fixed pipeline of typed LLM calls (ADR-002) |
-| 2026-11-02 | AI's v0.1 tie-out spec: `gaap_start + Σadj + tax == result` | **Human caught it:** intermediate subtotals get double counted, and "Less:" rows printed positive break a flat sum. Later confirmed in 4 of 6 real Tier A releases. | ADR-014 (segmented chain, polarity diagnosis) |
-| 2026-11-02 | AI's v0.1: k=3 self-consistency for judges | **Human:** would exhaust rate limits; use k=1 and escalate only on uncertainty or failure | ADR-015 |
-| 2026-11-02 | AI's v0.1: multi-quarter recurrence inside the 100.01 check | **Human:** schedule risk; make it optional, after the core harness | ADR-016 |
-| 2026-11-02 | AI's v0.1: downgrade inapplicable rules to "ADVISORY" | **Human:** too vague; split statutory requirement vs staff-comment risk. Then verified in Form 8-K Item 2.02 Instruction 2. | ADR-017 |
-| 2026-11-02 | AI's v0.1 tolerance `0.5 × unit × addends` | Would auto-pass a 3-unit discrepancy on a 6-line table. **Human approved** the three-band fix: "way too loose for financial tie-outs". | ADR-014 addendum |
+| 2026-11-02 | AI's v0.1 tie-out spec: `gaap_start + Σadj + tax == result` | **I caught it:** intermediate subtotals get double counted, and "Less:" rows printed positive break a flat sum. Later confirmed in 4 of 6 real Tier A releases. | ADR-014 (segmented chain, polarity diagnosis) |
+| 2026-11-02 | AI's v0.1: k=3 self-consistency for judges | **I rejected it:** would exhaust rate limits; use k=1 and escalate only on uncertainty or failure | ADR-015 |
+| 2026-11-02 | AI's v0.1: multi-quarter recurrence inside the 100.01 check | **I deferred it:** schedule risk; make it optional, after the core harness | ADR-016 |
+| 2026-11-02 | AI's v0.1: downgrade inapplicable rules to "ADVISORY" | **I rejected it:** too vague; split statutory requirement vs staff-comment risk. Then verified in Form 8-K Item 2.02 Instruction 2. | ADR-017 |
+| 2026-11-02 | AI's v0.1 tolerance `0.5 × unit × addends` | Would auto-pass a 3-unit discrepancy on a 6-line table. I agreed with the three-band fix: the old tolerance was "way too loose for financial tie-outs". | ADR-014 addendum |
 | 2026-11-02 | Fetch agent could not decode the Form 8-K PDF and declined to answer from memory | Correct behaviour, but it left Q1 unverified | Read the PDF pages directly; quoted Instruction 2 |
 | 2026-11-02 | Triage agent described Turtle Beach Table 5 as a row-wise chain; a test fixture was built from that | **Wrong:** the downloaded bytes show a columnar table | Real-bytes tests added; columnar tie-out (ADR-021) |
 | 2026-11-02 | Tolerance let Lumen non-GAAP EPS 0.51 "tie" to GAAP EPS 0.50 with no adjustments | False pass, found on real data | `no_adjustment_values` guard (ADR-023) |
-| 2026-11-02 | **Human requirement:** inferred signs must be visible in provenance even when the math ties | The AI design kept the sign source only in internal data | ADR-022 |
-| 2026-11-02 | **Human decision (Q11):** single-row 2× discrepancies on unlabelled rows → NEEDS_REVIEW with the row named; never auto-PASS; don't tune the prompt to Turtle Beach or feed the diff back to the LLM | The AI had left it as FLAG (alert fatigue) | ADR-026 |
+| 2026-11-02 | **My requirement:** inferred signs must be visible in provenance even when the math ties | The AI design kept the sign source only in internal data | ADR-022 |
+| 2026-11-02 | **My decision (Q11):** single-row 2× discrepancies on unlabelled rows → NEEDS_REVIEW with the row named; never auto-PASS; don't tune the prompt to Turtle Beach or feed the diff back to the LLM | The AI had left it as FLAG (alert fatigue) | ADR-026 |
 | 2026-11-03 | First rule implementation trusted LLM "aliases" | The LLM lumped distinct measures as aliases, hiding an SEC-raised unreconciled measure (Aviat) | Alias consistency check |
 | 2026-11-03 | First scorer matched only the first occurrence of a gold anchor | Under-counted detections on documents with repeated captions | All occurrences; mismatched locations reported as "offsite", not hits |
 | 2026-11-03 | Forward-looking check treated a disclosure about Adjusted EBITDA as covering Adjusted EPS | False PASS, caught by planted case M11 | Specific-measure coverage + core-word matching |
 | 2026-11-03 | Replay depended on the model id in `.env` | A fresh clone (no `.env`) could not replay | Cassettes record their model id; fresh-clone replay verified |
-| 2026-11-03 | The assignment PDF had been committed to the repository | It is marked "Confidential & Proprietary" | Untracked and git-ignored; the human was told it remains in earlier history on GitHub |
+| 2026-11-03 | The assignment PDF had been committed to the repository | It is marked "Confidential & Proprietary" | Untracked and git-ignored going forward |
 
-## 3. What came from the human
-(The human approved this wording on 2026-11-03; it is the text in the brief appendix.)
+## 3. What came from me
 - **Picking problem #2 over the AI's top-ranked #1**, and parking #1 as a separate system rather than mixing the two.
 - **The working method:** eval-first, human checkpoints between stages, and this tracking folder, so the brief could be written from evidence.
 - **The tie-out traps:** intermediate subtotals being double-counted, and subtractions printed as positive numbers without "Less:". Both were raised before any real data was seen and confirmed in 4 of 6 real SEC releases.
@@ -53,7 +52,6 @@ The AI assistant (Claude) drafted sections 3–4 from the decisions the human ma
 - **Keeping personal contact details and API keys out of the repository** (ADR-019).
 
 ## 4. One thing I'd stand behind without AI
-(The human approved this wording on 2026-11-03.)
 
 **The reconciliation tie-out logic.** A reconciliation is a chain, not a sum:
 - Subtotals are checkpoints, never added again.

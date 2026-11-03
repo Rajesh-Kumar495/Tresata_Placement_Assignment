@@ -6,7 +6,7 @@
 | Stage | Status | Outcome |
 |---|---|---|
 | 1. Research & problem ranking | ✅ Done 2026-11-01 | 5 problems ranked; human picked #2 (SEC non-GAAP review) as primary, #1 (India treaty withholding) parked |
-| 2. Architecture & test plan | ✅ Done 2026-11-02 | Approved by the human with amendments (ADR-014…019); eval-first test plan with pre-registered targets |
+| 2. Architecture & test plan | ✅ Done 2026-11-02 | Approved with amendments (ADR-014…019); eval-first test plan with pre-registered targets |
 | 3. Implementation + evaluation | ✅ Done 2026-11-03 | Full pipeline; 10 real + 20 synthetic cases; HC1-confirmed run; single-call baseline; adjudication |
 | 4. Brief (4 pages + appendix) | ✅ Done 2026-11-03 | `Tresata_Brief.pdf` at the repository root |
 | 5. Secondary target (#1 withholding) | ⏹ Not built (deliberate) | Time went into evaluation quality instead; see `secondary-target_withholding.md` |
