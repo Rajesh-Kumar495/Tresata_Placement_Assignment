@@ -1,6 +1,6 @@
 # Project Tracking — Index
 
-The working record for the Tresata take-home. Everything we decide, reject or learn goes here first, so the 4-page brief and its AI-usage appendix can be written from it without reconstructing history.
+The working record for the Tresata take-home. **Status: complete (2026-11-03);** final deliverable [`../Tresata_Brief.pdf`](../Tresata_Brief.pdf). Everything we decide, reject or learn goes here first, so the 4-page brief and its AI-usage appendix can be written from it without reconstructing history.
 
 | File | What it holds | Feeds which part of the brief |
 |---|---|---|
@@ -10,9 +10,9 @@ The working record for the Tresata take-home. Everything we decide, reject or le
 | [phase-logs/phase3_build.md](phase-logs/phase3_build.md) | Stage 3: sign-off changes, full 18-letter triage record, what was built, lessons from real documents | Surprises, prototype, honest failures |
 | [decisions.md](decisions.md) | Architecture Decision Records (ADR-001…) | Solution design, risks |
 | [rejected-alternatives.md](rejected-alternatives.md) | Every option we considered and dropped, with reason | "Alternatives you rejected and why" |
-| [open-questions.md](open-questions.md) | Unresolved items needing a human call or verification | "Things to consider before spending more time" |
+| [open-questions.md](open-questions.md) | Q1–Q12: every question raised and how it was closed | "Things to consider before spending more time" |
 | [ai-collaboration-log.md](ai-collaboration-log.md) | Key prompts, AI suggestions corrected/rejected, human-originated decisions | **Appendix: what you added beyond the AI** |
-| [secondary-target_withholding.md](secondary-target_withholding.md) | Parked problem #1 (India treaty withholding) | — (only if time remains) |
+| [secondary-target_withholding.md](secondary-target_withholding.md) | Problem #1 (India treaty withholding): documented, deliberately not built | Brief §1 |
 
 Design deliverables live in [`../docs/design/`](../docs/design/):
 - [architecture.md](../docs/design/architecture.md) — system architecture for the primary target

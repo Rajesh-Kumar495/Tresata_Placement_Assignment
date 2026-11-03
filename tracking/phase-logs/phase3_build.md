@@ -112,3 +112,29 @@ Method: each letter read from EDGAR `filename2.txt` by fetch agents. For locked 
 1. **Half the real reconciliations are columnar.** A design built only from reading the rules (and from an AI agent's description of a table) would have assumed vertical bridges.
 2. **Tolerance can produce false passes, not just false flags:** non-GAAP EPS 0.51 vs GAAP EPS 0.50 "tied" within a cent, with nothing reconciled.
 3. **The LLM got table structure right far more often than signs.** Its one systematic error is semantic sign on uncued rows, exactly the case the human anticipated before any data was seen.
+
+## 2026-11-02/03 — Session 3: rules, judges, evaluation, brief
+
+### Human decisions this session
+- **Q11 → ADR-026:** unlabelled single-row 2× discrepancies go to NEEDS_REVIEW with the row named, never PASS.
+- **Q12:** gold measure lists for Tier B.
+- Commit to git before the next phase.
+- Later: "finish all the work"; then package the brief at the repository root and drop working files.
+
+### Built
+- 9 deterministic rules and 4 judge/hybrid rules, with verbatim rule excerpts (`rules/excerpts.yaml`) extracted from sha256-pinned SEC/eCFR pages.
+- Finding model with category, lineage and provenance.
+- Self-contained HTML memo; reviewer CLI (`review`, `hc1`, `hc2`, with a signed audit log).
+- 20 synthetic cases; evaluation harness with HC1-gold mode; single-LLM-call baseline; adjudication of unlabelled findings.
+- Brief (`Tresata_Brief.pdf`, 4 pages + appendix).
+
+### Results (final)
+- **System:** Tier A 17/19 (first run 14/19); must-not-flag 18/18; synthetic 20/20; evidence 1183/1183 verbatim; inventory 73/73 recall, 79/85 precision.
+- **Baseline (one LLM call):** 9/19, 8/18, 8/19. It also reported arithmetic errors in reconciliations that tie.
+- **Adjudication** of 83 unlabelled findings (by the AI, approved for use by the human): 36 TP, 37 debatable, 10 FP; precision 53% strict / 90% lenient.
+- **13 general bugs** fixed after the first run; both runs are reported in `eval/results/README.md`.
+
+### Verified at the end
+- A fresh clone with no `.env` and no network passes the tests and replays the system evaluation, the HC1 run and the baseline byte-identically.
+- `.env` was never committed.
+- The confidential assignment PDF is untracked going forward.

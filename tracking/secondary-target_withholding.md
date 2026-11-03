@@ -1,6 +1,6 @@
 # Secondary Target (Parked): Treaty Withholding-Rate Determination — India
 
-**Status:** Parked 2026-11-01 by human decision. Build only after the primary target (#2) is submittable.
+**Status:** Parked 2026-11-01 by human decision; not built. The remaining time went into evaluation quality for the primary target (baseline, adjudication).
 **Full research:** [phase-logs/phase1_problem_research.md §2 #1](phase-logs/phase1_problem_research.md)
 
 ## One-line problem

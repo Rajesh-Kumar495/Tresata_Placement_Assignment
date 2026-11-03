@@ -22,4 +22,4 @@
 - tracking/rejected-alternatives.md
 - tracking/open-questions.md (Q1–Q7)
 
-**Awaiting:** human review and challenge. Open questions Q1, Q3, Q6 and Q7 need human input.
+**Outcome (2026-11-02):** the human reviewed, challenged and approved the design with three changes (ADR-014 tie-out subtotals/polarity, ADR-015 escalation-only sampling, ADR-016 deferred recurrence) and decided Q1–Q7. See phase3_build.md.
